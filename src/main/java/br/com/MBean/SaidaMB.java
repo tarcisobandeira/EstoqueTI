@@ -31,6 +31,7 @@ public class SaidaMB {
 	Localizacao l = new Localizacao();
 	Funcionarios f = new Funcionarios();
 	List<Saida> listS = new ArrayList<Saida>();
+	Integer codigo;
 
 	public void fazerSaida() {
 
@@ -99,6 +100,10 @@ public class SaidaMB {
 
 		saida = new Saida();
 		zerar();
+	}
+	
+	public void buscar() {
+		
 	}
 
 	public void listarTotal() {
@@ -187,6 +192,14 @@ public class SaidaMB {
 
 	public void setF(Funcionarios f) {
 		this.f = f;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
 
 }

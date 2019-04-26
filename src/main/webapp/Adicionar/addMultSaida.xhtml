@@ -37,8 +37,15 @@
 					<p:ajax process="@this" event="keyup" update="qtdS" />
 				</p:spinner>
 			</p:panelGrid>
+
 			<p:commandButton value="ADD" actionListener="#{saidaMB.addListS}"
 				ajax="true" update=":formMS" />
+			
+			<p:panelGrid columns="2">
+				<p:inputNumber id="codigo" decimalPlaces="0"  />
+				<p:commandButton value="por código:" />
+			</p:panelGrid>
+
 			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS">
 				<p:column headerText="Item">
 					<p:outputLabel value="#{listS.itens.descricao}" />
@@ -57,7 +64,8 @@
 				actionListener="#{tabelaMB.listar}" action="#{saidaMB.zerarList}"
 				update=":formCorpo :formMS" oncomplete="PF('dlg9').hide();"
 				process="@this" />
-			<p:commandButton value="Salvar" ajax="true" update=":formF :formI :formL :formE :formS :formME :formMS"
+			<p:commandButton value="Salvar" ajax="true"
+				update=":formF :formI :formL :formE :formS :formME :formMS"
 				actionListener="#{saidaMB.fazerMultSaida}" />
 		</h:form>
 	</h:body>
