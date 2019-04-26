@@ -124,5 +124,26 @@ public class entradaDAO {
 		}
 		return null;
 	}
+	
+	public List<Entrada> buscarCodigo(int codigo) {
+		List<Entrada> list = new ArrayList<Entrada>();
+		String sql = 	" SELECT id_itens FROM entrada WHERE codigo = ? ";
 
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, codigo);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Entrada en = new Entrada();
+				en.setId_itens(rs.getInt("id_itens"));
+				
+				list.add(en);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 }

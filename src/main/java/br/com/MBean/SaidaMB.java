@@ -9,10 +9,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
 import br.com.DAO.itensDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.DAO.saidaDAO;
+import br.com.entities.Entrada;
 import br.com.entities.Funcionarios;
 import br.com.entities.Itens;
 import br.com.entities.Localizacao;
@@ -26,6 +28,7 @@ public class SaidaMB {
 	itensDAO iDAO = new itensDAO();
 	localizacaoDAO lDAO = new localizacaoDAO();
 	funcionariosDAO fDAO = new funcionariosDAO();
+	entradaDAO eDAO = new entradaDAO();
 	Saida s = new Saida();
 	Itens i = new Itens();
 	Localizacao l = new Localizacao();
@@ -103,7 +106,11 @@ public class SaidaMB {
 	}
 	
 	public void buscar() {
+		List<Entrada> ee = eDAO.buscarCodigo(codigo);
 		
+		for(Entrada entrada : ee) {
+			
+		}
 	}
 
 	public void listarTotal() {
