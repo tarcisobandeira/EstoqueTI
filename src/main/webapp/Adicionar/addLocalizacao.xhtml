@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:body>
+		<h:form id="formL">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Nome do local: " />
+				<p:inputText id="nome_local" value="#{localizacaoMB.l.local_nome}" />
+				<p:outputLabel value="Pertence: " />
+				<p:selectOneMenu id="local" value="#{localizacaoMB.l.localNF}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItem itemLabel="Núcleo" itemValue="1" />
+					<f:selectItem itemLabel="FAJ" itemValue="2" />
+				</p:selectOneMenu>
+			</p:panelGrid>
+			<p:commandButton value="Voltar" ajax="true"
+				actionListener="#{tabelaMB.listar}"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
+				oncomplete="PF('dlg3').hide();" process="@this" />
+			<p:commandButton value="Salvar" ajax="true"
+				actionListener="#{localizacaoMB.criarLocal}" update=":formL" />
+		</h:form>
+	</h:body>
+</ui:composition>

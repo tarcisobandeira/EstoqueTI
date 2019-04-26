@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:body>
+		<h:form id="formS">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Item: " />
+				<p:selectOneMenu id="itensS" value="#{saidaMB.s.id_itens}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.itensL}" var="is"
+						itemLabel="#{is.descricao}" itemValue="#{is.id}" />
+					<p:ajax listener="#{saidaMB.listarTotal}" event="change"
+						update="qtdS" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Local: " />
+				<p:selectOneMenu id="localfaj" value="#{saidaMB.s.id_localizacao}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.localfL}" var="lf"
+						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Funcionario: " />
+				<p:selectOneMenu id="fun" value="#{saidaMB.s.id_funcionario}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.funciL}" var="fs"
+						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Quantidade: " />
+				<p:spinner id="qtdS" value="#{saidaMB.s.saida}"
+					max="#{saidaMB.i.estoque_at}">
+					<p:ajax process="@this" event="keyup" update="qtdS" />
+				</p:spinner>
+
+
+			</p:panelGrid>
+			<p:commandButton value="Voltar" ajax="true"
+				actionListener="#{tabelaMB.listar}" update=":formCorpo"
+				oncomplete="PF('dlg8').hide();" process="@this" />
+			<p:commandButton value="Salvar" ajax="true"
+				actionListener="#{saidaMB.fazerSaida}" update=":formF :formI :formL :formE :formS :formME :formMS" />
+		</h:form>
+	</h:body>
+</ui:composition>

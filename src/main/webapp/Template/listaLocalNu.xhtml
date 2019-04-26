@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:outputLabel value="Lista dos locais do núcleo" />
+	<p:dataTable id="tabela3" value="#{tabelaMB.localnL}" scrollable="true"
+		scrollHeight="500" var="ln" emptyMessage="Nenhum item encontrado">
+
+		<p:column filterBy="#{ln.id}" headerText="Código"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{ln.id}" />
+		</p:column>
+
+		<p:column filterBy="#{ln.local_nome}" headerText="Local"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{ln.local_nome}" />
+		</p:column>
+
+	</p:dataTable>
+</ui:composition>

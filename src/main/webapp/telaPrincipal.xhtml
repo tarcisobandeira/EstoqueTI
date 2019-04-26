@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+	<title>Estoque</title>
+	<meta charset="UTF-8" />
+	<h:form id="formPrimario">
+		<div>
+			<p:menubar id="menu">
+				<p:submenu label="Adicionar" icon="ui-icon-plus">
+					<p:menuitem value="Funcionarios" onclick="PF('dlg1').show();" />
+					<p:menuitem value="Itens" onclick="PF('dlg2').show();" />
+					<p:menuitem value="Locais" onclick="PF('dlg3').show();" />
+				</p:submenu>
+				<p:submenu label="Listas">
+					<p:menuitem value="Itens" action="#{templateMB.setOpt(1)}"
+						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Funcionarios" action="#{templateMB.setOpt(2)}"
+						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Locais do Núcleo"
+						action="#{templateMB.setOpt(3)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Locais da FAJ" action="#{templateMB.setOpt(4)}"
+						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Entrada" action="#{templateMB.setOpt(5)}"
+						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Saída" action="#{templateMB.setOpt(6)}"
+						ajax="true" update=":formCorpo" />
+				</p:submenu>
+				<p:menuitem value="Entrada" onclick="PF('dlg4').show();" />
+				<p:menuitem value="Saída" onclick="PF('dlg7').show();" />
+			</p:menubar>
+		</div>
+	</h:form>
+</h:head>
+<h:body>
+
+	<h:form id="formCorpo">
+		<ui:insert>
+			<ui:include src="#{templateMB.mudar()}" />
+		</ui:insert>
+	</h:form>
+
+	<p:dialog header="Funcionarios" widgetVar="dlg1" modal="true"
+		closable="false" width="30%" height="50%">
+		<ui:include src="/Adicionar/addFuncionarios.xhtml" />
+	</p:dialog>
+	<p:dialog header="Itens" widgetVar="dlg2" modal="true" closable="false"
+		width="30%" height="50%">
+		<ui:include src="/Adicionar/addItens.xhtml" />
+	</p:dialog>
+	<p:dialog header="Locais" widgetVar="dlg3" modal="true"
+		closable="false" width="32%" height="50%">
+		<ui:include src="/Adicionar/addLocalizacao.xhtml" />
+	</p:dialog>
+	<p:dialog header="Entrada" widgetVar="dlg4" modal="true" width="32%"
+		height="50%">
+		<ui:include src="/escolhaEntrada.xhtml" />
+	</p:dialog>
+	<p:dialog header="Entrada" widgetVar="dlg5" modal="true"
+		closable="false" width="32%" height="50%">
+		<ui:include src="/Adicionar/addEntrada.xhtml" />
+	</p:dialog>
+	<p:dialog header="Entrada Multipla" widgetVar="dlg6" modal="true"
+		closable="false" width="75%" height="50%">
+		<ui:include src="/Adicionar/addMultEntrada.xhtml" />
+	</p:dialog>
+	<p:dialog header="Saída" widgetVar="dlg7" modal="true" width="32%"
+		height="50%">
+		<ui:include src="/escolhaSaida.xhtml" />
+	</p:dialog>
+	<p:dialog header="Saída" widgetVar="dlg8" modal="true" closable="false"
+		width="32%" height="50%">
+		<ui:include src="/Adicionar/addSaida.xhtml" />
+	</p:dialog>
+	<p:dialog header="Saída Multipla" widgetVar="dlg9" modal="true"
+		closable="false" width="75%" height="50%">
+		<ui:include src="/Adicionar/addMultSaida.xhtml" />
+	</p:dialog>
+
+</h:body>
+</html>

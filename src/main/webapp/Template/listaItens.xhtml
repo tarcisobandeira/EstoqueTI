@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<p:outputLabel value="Lista itens" />
+	<p:dataTable id="tabela1" value="#{tabelaMB.itensL}" scrollable="true"
+		scrollHeight="500" var="itensL" emptyMessage="Nenhum item encontrado"
+		rowStyleClass="#{itensL.estoque_at lt itensL.minimo ? 'baixo' : (itensL.estoque_at eq itensL.minimo ? 'limite' : null)}">
+
+		<p:column filterBy="#{itensL.id}" headerText="Código"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.id}" />
+		</p:column>
+
+		<p:column filterBy="#{itensL.descricao}" headerText="Descrição"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.descricao}" />
+		</p:column>
+
+		<p:column filterBy="#{itensL.unidade}" headerText="Unidade"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.unidade}" />
+		</p:column>
+
+		<p:column id="minimo" filterBy="#{itensL.minimo}" headerText="Minimo"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.minimo}" />
+		</p:column>
+
+		<p:column id="atual" filterBy="#{itensL.estoque_at}"
+			headerText="Atual" filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.estoque_at}" />
+		</p:column>
+
+		<p:column filterBy="#{itensL.localizacao.local_nome}"
+			headerText="Local" filterMatchMode="contains">
+			<p:outputLabel value="#{itensL.localizacao.local_nome}" />
+		</p:column>
+	</p:dataTable>
+	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"
+		ajax="true" update=":formCorpo" />
+	<p:commandButton value="Completa" actionListener="#{tabelaMB.listar}"
+		ajax="true" update=":formCorpo" />
+
+	<style>
+	.baixo {
+		background-color: red !important;
+		background-image: none !important;
+		color: #000000 !important;
+	}
+	
+	.limite{
+		background-color: yellow !important;
+		background-image: none !important;
+		color: #000000 !important;
+	}
+	</style>
+</ui:composition>
