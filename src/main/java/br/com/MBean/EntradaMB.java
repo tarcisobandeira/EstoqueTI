@@ -58,9 +58,9 @@ public class EntradaMB {
 
 			i = iDAO.buscarItem(entrada.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + entrada.getEntrada());
-			
+
 			entrada.setCodigo(codigo);
-				
+
 			if (eDAO.inserirMult(entrada)) {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + entrada.getItens().getDescricao() + ".");
 				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {

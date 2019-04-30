@@ -40,10 +40,12 @@
 
 			<p:commandButton value="ADD" actionListener="#{saidaMB.addListS}"
 				ajax="true" update=":formMS" />
-			
+
 			<p:panelGrid columns="2">
-				<p:inputNumber id="codigo" decimalPlaces="0" value="#{saidaMB.codigo}" />
-				<p:commandButton value="por código" actionListener="#{saidaMB.buscar}"/>
+				<p:inputNumber id="codigo" decimalPlaces="0"
+					value="#{saidaMB.codigo}" />
+				<p:commandButton value="por código"
+					actionListener="#{saidaMB.buscar}" ajax="true" update="multSaida" />
 			</p:panelGrid>
 
 			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS">

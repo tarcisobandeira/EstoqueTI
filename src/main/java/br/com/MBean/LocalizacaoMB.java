@@ -12,13 +12,15 @@ public class LocalizacaoMB {
 
 	localizacaoDAO lDAO = new localizacaoDAO();
 	Localizacao l = new Localizacao();
+	Localizacao selcN = new Localizacao();
+	Localizacao selcF = new Localizacao();
 
 	public void criarLocal() {
 		if (testarCampos()) {
 			if (lDAO.inserir(l)) {
 				System.out.println("EstoqueTI:Local criado.");
 				zerar();
-			}else {
+			} else {
 				System.out.println("EstoqueTI:Erro ao criar local.");
 			}
 		} else {
@@ -33,7 +35,7 @@ public class LocalizacaoMB {
 			return true;
 		}
 	}
-	
+
 	public void zerar() {
 		l = new Localizacao();
 	}
@@ -52,6 +54,22 @@ public class LocalizacaoMB {
 
 	public void setL(Localizacao l) {
 		this.l = l;
+	}
+
+	public Localizacao getSelcN() {
+		return selcN;
+	}
+
+	public void setSelcN(Localizacao selcN) {
+		this.selcN = selcN;
+	}
+
+	public Localizacao getSelcF() {
+		return selcF;
+	}
+
+	public void setSelcF(Localizacao selcF) {
+		this.selcF = selcF;
 	}
 
 }

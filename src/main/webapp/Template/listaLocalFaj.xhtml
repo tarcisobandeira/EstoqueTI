@@ -7,7 +7,9 @@
 
 	<p:outputLabel value="Lista dos locais da FAJ" />
 	<p:dataTable id="tabela4" value="#{tabelaMB.localfL}" scrollable="true"
-		scrollHeight="500" var="lf" emptyMessage="Nenhum item encontrado">
+		selection="#{localizacaoMB.selcF}" selectionMode="single"
+		rowKey="#{lf.id}" scrollHeight="500" var="lf"
+		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{lf.id}" headerText="Código"
 			filterMatchMode="contains">

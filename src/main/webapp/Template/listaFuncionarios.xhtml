@@ -7,7 +7,9 @@
 
 	<p:outputLabel value="Lista de funcionarios" />
 	<p:dataTable id="tabela2" value="#{tabelaMB.funciL}" scrollable="true"
-		scrollHeight="500" var="ff" emptyMessage="Nenhum item encontrado">
+		selection="#{funcionariosMB.selc}" selectionMode="single"
+		scrollHeight="500" rowKey="#{ff.id}" var="ff"
+		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{ff.nome}" headerText="Nome"
 			filterMatchMode="contains">

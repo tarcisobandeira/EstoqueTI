@@ -21,9 +21,21 @@ public class ItensMB {
 	itensDAO iDAO = new itensDAO();
 	entradaDAO eDAO = new entradaDAO();
 	Itens i = new Itens();
+	Itens selc;
 	Itens is = new Itens();
 	Entrada en = new Entrada();
-
+	
+	public void salvar() {
+		if(i.getId() != null) {
+			Itens itens = iDAO.buscarItem(i.getId());
+			if(itens != null && itens.getId().equals(itens.getId())) {
+				editarItem();
+			}
+		}else {
+			criarItem();
+		}
+	}
+	
 	public void criarItem() {
 		if (testarCampos()) {
 			is = iDAO.buscarItemDescricao(i.getDescricao());
@@ -43,6 +55,18 @@ public class ItensMB {
 				System.out.println("EstoqueTI:Item já foi criado.");
 			}
 		} else {
+			System.out.println("EstoqueTI:Campo vazio em Itens.");
+		}
+	}
+	
+	public void editarItem() {
+		if(testarCampos()) {
+			if(iDAO.editar(i)) {
+				zerar();
+			}else {
+				System.out.println("EstoqueTI:Erro ao editar o item.");
+			}
+		}else {
 			System.out.println("EstoqueTI:Campo vazio em Itens.");
 		}
 	}
@@ -73,10 +97,15 @@ public class ItensMB {
 		}
 
 	}
+	
+	public void editar() {
+		i = selc;
+	}
 
 	public void zerar() {
 		i = new Itens();
 		en = new Entrada();
+		selc = new Itens();
 	}
 
 	public itensDAO getiDAO() {
@@ -101,6 +130,38 @@ public class ItensMB {
 
 	public void setlDAO(localizacaoDAO lDAO) {
 		this.lDAO = lDAO;
+	}
+
+	public entradaDAO geteDAO() {
+		return eDAO;
+	}
+
+	public void seteDAO(entradaDAO eDAO) {
+		this.eDAO = eDAO;
+	}
+
+	public Itens getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Itens selc) {
+		this.selc = selc;
+	}
+
+	public Itens getIs() {
+		return is;
+	}
+
+	public void setIs(Itens is) {
+		this.is = is;
+	}
+
+	public Entrada getEn() {
+		return en;
+	}
+
+	public void setEn(Entrada en) {
+		this.en = en;
 	}
 
 }

@@ -8,8 +8,10 @@
 	<p:outputLabel value="Lista itens" />
 	<p:dataTable id="tabela1" value="#{tabelaMB.itensL}" scrollable="true"
 		scrollHeight="500" var="itensL" emptyMessage="Nenhum item encontrado"
+		selection="#{itensMB.selc}" selectionMode="single"
+		rowKey="#{itensL.id}"
 		rowStyleClass="#{itensL.estoque_at lt itensL.minimo ? 'baixo' : (itensL.estoque_at eq itensL.minimo ? 'limite' : null)}">
-
+		<p:ajax event="rowSelect" update=":formCorpo" />
 		<p:column filterBy="#{itensL.id}" headerText="Código"
 			filterMatchMode="contains">
 			<p:outputLabel value="#{itensL.id}" />
@@ -44,18 +46,20 @@
 		ajax="true" update=":formCorpo" />
 	<p:commandButton value="Completa" actionListener="#{tabelaMB.listar}"
 		ajax="true" update=":formCorpo" />
-
+	<p:commandButton value="Editar" actionListener="#{itensMB.editar}"
+		ajax="true" update=":formI" oncomplete="PF('dlg2').show();"
+		disabled="#{itensMB.selc == null}" />
 	<style>
-	.baixo {
-		background-color: red !important;
-		background-image: none !important;
-		color: #000000 !important;
-	}
-	
-	.limite{
-		background-color: yellow !important;
-		background-image: none !important;
-		color: #000000 !important;
-	}
-	</style>
+.baixo {
+	background-color: red !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.limite {
+	background-color: yellow !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+</style>
 </ui:composition>

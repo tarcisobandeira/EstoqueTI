@@ -7,7 +7,9 @@
 
 	<p:outputLabel value="Lista dos locais do núcleo" />
 	<p:dataTable id="tabela3" value="#{tabelaMB.localnL}" scrollable="true"
-		scrollHeight="500" var="ln" emptyMessage="Nenhum item encontrado">
+		selection="#{localizacaoMB.selcN}" selectionMode="single"
+		rowKey="#{ln.id}" scrollHeight="500" var="ln"
+		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{ln.id}" headerText="Código"
 			filterMatchMode="contains">

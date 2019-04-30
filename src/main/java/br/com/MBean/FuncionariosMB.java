@@ -12,6 +12,7 @@ public class FuncionariosMB {
 
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
+	Funcionarios selc = new Funcionarios();
 
 	public void criarFuncionario() {
 		if (testarCampos()) {
@@ -52,6 +53,14 @@ public class FuncionariosMB {
 
 	public void setF(Funcionarios f) {
 		this.f = f;
+	}
+
+	public Funcionarios getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Funcionarios selc) {
+		this.selc = selc;
 	}
 
 }
