@@ -42,15 +42,14 @@ public class itensDAO {
 	}
 
 	public boolean editar(Itens i) {
-		String sql = " UPDATE Itens SET descricao = ?, unidade = ?, minimo = ?, id_localizacao = ? WHERE id = ? ";
+		String sql = " UPDATE Itens SET descricao = ?, unidade = ?, minimo = ? WHERE id = ? ";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, i.getDescricao());
 			ps.setInt(2, i.getUnidade());
 			ps.setInt(3, i.getMinimo());
-			ps.setInt(4, i.getId_localizacao());
-			ps.setInt(5, i.getId());
+			ps.setInt(4, i.getId());
 			
 			if(ps.executeUpdate() == 1) {
 				return true;
