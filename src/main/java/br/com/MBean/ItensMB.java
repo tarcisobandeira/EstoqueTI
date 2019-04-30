@@ -62,6 +62,7 @@ public class ItensMB {
 	public void editarItem() {
 		if(testarCampos()) {
 			if(iDAO.editar(i)) {
+				System.out.println("EstoqueTI:Item modificado.");
 				zerar();
 			}else {
 				System.out.println("EstoqueTI:Erro ao editar o item.");

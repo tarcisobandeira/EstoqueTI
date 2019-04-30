@@ -23,10 +23,11 @@
 
 				<p:outputLabel value="Quantidade: " />
 				<p:inputText id="qtd" value="#{entradaMB.en.entrada}" />
-				
-				<p:outputLabel value="Código: "/>
-				<p:inputNumber id="codigo" decimalPlaces="0" value="#{entradaMB.codigo}"/>
-				
+
+				<p:outputLabel value="Código: " />
+				<p:inputNumber id="codigo" decimalPlaces="0"
+					value="#{entradaMB.codigo}" />
+
 			</p:panelGrid>
 			<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
 				ajax="true" update=":formME" />
@@ -37,12 +38,16 @@
 				<p:column headerText="Quantidade">
 					<p:outputLabel value="#{listE.entrada}" />
 				</p:column>
+				<p:column headerText="Código">
+					<p:outputLabel value="#{listE.codigo}" />
+				</p:column>
 			</p:dataTable>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" action="#{entradaMB.zerarList}"
 				update=":formCorpo :formME" oncomplete="PF('dlg6').hide();"
 				process="@this" />
-			<p:commandButton value="Salvar" ajax="true" update=":formF :formI :formL :formE :formS :formME :formMS"
+			<p:commandButton value="Salvar" ajax="true"
+				update=":formF :formI :formL :formE :formS :formME :formMS"
 				actionListener="#{entradaMB.fazerMultEntrada}" />
 		</h:form>
 	</h:body>

@@ -59,8 +59,6 @@ public class EntradaMB {
 			i = iDAO.buscarItem(entrada.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + entrada.getEntrada());
 
-			entrada.setCodigo(codigo);
-
 			if (eDAO.inserirMult(entrada)) {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + entrada.getItens().getDescricao() + ".");
 				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
@@ -72,6 +70,7 @@ public class EntradaMB {
 				System.out.println("EstoqueTI:Erro ao fazer a entrar do item.");
 			}
 		}
+		System.out.println("EstoqueTI:Nenhum item na lista.");
 		zerar();
 		zerarList();
 	}
@@ -84,6 +83,7 @@ public class EntradaMB {
 		entrada.setEntrada(en.getEntrada());
 		entrada.setId_itens(en.getId_itens());
 		entrada.setId_localizacao(l.getId());
+		entrada.setCodigo(codigo);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		Calendar data = new GregorianCalendar();
