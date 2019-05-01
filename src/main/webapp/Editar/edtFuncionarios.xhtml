@@ -6,7 +6,7 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<h:body>
-		<h:form id="formF">
+		<h:form id="formEF">
 			<div>
 				<p:panelGrid columns="2">
 					<p:outputLabel value="Nome: " />
@@ -23,11 +23,13 @@
 					<p:inputText id="senha" value="#{funcionariosMB.f.senha}" />
 				</p:panelGrid>
 				<p:commandButton value="Voltar" ajax="true"
-					actionListener="#{tabelaMB.listar}" oncomplete="PF('dlg1').hide();"
+					actionListener="#{tabelaMB.listar}"
+					oncomplete="PF('dlg11').hide();"
 					update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 					process="@this" />
 				<p:commandButton value="Salvar" ajax="true"
-					actionListener="#{funcionariosMB.salvar}" update=":formF" />
+					actionListener="#{funcionariosMB.salvar}" update=":formCorpo"
+					oncomplete="PF('dlg11').hide();" />
 			</div>
 		</h:form>
 	</h:body>

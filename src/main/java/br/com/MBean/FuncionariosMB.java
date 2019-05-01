@@ -12,8 +12,19 @@ public class FuncionariosMB {
 
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
-	Funcionarios selc = new Funcionarios();
-
+	Funcionarios selc;
+	
+	public void salvar() {
+		if(f.getId() == null) {
+			Funcionarios funcionarios = fDAO.buscarFuncionarioId(f.getId());
+			if(funcionarios != null && funcionarios.getId().equals(f.getId())) {
+				editarFuncionario();
+			}
+		}else {
+			criarFuncionario();
+		}
+	}
+	
 	public void criarFuncionario() {
 		if (testarCampos()) {
 			if (fDAO.inserir(f)) {
@@ -26,6 +37,16 @@ public class FuncionariosMB {
 			System.out.println("EstoqueTI:Campo vazio em funcionarios.");
 		}
 	}
+	
+	public void editarFuncionario() {
+		if(testarCampos()) {
+			if(fDAO.editar(f)) {
+				System.out.println("EstoqueTI:Funcionario editado.");
+			}
+		}else {
+			System.out.println("EstoqueTI:Erro ao editar funcionario.");
+		}
+	}
 
 	public boolean testarCampos() {
 		if (f.getNome().equals("") || f.getFuncao() == null || f.getLogin().equals("") || f.getSenha().equals("")) {
@@ -33,6 +54,10 @@ public class FuncionariosMB {
 		} else {
 			return true;
 		}
+	}
+	
+	public void editar() {
+		f = selc;
 	}
 	
 	public void zerar() {

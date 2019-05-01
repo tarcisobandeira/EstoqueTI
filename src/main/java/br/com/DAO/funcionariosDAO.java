@@ -68,7 +68,7 @@ public class funcionariosDAO {
 	}
 	
 	public Funcionarios buscarFuncionarioId(int id) {
-		String sql = "SELECT * FROM Funcionarios WHERE id = ?";
+		String sql = " SELECT * FROM Funcionarios WHERE id = ? ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -90,9 +90,29 @@ public class funcionariosDAO {
 		}
 		return null;
 	}
+	
+	public boolean editar(Funcionarios f) {
+		String sql = " UPDATE funcionarios SET nome = ?, funcao = ?, login = ?, senha = ? WHERE id = ? ";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, f.getNome());
+			ps.setInt(2, f.getFuncao());
+			ps.setString(3, f.getLogin());
+			ps.setString(4, f.getSenha());
+			ps.setInt(5, f.getId());
+			
+			if(ps.executeUpdate() == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	public boolean inserir(Funcionarios f) {
-		String sql = "INSERT INTO Funcionarios (nome, funcao, login, senha) VALUES (?,?,?,?)";
+		String sql = " INSERT INTO Funcionarios (nome, funcao, login, senha) VALUES (?,?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);

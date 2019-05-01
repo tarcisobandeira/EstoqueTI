@@ -28,7 +28,7 @@ public class ItensMB {
 	public void salvar() {
 		if(i.getId() != null) {
 			Itens itens = iDAO.buscarItem(i.getId());
-			if(itens != null && itens.getId().equals(itens.getId())) {
+			if(itens != null && itens.getId().equals(i.getId())) {
 				editarItem();
 			}
 		}else {

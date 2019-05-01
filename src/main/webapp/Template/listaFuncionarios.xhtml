@@ -10,6 +10,7 @@
 		selection="#{funcionariosMB.selc}" selectionMode="single"
 		scrollHeight="500" rowKey="#{ff.id}" var="ff"
 		emptyMessage="Nenhum item encontrado">
+		<p:ajax event="rowSelect" update=":formCorpo" />
 
 		<p:column filterBy="#{ff.nome}" headerText="Nome"
 			filterMatchMode="contains">
@@ -25,6 +26,11 @@
 			filterMatchMode="contains">
 			<p:outputLabel value="#{ff.login}" />
 		</p:column>
-
 	</p:dataTable>
+
+	<p:commandButton value="Editar"
+		disabled="#{funcionariosMB.selc == null || funcionariosMB.selc.funcao == 3}"
+		ajax="true" update=":formEF" actionListener="#{funcionariosMB.editar}"
+		oncomplete="PF('dlg11').show();" />
+
 </ui:composition>
