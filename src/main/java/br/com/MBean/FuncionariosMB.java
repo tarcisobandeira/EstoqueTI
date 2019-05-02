@@ -15,7 +15,7 @@ public class FuncionariosMB {
 	Funcionarios selc;
 	
 	public void salvar() {
-		if(f.getId() == null) {
+		if(f.getId() != null) {
 			Funcionarios funcionarios = fDAO.buscarFuncionarioId(f.getId());
 			if(funcionarios != null && funcionarios.getId().equals(f.getId())) {
 				editarFuncionario();
