@@ -8,6 +8,7 @@ public class Saida {
 	private Integer id_funcionario;
 	private Integer saida;
 	private String dia;
+	private Integer OS;
 	private Itens itens;
 	private Localizacao localizacao;
 	private Funcionarios funcionarios;
@@ -82,6 +83,14 @@ public class Saida {
 
 	public void setFuncionarios(Funcionarios funcionarios) {
 		this.funcionarios = funcionarios;
+	}
+
+	public Integer getOS() {
+		return OS;
+	}
+
+	public void setOS(Integer oS) {
+		OS = oS;
 	}
 
 }

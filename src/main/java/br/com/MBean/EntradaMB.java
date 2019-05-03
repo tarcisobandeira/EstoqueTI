@@ -45,6 +45,7 @@ public class EntradaMB {
 			if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
 				System.out.println("EstoqueTI:Estoque atualizado.");
 				zerar();
+				codigo = null;
 			} else {
 				System.out.println("EstoqueTI:Erro ao atualizar estoque.");
 			}

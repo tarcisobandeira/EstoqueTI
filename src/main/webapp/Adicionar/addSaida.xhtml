@@ -37,7 +37,9 @@
 					<p:ajax process="@this" event="keyup" update="qtdS" />
 				</p:spinner>
 
-
+				<p:outputLabel value="O.S.: "/>
+				<p:inputText id="os" value="#{saidaMB.s.OS}"/>
+				
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" update=":formCorpo"

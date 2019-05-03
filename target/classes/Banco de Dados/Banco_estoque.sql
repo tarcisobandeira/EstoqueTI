@@ -45,6 +45,7 @@ CREATE TABLE Saida(
 	id_funcionario INT,
 	saida		INT,
 	dia			VARCHAR(12),
+	OS  		INT,
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
 	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
 	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id)

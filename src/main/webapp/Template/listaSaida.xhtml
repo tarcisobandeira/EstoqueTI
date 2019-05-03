@@ -34,5 +34,10 @@
 			<p:outputLabel value="#{sl.saida}" />
 		</p:column>
 
+		<p:column filterBy="#{sl.OS}" headerText="O.S."
+			filterMatchMode="contains">
+			<p:outputLabel value="#{sl.OS}"/>
+		</p:column>
+
 	</p:dataTable>
 </ui:composition>

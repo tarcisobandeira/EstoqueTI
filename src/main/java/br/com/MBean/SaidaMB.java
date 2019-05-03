@@ -42,7 +42,11 @@ public class SaidaMB {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		Calendar data = new GregorianCalendar();
 		s.setDia(sdf.format(data.getTime()));
-
+		
+		if(s.getOS() == null) {
+			s.setOS(0);
+		}
+		
 		i = iDAO.buscarItem(s.getId_itens());
 		i.setEstoque_at(i.getEstoque_at() - s.getSaida());
 
@@ -65,7 +69,7 @@ public class SaidaMB {
 		for (Saida saida : listS) {
 			i = iDAO.buscarItem(saida.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() - saida.getSaida());
-
+			
 			if (sDAO.inserir(saida)) {
 				System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
 				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
@@ -95,6 +99,12 @@ public class SaidaMB {
 		saida.setId_itens(s.getId_itens());
 		saida.setId_localizacao(s.getId_localizacao());
 		saida.setId_funcionario(s.getId_funcionario());
+		
+		if(s.getOS() == null) {
+			saida.setOS(0);
+		}else {
+			saida.setOS(s.getOS());
+		}
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		Calendar data = new GregorianCalendar();

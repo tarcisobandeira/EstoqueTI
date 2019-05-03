@@ -22,7 +22,7 @@ public class saidaDAO {
 	}
 
 	public boolean inserir(Saida s) {
-		String sql = " INSERT INTO Saida (id_itens, id_localizacao, id_funcionario, saida, dia) VALUES (?,?,?,?,?) ";
+		String sql = " INSERT INTO Saida (id_itens, id_localizacao, id_funcionario, saida, dia, OS) VALUES (?,?,?,?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -31,6 +31,7 @@ public class saidaDAO {
 			ps.setInt(3, s.getId_funcionario());
 			ps.setInt(4, s.getSaida());
 			ps.setString(5, s.getDia());
+			ps.setInt(6, s.getOS());
 
 			if (ps.executeUpdate() == 1) {
 				return true;
@@ -69,6 +70,7 @@ public class saidaDAO {
 				s.setId_funcionario(rs.getInt("id_funcionario"));
 				s.setSaida(rs.getInt("saida"));
 				s.setDia(rs.getString("dia"));
+				s.setOS(rs.getInt("OS"));
 				s.setItens(new Itens(s.getId_itens(), rs.getString("iDescricao"), null, null, null, null, null));
 				s.setLocalizacao(new Localizacao(s.getId_localizacao(), rs.getString("lNome"), null));
 				s.setFuncionarios(new Funcionarios(s.getId_funcionario(), rs.getString("fNome"), null, null, null));
