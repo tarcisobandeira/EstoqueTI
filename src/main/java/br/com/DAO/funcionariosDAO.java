@@ -17,15 +17,15 @@ public class funcionariosDAO {
 	public funcionariosDAO() {
 		con = ConnectionDB.getConnection();
 	}
-	
-	public List<Funcionarios> listarTodos(){
+
+	public List<Funcionarios> listarTodos() {
 		List<Funcionarios> list = new ArrayList<Funcionarios>();
-		String sql = " SELECT * FROM Funcionarios ";
-		
+		String sql = " SELECT * FROM Funcionarios WHERE funcao != 3 ";
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+
 			while (rs.next()) {
 				Funcionarios f = new Funcionarios();
 				f.setId(rs.getInt("id"));
@@ -35,7 +35,7 @@ public class funcionariosDAO {
 				f.setSenha(rs.getString("senha"));
 				list.add(f);
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -66,7 +66,43 @@ public class funcionariosDAO {
 		}
 		return null;
 	}
-	
+
+	public boolean confirmLogin(String login, int id) {
+		String sql = " SELECT * FROM Funcionarios WHERE login = ? AND id != ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, login);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
+	public boolean confirmNome(String nome, int id) {
+		String sql = " SELECT * FROM Funcionarios WHERE nome = ? AND id != ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, nome);
+			ps.setInt(2, id);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public Funcionarios buscarFuncionarioId(int id) {
 		String sql = " SELECT * FROM Funcionarios WHERE id = ? ";
 
@@ -90,10 +126,10 @@ public class funcionariosDAO {
 		}
 		return null;
 	}
-	
+
 	public boolean editar(Funcionarios f) {
 		String sql = " UPDATE funcionarios SET nome = ?, funcao = ?, login = ?, senha = ? WHERE id = ? ";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, f.getNome());
@@ -101,8 +137,8 @@ public class funcionariosDAO {
 			ps.setString(3, f.getLogin());
 			ps.setString(4, f.getSenha());
 			ps.setInt(5, f.getId());
-			
-			if(ps.executeUpdate() == 1) {
+
+			if (ps.executeUpdate() == 1) {
 				return true;
 			}
 		} catch (SQLException e) {
