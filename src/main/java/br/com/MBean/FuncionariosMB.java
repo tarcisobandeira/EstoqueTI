@@ -1,27 +1,24 @@
 package br.com.MBean;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 import br.com.DAO.funcionariosDAO;
 import br.com.entities.Funcionarios;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class FuncionariosMB {
 
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
-	Funcionarios fid = new Funcionarios();
-	Funcionarios login = new Funcionarios();
 	Funcionarios selc;
 
 	public String salvar() {
-		fid = fDAO.buscarFuncionarioId(f.getId());
 		if (f.getId() != null) {
 			Funcionarios funcionarios = fDAO.buscarFuncionarioId(f.getId());
 			if (funcionarios != null && funcionarios.getId().equals(f.getId())) {
-				if(editarFuncionario()) {
+				if (editarFuncionario()) {
 					return "PF('dlg11').hide();";
 				}
 			}
@@ -33,39 +30,43 @@ public class FuncionariosMB {
 
 	public void criarFuncionario() {
 		if (testarCampos()) {
-			if (fid == null) {
-				if (fDAO.inserir(f)) {
-					System.out.println("EstoqueTI:Funcionario criado.");
-					zerar();
+			if (!fDAO.confirmNome(f.getNome(), 0)) {
+				if (!fDAO.confirmLogin(f.getLogin(), 0)) {
+					if (fDAO.inserir(f)) {
+						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " criado.");
+						zerar();
+					} else {
+						System.out.println("EstoqueTI:Erro 4");
+					}
 				} else {
-					System.out.println("EstoqueTI:Erro ao criar funcionario.");
+					System.out.println("EstoqueTI:Erro 3");
 				}
 			} else {
-				System.out.println("EstoqueTI:Login já existe.");
+				System.out.println("EstoqueTI:Erro 2");
 			}
 		} else {
-			System.out.println("EstoqueTI:Campo vazio em funcionarios.");
+			System.out.println("EstoqueTI:Erro 1");
 		}
 	}
 
 	public boolean editarFuncionario() {
-		if(testarCampos()) {
-			if(!fDAO.confirmNome(f.getNome(), f.getId()) ) {
-				if(!fDAO.confirmLogin(f.getLogin(), f.getId())) {
-					if(fDAO.editar(f)) {
+		if (testarCampos()) {
+			if (!fDAO.confirmNome(f.getNome(), f.getId())) {
+				if (!fDAO.confirmLogin(f.getLogin(), f.getId())) {
+					if (fDAO.editar(f)) {
 						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " editado.");
 						zerar();
 						return true;
-					}else {
+					} else {
 						System.out.println("EstoqueTI:Erro 4");
 					}
-				}else {
+				} else {
 					System.out.println("EstoqueTI:Erro 3");
 				}
-			}else {
+			} else {
 				System.out.println("EstoqueTI:Erro 2");
 			}
-		}else {
+		} else {
 			System.out.println("EstoqueTI:Erro 1");
 		}
 		return false;
@@ -85,7 +86,6 @@ public class FuncionariosMB {
 
 	public void zerar() {
 		f = new Funcionarios();
-		fid = new Funcionarios();
 	}
 
 	public funcionariosDAO getfDAO() {
