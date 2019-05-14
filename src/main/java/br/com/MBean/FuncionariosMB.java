@@ -14,18 +14,15 @@ public class FuncionariosMB {
 	Funcionarios f = new Funcionarios();
 	Funcionarios selc;
 
-	public String salvar() {
+	public void salvar() {
 		if (f.getId() != null) {
 			Funcionarios funcionarios = fDAO.buscarFuncionarioId(f.getId());
 			if (funcionarios != null && funcionarios.getId().equals(f.getId())) {
-				if (editarFuncionario()) {
-					return "PF('dlg11').hide();";
-				}
+				editarFuncionario();
 			}
 		} else {
 			criarFuncionario();
 		}
-		return null;
 	}
 
 	public void criarFuncionario() {
@@ -49,14 +46,13 @@ public class FuncionariosMB {
 		}
 	}
 
-	public boolean editarFuncionario() {
+	public void editarFuncionario() {
 		if (testarCampos()) {
 			if (!fDAO.confirmNome(f.getNome(), f.getId())) {
 				if (!fDAO.confirmLogin(f.getLogin(), f.getId())) {
 					if (fDAO.editar(f)) {
 						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " editado.");
 						zerar();
-						return true;
 					} else {
 						System.out.println("EstoqueTI:Erro 4");
 					}
@@ -69,7 +65,6 @@ public class FuncionariosMB {
 		} else {
 			System.out.println("EstoqueTI:Erro 1");
 		}
-		return false;
 	}
 
 	public boolean testarCampos() {

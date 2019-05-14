@@ -29,7 +29,7 @@
 	</p:dataTable>
 
 	<p:commandButton value="Editar"
-		disabled="#{funcionariosMB.selc == null || funcionariosMB.selc.funcao == 3}"
+		disabled="#{funcionariosMB.selc == null}"
 		ajax="true" update=":formEF" actionListener="#{funcionariosMB.editar}"
 		oncomplete="PF('dlg11').show();" />
 

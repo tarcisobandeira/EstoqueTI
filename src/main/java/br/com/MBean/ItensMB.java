@@ -24,18 +24,18 @@ public class ItensMB {
 	Itens selc;
 	Itens is = new Itens();
 	Entrada en = new Entrada();
-	
+
 	public void salvar() {
-		if(i.getId() != null) {
+		if (i.getId() != null) {
 			Itens itens = iDAO.buscarItem(i.getId());
-			if(itens != null && itens.getId().equals(i.getId())) {
+			if (itens != null && itens.getId().equals(i.getId())) {
 				editarItem();
 			}
-		}else {
+		} else {
 			criarItem();
 		}
 	}
-	
+
 	public void criarItem() {
 		if (testarCampos()) {
 			is = iDAO.buscarItemDescricao(i.getDescricao());
@@ -58,17 +58,13 @@ public class ItensMB {
 			System.out.println("EstoqueTI:Campo vazio em Itens.");
 		}
 	}
-	
+
 	public void editarItem() {
-		if(testarCampos()) {
-			if(iDAO.editar(i)) {
-				System.out.println("EstoqueTI:Item modificado.");
-				zerar();
-			}else {
-				System.out.println("EstoqueTI:Erro ao editar o item.");
-			}
-		}else {
-			System.out.println("EstoqueTI:Campo vazio em Itens.");
+		if (iDAO.editar(i)) {
+			System.out.println("EstoqueTI:Item modificado.");
+			zerar();
+		} else {
+			System.out.println("EstoqueTI:Erro ao editar o item.");
 		}
 	}
 
@@ -98,7 +94,7 @@ public class ItensMB {
 		}
 
 	}
-	
+
 	public void editar() {
 		i = selc;
 	}

@@ -28,7 +28,7 @@
 					update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 					process="@this" />
 				<p:commandButton value="Salvar" ajax="true" process="@this"
-					action="#{funcionariosMB.salvar}" update=":formCorpo" />
+					actionListener="#{funcionariosMB.salvar}" update=":formCorpo" />
 			</div>
 		</h:form>
 	</h:body>
