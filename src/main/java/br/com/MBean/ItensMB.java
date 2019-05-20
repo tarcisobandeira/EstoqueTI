@@ -101,6 +101,7 @@ public class ItensMB {
 
 	public void zerar() {
 		i = new Itens();
+		is = new Itens();
 		en = new Entrada();
 		selc = new Itens();
 	}

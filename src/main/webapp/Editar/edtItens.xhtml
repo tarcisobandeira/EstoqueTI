@@ -19,8 +19,8 @@
 				actionListener="#{tabelaMB.listar}"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 				oncomplete="PF('dlg10').hide();" process="@this" />
-			<p:commandButton value="Salvar" ajax="true" update=":formCorpo"
-				actionListener="#{itensMB.salvar}" oncomplete="PF('dlg10').hide();" />
+			<p:commandButton value="Salvar" ajax="true"
+				update=":formCorpo :formEI" actionListener="#{itensMB.salvar}" />
 		</h:form>
 	</h:body>
 </ui:composition>

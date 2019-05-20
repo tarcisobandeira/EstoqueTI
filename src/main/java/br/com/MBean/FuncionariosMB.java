@@ -12,14 +12,12 @@ public class FuncionariosMB {
 
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
+	Funcionarios ef = new Funcionarios();
 	Funcionarios selc;
 
 	public void salvar() {
-		if (f.getId() != null) {
-			Funcionarios funcionarios = fDAO.buscarFuncionarioId(f.getId());
-			if (funcionarios != null && funcionarios.getId().equals(f.getId())) {
-				editarFuncionario();
-			}
+		if (f.getId() == null) {
+			editarFuncionario();
 		} else {
 			criarFuncionario();
 		}
@@ -47,23 +45,19 @@ public class FuncionariosMB {
 	}
 
 	public void editarFuncionario() {
-		if (testarCampos()) {
-			if (!fDAO.confirmNome(f.getNome(), f.getId())) {
-				if (!fDAO.confirmLogin(f.getLogin(), f.getId())) {
-					if (fDAO.editar(f)) {
-						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " editado.");
-						zerar();
-					} else {
-						System.out.println("EstoqueTI:Erro 4");
-					}
+		if (!fDAO.confirmNome(ef.getNome(), ef.getId())) {
+			if (!fDAO.confirmLogin(ef.getLogin(), ef.getId())) {
+				if (fDAO.editar(ef)) {
+					System.out.println("EstoqueTI:Funcionario " + ef.getNome() + " editado.");
+					zerar();
 				} else {
-					System.out.println("EstoqueTI:Erro 3");
+					System.out.println("EstoqueTI:Erro ao editar.");
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro 2");
+				System.out.println("EstoqueTI:Erro no login.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Erro 1");
+			System.out.println("EstoqueTI:Erro no nome.");
 		}
 	}
 
@@ -76,11 +70,13 @@ public class FuncionariosMB {
 	}
 
 	public void editar() {
-		f = selc;
+		ef = selc;
 	}
 
 	public void zerar() {
 		f = new Funcionarios();
+		ef = new Funcionarios();
+		selc = new Funcionarios();
 	}
 
 	public funcionariosDAO getfDAO() {
@@ -105,6 +101,14 @@ public class FuncionariosMB {
 
 	public void setSelc(Funcionarios selc) {
 		this.selc = selc;
+	}
+
+	public Funcionarios getEf() {
+		return ef;
+	}
+
+	public void setEf(Funcionarios ef) {
+		this.ef = ef;
 	}
 
 }
