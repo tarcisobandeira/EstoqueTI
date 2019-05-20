@@ -12,7 +12,6 @@ public class FuncionariosMB {
 
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
-	Funcionarios ef = new Funcionarios();
 	Funcionarios selc;
 
 	public void salvar() {
@@ -31,33 +30,37 @@ public class FuncionariosMB {
 						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " criado.");
 						zerar();
 					} else {
-						System.out.println("EstoqueTI:Erro 4");
+						System.out.println("EstoqueTI:Erro ao criar.");
 					}
 				} else {
-					System.out.println("EstoqueTI:Erro 3");
+					System.out.println("EstoqueTI:Erro no login.");
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro 2");
+				System.out.println("EstoqueTI:Erro no nome.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Erro 1");
+			System.out.println("EstoqueTI:Algum campo vazio.");
 		}
 	}
 
 	public void editarFuncionario() {
-		if (!fDAO.confirmNome(ef.getNome(), ef.getId())) {
-			if (!fDAO.confirmLogin(ef.getLogin(), ef.getId())) {
-				if (fDAO.editar(ef)) {
-					System.out.println("EstoqueTI:Funcionario " + ef.getNome() + " editado.");
-					zerar();
+		if (testarCampos()) {
+			if (!fDAO.confirmNome(f.getNome(), f.getId())) {
+				if (!fDAO.confirmLogin(f.getLogin(), f.getId())) {
+					if (fDAO.editar(f)) {
+						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " editado.");
+						zerar();
+					} else {
+						System.out.println("EstoqueTI:Erro ao editar.");
+					}
 				} else {
-					System.out.println("EstoqueTI:Erro ao editar.");
+					System.out.println("EstoqueTI:Erro no login.");
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro no login.");
+				System.out.println("EstoqueTI:Erro no nome.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Erro no nome.");
+			System.out.println("EstoqueTI:Algum campo vazio.");
 		}
 	}
 
@@ -70,12 +73,11 @@ public class FuncionariosMB {
 	}
 
 	public void editar() {
-		ef = selc;
+		f = selc;
 	}
 
 	public void zerar() {
 		f = new Funcionarios();
-		ef = new Funcionarios();
 		selc = new Funcionarios();
 	}
 
@@ -101,14 +103,6 @@ public class FuncionariosMB {
 
 	public void setSelc(Funcionarios selc) {
 		this.selc = selc;
-	}
-
-	public Funcionarios getEf() {
-		return ef;
-	}
-
-	public void setEf(Funcionarios ef) {
-		this.ef = ef;
 	}
 
 }

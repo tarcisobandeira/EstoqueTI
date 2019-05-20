@@ -9,17 +9,17 @@
 		<h:form id="formEF">
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Nome: " />
-				<p:inputText id="nome_fun" value="#{funcionariosMB.ef.nome}" />
+				<p:inputText id="nome_fun" value="#{funcionariosMB.f.nome}" />
 				<p:outputLabel value="Função: " />
-				<p:selectOneMenu id="funcao" value="#{funcionariosMB.ef.funcao}">
+				<p:selectOneMenu id="funcao" value="#{funcionariosMB.f.funcao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItem itemLabel="Estagiário" itemValue="1" />
 					<f:selectItem itemLabel="Efetivo" itemValue="2" />
 				</p:selectOneMenu>
 				<p:outputLabel value="Login: " />
-				<p:inputText id="login" value="#{funcionariosMB.ef.login}" />
+				<p:inputText id="login" value="#{funcionariosMB.f.login}" />
 				<p:outputLabel value="Senha: " />
-				<p:inputText id="senha" value="#{funcionariosMB.ef.senha}" />
+				<p:inputText id="senha" value="#{funcionariosMB.f.senha}" />
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" oncomplete="PF('dlg11').hide();"

@@ -36,9 +36,9 @@
 					max="#{saidaMB.i.estoque_at}">
 					<p:ajax process="@this" event="keyup" update="qtdS" />
 				</p:spinner>
-				
-				<p:outputLabel value="O.S.: "/>
-				<p:inputText id="os" value="#{saidaMB.s.OS}"/>
+
+				<p:outputLabel value="O.S.: " />
+				<p:inputText id="os" value="#{saidaMB.s.OS}" />
 			</p:panelGrid>
 
 			<p:commandButton value="ADD" actionListener="#{saidaMB.addListS}"
@@ -48,10 +48,12 @@
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{saidaMB.codigo}" />
 				<p:commandButton value="por código"
-					actionListener="#{saidaMB.buscar}" ajax="true" update="multSaida" />
+					actionListener="#{saidaMB.buscar}" ajax="true" update=":formMS" />
 			</p:panelGrid>
 
-			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS">
+			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS"
+				selection="#{saidaMB.selc}" selectionMode="single"
+				rowKey="#{listS.itens}">
 				<p:column headerText="Item">
 					<p:outputLabel value="#{listS.itens.descricao}" />
 				</p:column>
@@ -65,6 +67,8 @@
 					<p:outputLabel value="#{listS.saida}" />
 				</p:column>
 			</p:dataTable>
+			<p:commandButton value="Editar" actionListener="#{saidaMB.editar}"
+				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}" />
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" action="#{saidaMB.zerarList}"
 				update=":formCorpo :formMS" oncomplete="PF('dlg9').hide();"

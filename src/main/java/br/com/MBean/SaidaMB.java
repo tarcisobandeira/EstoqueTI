@@ -34,8 +34,8 @@ public class SaidaMB {
 	Localizacao l = new Localizacao();
 	Funcionarios f = new Funcionarios();
 	List<Saida> listS = new ArrayList<Saida>();
-	List<Itens> listI = new ArrayList<Itens>();
 	Integer codigo;
+	Saida selc;
 
 	public void fazerSaida() {
 
@@ -123,7 +123,12 @@ public class SaidaMB {
 
 			Itens i = iDAO.buscarItem(entrada.getId_itens());
 
-			listI.add(i);
+			Saida saida = new Saida();
+			
+			saida.setId_itens(i.getId());
+			saida.setItens(i);
+			
+			listS.add(saida);
 
 			System.out.println(i.getId());
 		}
@@ -145,6 +150,10 @@ public class SaidaMB {
 		listS = new ArrayList<Saida>();
 	}
 
+	public void editar() {
+		s = selc;
+	}
+	
 	public saidaDAO getsDAO() {
 		return sDAO;
 	}
@@ -217,14 +226,6 @@ public class SaidaMB {
 		this.eDAO = eDAO;
 	}
 
-	public List<Itens> getListI() {
-		return listI;
-	}
-
-	public void setListI(List<Itens> listI) {
-		this.listI = listI;
-	}
-
 	public Funcionarios getF() {
 		return f;
 	}
@@ -239,6 +240,14 @@ public class SaidaMB {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public Saida getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Saida selc) {
+		this.selc = selc;
 	}
 
 }
