@@ -56,6 +56,7 @@ public class SaidaMB {
 				System.out.println("EstoqueTI:Estoque atualizado.");
 				zerar();
 				zerarList();
+				codigo = null;
 			} else {
 				System.out.println("EstoqueTI:Erro ao atualizar estoque.");
 			}
@@ -83,6 +84,7 @@ public class SaidaMB {
 		}
 		zerar();
 		zerarList();
+		codigo = null;
 	}
 
 	public void addListS() {
@@ -110,7 +112,8 @@ public class SaidaMB {
 		Calendar data = new GregorianCalendar();
 		saida.setDia(sdf.format(data.getTime()));
 
-		deletList();
+		updateList();
+		
 		
 		listS.add(saida);
 
@@ -118,10 +121,22 @@ public class SaidaMB {
 		zerar();
 	}
 
-	public boolean deletList() {
+	public boolean updateList() {
 		int contador = 0;
 		for (Saida saida : listS) {
 			if (saida.equals(s)) {
+				listS.remove(contador);
+				return true;
+			}
+			contador++;
+		}
+		return false;
+	}
+	
+	public boolean deletList() {
+		int contador = 0;
+		for (Saida saida : listS) {
+			if (saida.equals(selc)) {
 				listS.remove(contador);
 				return true;
 			}
@@ -143,8 +158,6 @@ public class SaidaMB {
 			saida.setItens(item);
 
 			listS.add(saida);
-
-			System.out.println(item.getId());
 		}
 	}
 

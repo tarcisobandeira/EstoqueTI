@@ -68,12 +68,14 @@
 					<p:outputLabel value="#{listS.saida}" />
 				</p:column>
 			</p:dataTable>
-			<p:commandButton value="Editar" actionListener="#{saidaMB.editar}"
-				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}" />
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" action="#{saidaMB.zerarList}"
 				update=":formCorpo :formMS" oncomplete="PF('dlg9').hide();"
 				process="@this" />
+			<p:commandButton value="Editar" actionListener="#{saidaMB.editar}"
+				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}" />
+			<p:commandButton value="Deletar" actionListener="#{saidaMB.deletList}"
+				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}" />
 			<p:commandButton value="Salvar" ajax="true"
 				update=":formF :formI :formL :formE :formS :formME :formMS"
 				actionListener="#{saidaMB.fazerMultSaida}" />
