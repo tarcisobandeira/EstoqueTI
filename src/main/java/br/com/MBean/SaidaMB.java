@@ -87,7 +87,7 @@ public class SaidaMB {
 
 	public void addListS() {
 		Saida saida = new Saida();
-
+		
 		i = iDAO.buscarItem(s.getId_itens());
 		l = lDAO.buscarLocal(s.getId_localizacao());
 		f = fDAO.buscarFuncionarioId(s.getId_funcionario());
@@ -111,21 +111,23 @@ public class SaidaMB {
 		saida.setDia(sdf.format(data.getTime()));
 
 		deletList();
-
+		
 		listS.add(saida);
 
 		saida = new Saida();
 		zerar();
 	}
 
-	public void deletList() {
+	public boolean deletList() {
 		int contador = 0;
 		for (Saida saida : listS) {
-			if (saida.getId_itens() == s.getId_itens()) {
+			if (saida.equals(s)) {
 				listS.remove(contador);
+				return true;
 			}
 			contador++;
 		}
+		return false;
 	}
 
 	public void buscar() {
