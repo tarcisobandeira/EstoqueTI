@@ -54,6 +54,7 @@
 			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS"
 				selection="#{saidaMB.selc}" selectionMode="single"
 				rowKey="#{listS.itens}">
+				<p:ajax event="rowSelect" update=":formMS" />
 				<p:column headerText="Item">
 					<p:outputLabel value="#{listS.itens.descricao}" />
 				</p:column>

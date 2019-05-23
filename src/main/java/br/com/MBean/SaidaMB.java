@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 
+import javax.activation.MailcapCommandMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+
+import org.w3c.dom.ls.LSInput;
 
 import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
@@ -42,11 +46,11 @@ public class SaidaMB {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		Calendar data = new GregorianCalendar();
 		s.setDia(sdf.format(data.getTime()));
-		
-		if(s.getOS() == null) {
+
+		if (s.getOS() == null) {
 			s.setOS(0);
 		}
-		
+
 		i = iDAO.buscarItem(s.getId_itens());
 		i.setEstoque_at(i.getEstoque_at() - s.getSaida());
 
@@ -69,7 +73,7 @@ public class SaidaMB {
 		for (Saida saida : listS) {
 			i = iDAO.buscarItem(saida.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() - saida.getSaida());
-			
+
 			if (sDAO.inserir(saida)) {
 				System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
 				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
@@ -99,10 +103,10 @@ public class SaidaMB {
 		saida.setId_itens(s.getId_itens());
 		saida.setId_localizacao(s.getId_localizacao());
 		saida.setId_funcionario(s.getId_funcionario());
-		
-		if(s.getOS() == null) {
+
+		if (s.getOS() == null) {
 			saida.setOS(0);
-		}else {
+		} else {
 			saida.setOS(s.getOS());
 		}
 
@@ -110,10 +114,21 @@ public class SaidaMB {
 		Calendar data = new GregorianCalendar();
 		saida.setDia(sdf.format(data.getTime()));
 
+		deletList();
+
 		listS.add(saida);
 
 		saida = new Saida();
 		zerar();
+	}
+
+	public void deletList() {
+		for (Saida saida : listS) {
+			if(saida.getId_itens() == s.getId_itens()) {
+				System.out.println(saida.getItens().getDescricao());
+				System.out.println(saida.getId());				
+			}		
+		}		
 	}
 
 	public void buscar() {
@@ -121,16 +136,16 @@ public class SaidaMB {
 
 		for (Entrada entrada : ee) {
 
-			Itens i = iDAO.buscarItem(entrada.getId_itens());
+			Itens item = iDAO.buscarItem(entrada.getId_itens());
 
 			Saida saida = new Saida();
-			
-			saida.setId_itens(i.getId());
-			saida.setItens(i);
-			
+
+			saida.setId_itens(item.getId());
+			saida.setItens(item);
+
 			listS.add(saida);
 
-			System.out.println(i.getId());
+			System.out.println(item.getId());
 		}
 	}
 
@@ -152,8 +167,9 @@ public class SaidaMB {
 
 	public void editar() {
 		s = selc;
+		i = iDAO.buscarItem(s.getId_itens());
 	}
-	
+
 	public saidaDAO getsDAO() {
 		return sDAO;
 	}
