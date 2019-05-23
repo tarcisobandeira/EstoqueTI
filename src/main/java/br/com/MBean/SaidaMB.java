@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Map;
 
-import javax.activation.MailcapCommandMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import org.w3c.dom.ls.LSInput;
 
 import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
@@ -123,12 +119,13 @@ public class SaidaMB {
 	}
 
 	public void deletList() {
+		int contador = 0;
 		for (Saida saida : listS) {
-			if(saida.getId_itens() == s.getId_itens()) {
-				System.out.println(saida.getItens().getDescricao());
-				System.out.println(saida.getId());				
-			}		
-		}		
+			if (saida.getId_itens() == s.getId_itens()) {
+				listS.remove(contador);
+			}
+			contador++;
+		}
 	}
 
 	public void buscar() {
