@@ -31,7 +31,10 @@
 			</p:panelGrid>
 			<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
 				ajax="true" update=":formME" />
-			<p:dataTable id="multEntrada" value="#{entradaMB.listE}" var="listE">
+			<p:dataTable id="multEntrada" value="#{entradaMB.listE}" var="listE"
+				selection="#{entradaMB.selc}" selectionMode="single"
+				rowKey="#{listE.itens}">
+				<p:ajax event="rowSelect" update=":formME" />
 				<p:column headerText="Item">
 					<p:outputLabel value="#{listE.itens.descricao}" />
 				</p:column>
@@ -46,6 +49,11 @@
 				actionListener="#{tabelaMB.listar}" action="#{entradaMB.zerarList}"
 				update=":formCorpo :formME" oncomplete="PF('dlg6').hide();"
 				process="@this" />
+			<p:commandButton value="Editar" actionListener="#{entradaMB.editar}"
+				ajax="true" update=":formME" disabled="#{entradaMB.selc == null}" />
+			<p:commandButton value="Deletar"
+				actionListener="#{entradaMB.deletList}" ajax="true" update=":formME"
+				disabled="#{entradaMB.selc == null}" />
 			<p:commandButton value="Salvar" ajax="true"
 				update=":formF :formI :formL :formE :formS :formME :formMS"
 				actionListener="#{entradaMB.fazerMultEntrada}" />

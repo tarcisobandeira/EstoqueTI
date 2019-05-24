@@ -28,6 +28,7 @@ public class EntradaMB {
 	Localizacao l = new Localizacao();
 	List<Entrada> listE = new ArrayList<Entrada>();
 	Integer codigo;
+	Entrada selc;
 
 	public void fazerEntrada() {
 
@@ -74,6 +75,7 @@ public class EntradaMB {
 		System.out.println("EstoqueTI:Nenhum item na lista.");
 		zerar();
 		zerarList();
+		codigo = null;
 	}
 
 	public void addListE() {
@@ -84,16 +86,47 @@ public class EntradaMB {
 		entrada.setEntrada(en.getEntrada());
 		entrada.setId_itens(en.getId_itens());
 		entrada.setId_localizacao(l.getId());
-		entrada.setCodigo(codigo);
-
+		
+		if(en.getCodigo() == null || en.getCodigo() == 0) {
+			entrada.setCodigo(0);
+		}else {
+			entrada.setCodigo(codigo);
+		}
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		Calendar data = new GregorianCalendar();
 		entrada.setDia(sdf.format(data.getTime()));
-
+		
+		updateList();
+		
 		listE.add(entrada);
 
 		entrada = new Entrada();
 		zerar();
+	}
+	
+	public boolean updateList() {
+		int contador = 0;
+		for (Entrada entrada : listE) {
+			if (entrada.equals(en)) {
+				listE.remove(contador);
+				return true;
+			}
+			contador++;
+		}
+		return false;
+	}
+	
+	public boolean deletList() {
+		int contador = 0;
+		for (Entrada entrada : listE) {
+			if (entrada.equals(selc)) {
+				listE.remove(contador);
+				return true;
+			}
+			contador++;
+		}
+		return false;
 	}
 
 	public void listarLocal() {
@@ -111,6 +144,10 @@ public class EntradaMB {
 	public void zerarList() {
 		listE = new ArrayList<Entrada>();
 		codigo = null;
+	}
+	
+	public void editar() {
+		en = selc;
 	}
 
 	public entradaDAO geteDAO() {
@@ -175,6 +212,14 @@ public class EntradaMB {
 
 	public void setCodigo(Integer codigo) {
 		this.codigo = codigo;
+	}
+
+	public Entrada getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Entrada selc) {
+		this.selc = selc;
 	}
 
 }

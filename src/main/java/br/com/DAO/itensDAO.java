@@ -115,7 +115,7 @@ public class itensDAO {
 	public List<Itens> listarItens() {
 		List<Itens> list = new ArrayList<Itens>();
 		String sql = " SELECT i.*, l.local_nome AS nomeLocal " + " FROM itens i " + " INNER JOIN localizacao l "
-				+ " ON i.id_localizacao = l.id ";
+				+ " ON i.id_localizacao = l.id ORDER BY i.id ASC ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
