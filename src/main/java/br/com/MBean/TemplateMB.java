@@ -1,10 +1,10 @@
 package br.com.MBean;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class TemplateMB {
 
 	public int opt = 1;

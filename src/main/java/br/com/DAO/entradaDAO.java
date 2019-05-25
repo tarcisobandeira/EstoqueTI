@@ -21,7 +21,7 @@ public class entradaDAO {
 	}
 
 	public boolean inserir(Entrada en) {
-		String sql = " INSERT INTO Entrada (id_itens, id_localizacao, entrada, dia) VALUES (?,?,?,?) ";
+		String sql = " INSERT INTO Entrada (id_itens, id_localizacao, entrada, dia, codigo) VALUES (?,?,?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -29,27 +29,7 @@ public class entradaDAO {
 			ps.setInt(2, en.getId_localizacao());
 			ps.setInt(3, en.getEntrada());
 			ps.setString(4, en.getDia());
-
-			if (ps.executeUpdate() == 1) {
-				return true;
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
-	
-	public boolean inserirMult(Entrada en) {
-		String sql = " INSERT INTO Entrada (codigo, id_itens, id_localizacao, entrada, dia) VALUES (?,?,?,?,?) ";
-
-		try {
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, en.getCodigo());
-			ps.setInt(2, en.getId_itens());
-			ps.setInt(3, en.getId_localizacao());
-			ps.setInt(4, en.getEntrada());
-			ps.setString(5, en.getDia());
+			ps.setInt(5, en.getCodigo());
 
 			if (ps.executeUpdate() == 1) {
 				return true;

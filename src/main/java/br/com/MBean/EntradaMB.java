@@ -40,7 +40,11 @@ public class EntradaMB {
 		i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
 
 		en.setId_localizacao(l.getId());
-
+		
+		if(en.getCodigo() == null ) {
+			en.setCodigo(0);
+		}
+		
 		if (eDAO.inserir(en)) {
 			System.out.println("EstoqueTI:Foi feita a entrada de " + i.getDescricao() + ".");
 			if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
@@ -61,7 +65,7 @@ public class EntradaMB {
 			i = iDAO.buscarItem(entrada.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + entrada.getEntrada());
 
-			if (eDAO.inserirMult(entrada)) {
+			if (eDAO.inserir(entrada)) {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + entrada.getItens().getDescricao() + ".");
 				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
@@ -87,7 +91,7 @@ public class EntradaMB {
 		entrada.setId_itens(en.getId_itens());
 		entrada.setId_localizacao(l.getId());
 		
-		if(en.getCodigo() == null || en.getCodigo() == 0) {
+		if(codigo == null || codigo == 0) {
 			entrada.setCodigo(0);
 		}else {
 			entrada.setCodigo(codigo);
@@ -129,6 +133,14 @@ public class EntradaMB {
 		return false;
 	}
 
+	public boolean testarCampos() {
+		if(en.getId_itens() == null || en.getEntrada() == null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
 	public void listarLocal() {
 		int id = en.getId_itens();
 		i = iDAO.buscarItem(id);

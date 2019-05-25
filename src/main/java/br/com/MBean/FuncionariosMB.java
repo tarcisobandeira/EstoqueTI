@@ -15,7 +15,7 @@ public class FuncionariosMB {
 	Funcionarios selc;
 
 	public void salvar() {
-		if (f.getId() == null) {
+		if (f.getId() != null) {
 			editarFuncionario();
 		} else {
 			criarFuncionario();

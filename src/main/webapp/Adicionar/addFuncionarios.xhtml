@@ -23,7 +23,8 @@
 					<p:inputText id="senha" value="#{funcionariosMB.f.senha}" />
 				</p:panelGrid>
 				<p:commandButton value="Voltar" ajax="true"
-					actionListener="#{tabelaMB.listar}" oncomplete="PF('dlg1').hide();"
+					actionListener="#{tabelaMB.listar}"
+					action="#{funcionariosMB.zerar}" oncomplete="PF('dlg1').hide();"
 					update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 					process="@this" />
 				<p:commandButton value="Salvar" ajax="true"

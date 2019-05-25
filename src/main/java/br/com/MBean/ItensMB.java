@@ -86,6 +86,10 @@ public class ItensMB {
 		i = iDAO.buscarItemDescricao(i.getDescricao());
 		en.setId_itens(i.getId());
 		en.setId_localizacao(i.getId_localizacao());
+		
+		if(en.getCodigo() == null ) {
+			en.setCodigo(0);
+		}
 
 		if (eDAO.inserir(en)) {
 			return true;
