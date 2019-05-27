@@ -20,8 +20,12 @@ public class TemplateMB {
 			return "/Template/listaLocalFaj.xhtml";
 		} else if (opt == 5) {
 			return "/Template/listaEntrada.xhtml";
-		} else {
+		} else if (opt == 6) {
 			return "/Template/listaSaida.xhtml";
+		} else if (opt == 7) {
+			return "/Template/listaMovimentacao.xhtml";
+		} else {
+			return "/Template/listaEmprestimo.xhtml";
 		}
 	}
 

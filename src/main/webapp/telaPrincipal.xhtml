@@ -31,6 +31,11 @@
 				</p:submenu>
 				<p:menuitem value="Entrada" onclick="PF('dlg4').show();" />
 				<p:menuitem value="Saída" onclick="PF('dlg7').show();" />
+				<p:menuitem value="Movimentação" action="#{templateMB.setOpt(7)}"
+					ajax="true" update=":formCorpo" />
+				<p:menuitem value="Empréstimos" action="#{templateMB.setOpt(8)}"
+					ajax="true" update=":formCorpo" />
+				<p:menuitem value="Sair" />
 			</p:menubar>
 		</div>
 	</h:form>
