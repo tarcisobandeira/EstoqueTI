@@ -60,17 +60,29 @@ public class ItensMB {
 	}
 
 	public void editarItem() {
-		if (iDAO.editar(i)) {
-			System.out.println("EstoqueTI:Item modificado.");
-			zerar();
+		if (testarCamposE()) {
+			if (iDAO.editar(i)) {
+				System.out.println("EstoqueTI:Item modificado.");
+				zerar();
+			} else {
+				System.out.println("EstoqueTI:Erro ao editar o item.");
+			}
 		} else {
-			System.out.println("EstoqueTI:Erro ao editar o item.");
+			System.out.println("EstoqueTI:Campo vazio em editar itens.");
 		}
 	}
 
 	public boolean testarCampos() {
 		if ((i.getDescricao().equals("")) || (i.getUnidade() == null) || (i.getMinimo() == null)
 				|| (i.getSaldo_ini() == null) || (i.getId_localizacao() == null)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	public boolean testarCamposE() {
+		if ((i.getDescricao().equals("")) || (i.getUnidade() == null) || (i.getMinimo() == null)) {
 			return false;
 		} else {
 			return true;
@@ -86,8 +98,8 @@ public class ItensMB {
 		i = iDAO.buscarItemDescricao(i.getDescricao());
 		en.setId_itens(i.getId());
 		en.setId_localizacao(i.getId_localizacao());
-		
-		if(en.getCodigo() == null ) {
+
+		if (en.getCodigo() == null) {
 			en.setCodigo(0);
 		}
 
@@ -107,7 +119,7 @@ public class ItensMB {
 		i = new Itens();
 		is = new Itens();
 		en = new Entrada();
-		selc = new Itens();
+		selc = null;
 	}
 
 	public itensDAO getiDAO() {

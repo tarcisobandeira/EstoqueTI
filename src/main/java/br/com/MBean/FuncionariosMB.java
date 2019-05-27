@@ -78,7 +78,7 @@ public class FuncionariosMB {
 
 	public void zerar() {
 		f = new Funcionarios();
-		selc = new Funcionarios();
+		selc = null;
 	}
 
 	public funcionariosDAO getfDAO() {

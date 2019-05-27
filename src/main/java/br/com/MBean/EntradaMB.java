@@ -31,31 +31,34 @@ public class EntradaMB {
 	Entrada selc;
 
 	public void fazerEntrada() {
+		if (testarCampos()) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+			Calendar data = new GregorianCalendar();
+			en.setDia(sdf.format(data.getTime()));
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		Calendar data = new GregorianCalendar();
-		en.setDia(sdf.format(data.getTime()));
+			i = iDAO.buscarItem(en.getId_itens());
+			i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
 
-		i = iDAO.buscarItem(en.getId_itens());
-		i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
+			en.setId_localizacao(l.getId());
 
-		en.setId_localizacao(l.getId());
-		
-		if(en.getCodigo() == null ) {
-			en.setCodigo(0);
-		}
-		
-		if (eDAO.inserir(en)) {
-			System.out.println("EstoqueTI:Foi feita a entrada de " + i.getDescricao() + ".");
-			if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
-				System.out.println("EstoqueTI:Estoque atualizado.");
-				zerar();
-				codigo = null;
+			if (en.getCodigo() == null) {
+				en.setCodigo(0);
+			}
+
+			if (eDAO.inserir(en)) {
+				System.out.println("EstoqueTI:Foi feita a entrada de " + i.getDescricao() + ".");
+				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
+					System.out.println("EstoqueTI:Estoque atualizado.");
+					zerar();
+					codigo = null;
+				} else {
+					System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+				}
 			} else {
-				System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+				System.out.println("EstoqueTI:Erro ao fazer a entrar do item.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Erro ao fazer a entrar do item.");
+			System.out.println("EstoqueTI:Campo vazio em entrada single.");
 		}
 	}
 
@@ -83,32 +86,36 @@ public class EntradaMB {
 	}
 
 	public void addListE() {
-		Entrada entrada = new Entrada();
-		i = iDAO.buscarItem(en.getId_itens());
+		if (testarCampos()) {
+			Entrada entrada = new Entrada();
+			i = iDAO.buscarItem(en.getId_itens());
 
-		entrada.setItens(i);
-		entrada.setEntrada(en.getEntrada());
-		entrada.setId_itens(en.getId_itens());
-		entrada.setId_localizacao(l.getId());
-		
-		if(codigo == null || codigo == 0) {
-			entrada.setCodigo(0);
-		}else {
-			entrada.setCodigo(codigo);
+			entrada.setItens(i);
+			entrada.setEntrada(en.getEntrada());
+			entrada.setId_itens(en.getId_itens());
+			entrada.setId_localizacao(l.getId());
+
+			if (codigo == null || codigo == 0) {
+				entrada.setCodigo(0);
+			} else {
+				entrada.setCodigo(codigo);
+			}
+
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+			Calendar data = new GregorianCalendar();
+			entrada.setDia(sdf.format(data.getTime()));
+
+			updateList();
+
+			listE.add(entrada);
+
+			entrada = new Entrada();
+			zerar();
+		} else {
+
 		}
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		Calendar data = new GregorianCalendar();
-		entrada.setDia(sdf.format(data.getTime()));
-		
-		updateList();
-		
-		listE.add(entrada);
-
-		entrada = new Entrada();
-		zerar();
 	}
-	
+
 	public boolean updateList() {
 		int contador = 0;
 		for (Entrada entrada : listE) {
@@ -120,7 +127,7 @@ public class EntradaMB {
 		}
 		return false;
 	}
-	
+
 	public boolean deletList() {
 		int contador = 0;
 		for (Entrada entrada : listE) {
@@ -134,13 +141,13 @@ public class EntradaMB {
 	}
 
 	public boolean testarCampos() {
-		if(en.getId_itens() == null || en.getEntrada() == null) {
-			return true;
-		}else {
+		if (en.getId_itens() == null || en.getEntrada() == null) {
 			return false;
+		} else {
+			return true;
 		}
 	}
-	
+
 	public void listarLocal() {
 		int id = en.getId_itens();
 		i = iDAO.buscarItem(id);
@@ -151,13 +158,14 @@ public class EntradaMB {
 		en = new Entrada();
 		i = new Itens();
 		l = new Localizacao();
+		selc = null;
 	}
 
 	public void zerarList() {
 		listE = new ArrayList<Entrada>();
 		codigo = null;
 	}
-	
+
 	public void editar() {
 		en = selc;
 	}
