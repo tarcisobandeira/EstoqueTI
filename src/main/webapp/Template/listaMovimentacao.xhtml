@@ -6,5 +6,37 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Movimentação" />
-
+	
+	<p:dataTable id="tbMovimentacao" scrollable="true"
+		scrollHeight="500" emptyMessage="Nenhum item encontrado">
+		
+		<p:column filterBy="#{a}" headerText="Item"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+		
+		<p:column filterBy="#{a}" headerText="Local anterior"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+		
+		<p:column filterBy="#{a}" headerText="Local atual"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+		
+		<p:column filterBy="#{a}" headerText="Quantidade"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+		
+		<p:column filterBy="#{a}" headerText="Data"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+		
+	</p:dataTable>
+	
+	<p:commandButton value="New"/>
+	
 </ui:composition>
