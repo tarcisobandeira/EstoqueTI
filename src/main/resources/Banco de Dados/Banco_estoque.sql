@@ -4,7 +4,7 @@ USE estoque;
 
 CREATE TABLE Unidade(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	descricao	VARCHAR(20)
+	unidade		VARCHAR(20)
 );
 
 CREATE TABLE Localizacao(
@@ -16,11 +16,11 @@ CREATE TABLE Localizacao(
 CREATE TABLE Itens(
 	id 			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	descricao 	VARCHAR(500),
-	unidade		INT,
+	id_unidade	INT,
 	minimo		INT,
-	saldo_ini	INT,
 	estoque_at	INT,
 	id_localizacao INT,
+	FOREIGN KEY (id_unidade) REFERENCES Unidade (id),
 	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
 );
 
@@ -88,12 +88,12 @@ INSERT INTO `localizacao` (`id`, `local_nome`, `localNF`) VALUES
 (6, 'CSC', 2),
 (7, 'LAB 8', 2);
 
-INSERT INTO `itens` (`id`, `descricao`, `unidade`, `minimo`, `saldo_ini`, `estoque_at`, `id_localizacao`) VALUES
-(1, 'Pilha AA', 2, 10, 10, 41, 1),
-(2, 'Monitor', 1, 2, 5, 0, 2),
-(3, 'seial', 10, 50, 90, 100, 1),
-(4, 'Bubinas', 2, 5, 6, 0, 2),
-(7, 'Mouse', 1, 30, 50, 70, 1),
-(8, 'Goiaba', 2, 4, 15, 14, 1),
-(9, 'acasoh', 12, 12, 21, 21, 2),
-(10, 'Navio', 2, 2, 2, 2, 2);
+INSERT INTO `itens` (`id`, `descricao`, `unidade`, `minimo`, `id_localizacao`) VALUES
+(1, 'Pilha AA', 2, 41, 1),
+(2, 'Monitor', 1, 0, 2),
+(3, 'seial', 10, 100, 1),
+(4, 'Bubinas', 2, 0, 2),
+(7, 'Mouse', 1, 70, 1),
+(8, 'Goiaba', 2, 14, 1),
+(9, 'acasoh', 12, 21, 2),
+(10, 'Navio', 2, 2, 2);

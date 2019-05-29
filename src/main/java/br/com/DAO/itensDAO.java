@@ -20,16 +20,15 @@ public class itensDAO {
 	}
 
 	public boolean inserir(Itens i) {
-		String sql = "INSERT INTO Itens (descricao, unidade, minimo, saldo_ini, estoque_at, id_localizacao) VALUES (?,?,?,?,?,?)";
+		String sql = "INSERT INTO Itens (descricao, unidade, minimo, estoque_at, id_localizacao) VALUES (?,?,?,?,?)";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, i.getDescricao());
 			ps.setInt(2, i.getUnidade());
 			ps.setInt(3, i.getMinimo());
-			ps.setInt(4, i.getSaldo_ini());
-			ps.setInt(5, i.getSaldo_ini());
-			ps.setInt(6, i.getId_localizacao());
+			ps.setInt(4, 0);
+			ps.setInt(5, i.getId_localizacao());
 
 			if (ps.executeUpdate() == 1) {
 				return true;
@@ -43,15 +42,15 @@ public class itensDAO {
 
 	public boolean editar(Itens i) {
 		String sql = " UPDATE Itens SET descricao = ?, unidade = ?, minimo = ? WHERE id = ? ";
-		
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, i.getDescricao());
 			ps.setInt(2, i.getUnidade());
 			ps.setInt(3, i.getMinimo());
 			ps.setInt(4, i.getId());
-			
-			if(ps.executeUpdate() == 1) {
+
+			if (ps.executeUpdate() == 1) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -74,7 +73,6 @@ public class itensDAO {
 				i.setDescricao(rs.getString("descricao"));
 				i.setUnidade(rs.getInt("unidade"));
 				i.setMinimo(rs.getInt("minimo"));
-				i.setSaldo_ini(rs.getInt("saldo_ini"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
 				i.setId_localizacao(rs.getInt("id_localizacao"));
 
@@ -100,7 +98,6 @@ public class itensDAO {
 				i.setDescricao(rs.getString("descricao"));
 				i.setUnidade(rs.getInt("unidade"));
 				i.setMinimo(rs.getInt("minimo"));
-				i.setSaldo_ini(rs.getInt("saldo_ini"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
 				i.setId_localizacao(rs.getInt("id_localizacao"));
 
@@ -112,7 +109,7 @@ public class itensDAO {
 		return null;
 	}
 
-	public List<Itens> listarItens() {
+	public List<Itens> listarTodos() {
 		List<Itens> list = new ArrayList<Itens>();
 		String sql = " SELECT i.*, l.local_nome AS nomeLocal " + " FROM itens i " + " INNER JOIN localizacao l "
 				+ " ON i.id_localizacao = l.id ORDER BY i.id ASC ";
@@ -127,7 +124,6 @@ public class itensDAO {
 				i.setDescricao(rs.getString("descricao"));
 				i.setUnidade(rs.getInt("unidade"));
 				i.setMinimo(rs.getInt("minimo"));
-				i.setSaldo_ini(rs.getInt("saldo_ini"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
 				i.setLocalizacao(new Localizacao(i.getId_localizacao(), rs.getString("nomeLocal"), null));
 				list.add(i);
@@ -156,7 +152,6 @@ public class itensDAO {
 				i.setDescricao(rs.getString("descricao"));
 				i.setUnidade(rs.getInt("unidade"));
 				i.setMinimo(rs.getInt("minimo"));
-				i.setSaldo_ini(rs.getInt("saldo_ini"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
 				i.setLocalizacao(new Localizacao(i.getId_localizacao(), rs.getString("nomeLocal"), null));
 				list.add(i);

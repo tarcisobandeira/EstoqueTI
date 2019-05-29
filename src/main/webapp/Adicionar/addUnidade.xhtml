@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:body>
+		<h:form id="formU">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Tipo de unidade: " />
+				<p:inputText id="unidade" value="#{unidadeMB.u.unidade}" />
+			</p:panelGrid>
+			<p:commandButton value="Voltar" ajax="true"
+				actionListener="#{tabelaMB.listar}"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU"
+				oncomplete="PF('dlg12').hide();" process="@this" />
+			<p:commandButton value="Salvar" ajax="true" update=":formU"
+				actionListener="#{unidadeMB.criarUnidade}" />
+		</h:form>
+	</h:body>
+</ui:composition>

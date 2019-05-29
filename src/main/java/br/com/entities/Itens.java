@@ -5,18 +5,16 @@ public class Itens {
 	private String descricao;
 	private Integer unidade;
 	private Integer minimo;
-	private Integer saldo_ini;
 	private Integer estoque_at;
 	private Integer id_localizacao;
 	private Localizacao localizacao;
 	
-	public Itens(Integer id, String descricao, Integer unidade, Integer minimo, Integer saldo_ini, Integer estoque_at, Integer id_localizacao) {
+	public Itens(Integer id, String descricao, Integer unidade, Integer minimo, Integer estoque_at, Integer id_localizacao) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.unidade = unidade;
 		this.minimo = minimo;
-		this.saldo_ini = saldo_ini;
 		this.estoque_at = estoque_at;
 		this.id_localizacao = id_localizacao;
 	}
@@ -55,14 +53,6 @@ public class Itens {
 
 	public void setMinimo(Integer minimo) {
 		this.minimo = minimo;
-	}
-
-	public Integer getSaldo_ini() {
-		return saldo_ini;
-	}
-
-	public void setSaldo_ini(Integer saldo_ini) {
-		this.saldo_ini = saldo_ini;
 	}
 
 	public Integer getEstoque_at() {

@@ -12,11 +12,13 @@ import br.com.DAO.funcionariosDAO;
 import br.com.DAO.itensDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.DAO.saidaDAO;
+import br.com.DAO.unidadeDAO;
 import br.com.entities.Entrada;
 import br.com.entities.Funcionarios;
 import br.com.entities.Itens;
 import br.com.entities.Localizacao;
 import br.com.entities.Saida;
+import br.com.entities.Unidade;
 
 @ManagedBean
 @ViewScoped
@@ -27,12 +29,14 @@ public class TabelaMB {
 	funcionariosDAO fDAO = new funcionariosDAO();
 	entradaDAO eDAO = new entradaDAO();
 	saidaDAO sDAO = new saidaDAO();
+	unidadeDAO uDAO = new unidadeDAO();
 	List<Itens> itensL = new ArrayList<Itens>();
 	List<Localizacao> localnL = new ArrayList<Localizacao>();
 	List<Localizacao> localfL = new ArrayList<Localizacao>();
 	List<Funcionarios> funciL = new ArrayList<Funcionarios>();
 	List<Entrada> entradaL = new ArrayList<Entrada>();
 	List<Saida> saidaL = new ArrayList<Saida>();
+	List<Unidade> unidadeL = new ArrayList<Unidade>();
 	int opt;
 
 	public TabelaMB() {
@@ -40,12 +44,13 @@ public class TabelaMB {
 	}
 
 	public void listar() {
-		itensL = iDAO.listarItens();
+		itensL = iDAO.listarTodos();
 		localnL = lDAO.listarTodosN();
 		localfL = lDAO.listarTodosF();
 		funciL = fDAO.listarTodos();
 		entradaL = eDAO.listarTodos();
 		saidaL = sDAO.listarTodos();
+		unidadeL = uDAO.listarTodos();
 	}
 
 	public void orderBy() {

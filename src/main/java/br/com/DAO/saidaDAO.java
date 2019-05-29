@@ -45,18 +45,10 @@ public class saidaDAO {
 
 	public List<Saida> listarTodos() {
 		List<Saida> list = new ArrayList<Saida>();
-		String sql = " SELECT s.*, " +
-					 " i.descricao AS iDescricao, " +
-					 " l.local_nome AS lNome, " +
-					 " f.nome AS fNome " +
-					 " FROM saida s " +
-					 " INNER JOIN itens i " +
-					 " ON s.id_itens = i.id " +
-					 " INNER JOIN localizacao l " +
-					 " ON s.id_localizacao = l.id " +
-					 " INNER JOIN funcionarios f " +
-					 " ON s.id_funcionario = f.id " +
-					 " ORDER BY s.id DESC ";
+		String sql = " SELECT s.*, " + " i.descricao AS iDescricao, " + " l.local_nome AS lNome, " + " f.nome AS fNome "
+				+ " FROM saida s " + " INNER JOIN itens i " + " ON s.id_itens = i.id " + " INNER JOIN localizacao l "
+				+ " ON s.id_localizacao = l.id " + " INNER JOIN funcionarios f " + " ON s.id_funcionario = f.id "
+				+ " ORDER BY s.id DESC ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -71,10 +63,10 @@ public class saidaDAO {
 				s.setSaida(rs.getInt("saida"));
 				s.setDia(rs.getString("dia"));
 				s.setOS(rs.getInt("OS"));
-				s.setItens(new Itens(s.getId_itens(), rs.getString("iDescricao"), null, null, null, null, null));
+				s.setItens(new Itens(s.getId_itens(), rs.getString("iDescricao"), null, null, null, null));
 				s.setLocalizacao(new Localizacao(s.getId_localizacao(), rs.getString("lNome"), null));
 				s.setFuncionarios(new Funcionarios(s.getId_funcionario(), rs.getString("fNome"), null, null, null));
-				
+
 				list.add(s);
 			}
 		} catch (SQLException e) {

@@ -1,16 +1,10 @@
 package br.com.MBean;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
-import br.com.DAO.entradaDAO;
 import br.com.DAO.itensDAO;
 import br.com.DAO.localizacaoDAO;
-import br.com.entities.Entrada;
 import br.com.entities.Itens;
 
 @ManagedBean
@@ -19,11 +13,9 @@ public class ItensMB {
 
 	localizacaoDAO lDAO = new localizacaoDAO();
 	itensDAO iDAO = new itensDAO();
-	entradaDAO eDAO = new entradaDAO();
 	Itens i = new Itens();
 	Itens selc;
 	Itens is = new Itens();
-	Entrada en = new Entrada();
 
 	public void salvar() {
 		if (i.getId() != null) {
@@ -42,12 +34,7 @@ public class ItensMB {
 			if (is == null) {
 				if (iDAO.inserir(i)) {
 					System.out.println("EstoqueTI:Item criado.");
-					if (addEntrada()) {
-						System.out.println("EstoqueTI:Feito a entrada do item.");
-						zerar();
-					} else {
-						System.out.println("EstoqueTI:Erro ao dar entrada no item.");
-					}
+					zerar();
 				} else {
 					System.out.println("EstoqueTI:Erro ao criar item.");
 				}
@@ -74,7 +61,7 @@ public class ItensMB {
 
 	public boolean testarCampos() {
 		if ((i.getDescricao().equals("")) || (i.getUnidade() == null) || (i.getMinimo() == null)
-				|| (i.getSaldo_ini() == null) || (i.getId_localizacao() == null)) {
+				|| (i.getId_localizacao() == null)) {
 			return false;
 		} else {
 			return true;
@@ -89,28 +76,6 @@ public class ItensMB {
 		}
 	}
 
-	public boolean addEntrada() {
-
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		Calendar data = new GregorianCalendar();
-		en.setDia(sdf.format(data.getTime()));
-		en.setEntrada(i.getSaldo_ini());
-		i = iDAO.buscarItemDescricao(i.getDescricao());
-		en.setId_itens(i.getId());
-		en.setId_localizacao(i.getId_localizacao());
-
-		if (en.getCodigo() == null) {
-			en.setCodigo(0);
-		}
-
-		if (eDAO.inserir(en)) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
 	public void editar() {
 		i = selc;
 	}
@@ -118,7 +83,6 @@ public class ItensMB {
 	public void zerar() {
 		i = new Itens();
 		is = new Itens();
-		en = new Entrada();
 		selc = null;
 	}
 
@@ -146,14 +110,6 @@ public class ItensMB {
 		this.lDAO = lDAO;
 	}
 
-	public entradaDAO geteDAO() {
-		return eDAO;
-	}
-
-	public void seteDAO(entradaDAO eDAO) {
-		this.eDAO = eDAO;
-	}
-
 	public Itens getSelc() {
 		return selc;
 	}
@@ -168,14 +124,6 @@ public class ItensMB {
 
 	public void setIs(Itens is) {
 		this.is = is;
-	}
-
-	public Entrada getEn() {
-		return en;
-	}
-
-	public void setEn(Entrada en) {
-		this.en = en;
 	}
 
 }

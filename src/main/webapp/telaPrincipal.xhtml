@@ -2,8 +2,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Estoque</title>
 	<meta charset="UTF-8" />
@@ -14,6 +13,7 @@
 					<p:menuitem value="Funcionarios" onclick="PF('dlg1').show();" />
 					<p:menuitem value="Itens" onclick="PF('dlg2').show();" />
 					<p:menuitem value="Locais" onclick="PF('dlg3').show();" />
+					<p:menuitem value="Unidades" onclick="PF('dlg12').show();" />
 				</p:submenu>
 				<p:submenu label="Listas">
 					<p:menuitem value="Itens" action="#{templateMB.setOpt(1)}"
@@ -94,7 +94,10 @@
 		closable="false" width="30%" height="50%">
 		<ui:include src="/Editar/edtFuncionarios.xhtml" />
 	</p:dialog>
-
+	<p:dialog header="Unidade" widgetVar="dlg12" modal="true"
+		closable="false" width="30%" height="50%">
+		<ui:include src="/Adicionar/addUnidade.xhtml" />
+	</p:dialog>
 
 </h:body>
 </html>

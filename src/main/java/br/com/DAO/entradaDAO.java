@@ -65,7 +65,7 @@ public class entradaDAO {
 				en.setId_localizacao(rs.getInt("id_localizacao"));
 				en.setEntrada(rs.getInt("entrada"));
 				en.setDia(rs.getString("dia"));
-				en.setItens(new Itens(en.getId_itens(), rs.getString("nomeItem"), null, null, null, null, null));
+				en.setItens(new Itens(en.getId_itens(), rs.getString("nomeItem"), null, null, null, null));
 				en.setLocalizacao(new Localizacao(en.getId_localizacao(), rs.getString("nomeLocal"), null));
 				
 				list.add(en);
@@ -94,7 +94,7 @@ public class entradaDAO {
 			
 			if(rs.next()) {
 				Entrada en = new Entrada();
-				en.setItens(new Itens(en.getId_itens(), rs.getString("nomeItem"), null, null, null, null, null));
+				en.setItens(new Itens(en.getId_itens(), rs.getString("nomeItem"), null, null, null, null));
 				en.setLocalizacao(new Localizacao(en.getId_localizacao(), rs.getString("nomeLocal"), null));
 				
 				return en;
