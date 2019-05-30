@@ -7,7 +7,7 @@
 
 	<h:body>
 		<h:form id="formE">
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="itens" value="#{entradaMB.en.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -16,22 +16,27 @@
 					<p:ajax listener="#{entradaMB.listarLocal}" event="change"
 						update="txtLocal" />
 				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
 
 				<p:outputLabel value="Local: " />
 				<p:outputLabel id="txtLocal" value="#{entradaMB.l.local_nome}" />
+				<p:outputLabel />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:inputText id="qtd" value="#{entradaMB.en.entrada}" />
-				
+				<p:outputLabel />
+
 				<p:outputLabel value="Código: " />
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{entradaMB.en.codigo}" />
+				<p:outputLabel />
 
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" update=":formCorpo"
 				oncomplete="PF('dlg5').hide();" process="@this" />
-			<p:commandButton value="Salvar" ajax="true" update=":formF :formI :formL :formE :formS :formME :formMS"
+			<p:commandButton value="Salvar" ajax="true"
+				update=":formF :formI :formL :formE :formS :formME :formMS :formU"
 				actionListener="#{entradaMB.fazerEntrada}" />
 		</h:form>
 	</h:body>

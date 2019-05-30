@@ -7,7 +7,7 @@
 
 	<h:body>
 		<h:form id="formME">
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="itens" filter="true"
 					value="#{entradaMB.en.id_itens}">
@@ -17,20 +17,27 @@
 					<p:ajax listener="#{entradaMB.listarLocal}" event="change"
 						update="txtLocal" />
 				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
 
 				<p:outputLabel value="Local: " />
 				<p:outputLabel id="txtLocal" value="#{entradaMB.l.local_nome}" />
+				<p:outputLabel />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:inputText id="qtd" value="#{entradaMB.en.entrada}" />
+				<p:outputLabel />
 
 				<p:outputLabel value="Código: " />
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{entradaMB.codigo}" />
-
-			</p:panelGrid>
-			<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
+				<p:outputLabel />
+				
+				<p:outputLabel />
+				<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
 				ajax="true" update=":formME" />
+				<p:outputLabel />
+			</p:panelGrid>
+			
 			<p:dataTable id="multEntrada" value="#{entradaMB.listE}" var="listE"
 				selection="#{entradaMB.selc}" selectionMode="single"
 				rowKey="#{listE.itens}">
