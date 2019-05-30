@@ -23,7 +23,7 @@ public class TemplateMB {
 		} else if (opt == 6) {
 			return "/Template/listaSaida.xhtml";
 		} else if (opt == 7) {
-			return "/Template/listaMovimentacao.xhtml";
+			return "/Template/listaTroca.xhtml";
 		} else if (opt == 8){
 			return "/Template/listaEmprestimo.xhtml";
 		} else {

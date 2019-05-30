@@ -1,0 +1,41 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:body>
+		<h:form id="formT">
+			<p:panelGrid columns="3">
+				<p:outputLabel value="Item: " />
+				<p:selectOneMenu id="item" value="#{a}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+				<p:outputLabel />
+
+				<p:outputLabel value="Local atual: " />
+				<p:inputText id="localAt" value="#{a}" />
+				<p:outputLabel />
+
+				<p:outputLabel value="Novo Local: " />
+				<p:selectOneMenu id="localN" value="#{a}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
+
+				<p:outputLabel value="Quantidade: " />
+				<p:inputText id="qtd" value="#{a}" />
+				<p:outputLabel />
+
+			</p:panelGrid>
+
+			<p:commandButton value="Voltar" ajax="true"
+				actionListener="#{tabelaMB.listar}"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU"
+				oncomplete="PF('dlg13').hide();" process="@this" />
+			<p:commandButton value="Salvar" ajax="true"
+				actionListener="#{localizacaoMB.criarLocal}" update=":formL" />
+		</h:form>
+	</h:body>
+</ui:composition>

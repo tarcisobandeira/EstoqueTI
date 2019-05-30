@@ -5,9 +5,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<p:outputLabel value="Movimentação" />
+	<p:outputLabel value="Troca de Local" />
 	
-	<p:dataTable id="tbMovimentacao" scrollable="true"
+	<p:dataTable id="tbTroca" scrollable="true"
 		scrollHeight="500" emptyMessage="Nenhum item encontrado">
 		
 		<p:column filterBy="#{a}" headerText="Item"
@@ -37,6 +37,6 @@
 		
 	</p:dataTable>
 	
-	<p:commandButton value="New"/>
+	<p:commandButton value="New" onclick="PF('dlg13').show();"/>
 	
 </ui:composition>

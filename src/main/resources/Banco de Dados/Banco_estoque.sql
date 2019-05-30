@@ -19,9 +19,15 @@ CREATE TABLE Itens(
 	id_unidade	INT,
 	minimo		INT,
 	estoque_at	INT,
-	id_localizacao INT,
-	FOREIGN KEY (id_unidade) REFERENCES Unidade (id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
+	FOREIGN KEY (id_unidade) REFERENCES Unidade (id)
+);
+
+CREATE TABLE LI(
+	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id_localizacao	INT,
+	id_itens	INT,
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
+	FOREIGN KEY (id_itens) REFERENCES Itens (id)
 );
 
 CREATE TABLE Funcionarios(
@@ -48,23 +54,23 @@ CREATE TABLE Entrada(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	codigo		INT,
 	id_itens	INT,
-	id_localizacao INT,
+	id_li		INT,
 	entrada		INT,
 	dia			VARCHAR(12),
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
+	FOREIGN KEY (id_li) REFERENCES LI (id)
 );
 
 CREATE TABLE Saida(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	id_itens	INT,
-	id_localizacao INT,
+	id_li		INT,
 	id_funcionario INT,
 	saida		INT,
 	dia			VARCHAR(12),
 	OS  		INT,
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
+	FOREIGN KEY (id_li) REFERENCES LI (id),
 	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id)
 );
 

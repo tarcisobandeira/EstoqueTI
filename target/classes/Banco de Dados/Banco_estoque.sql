@@ -24,6 +24,14 @@ CREATE TABLE Itens(
 	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
 );
 
+CREATE TABLE LI(
+	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	id_localizacao	INT,
+	id_itens	INT,
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
+	FOREIGN KEY (id_itens) REFERENCES Itens (id)
+);
+
 CREATE TABLE Funcionarios(
 	id 			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	nome		VARCHAR(100),
