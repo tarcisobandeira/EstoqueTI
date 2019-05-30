@@ -7,7 +7,7 @@
 
 	<h:body>
 		<h:form id="formS">
-			<p:panelGrid columns="2">
+			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="itensS" value="#{saidaMB.s.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -16,6 +16,7 @@
 					<p:ajax listener="#{saidaMB.listarTotal}" event="change"
 						update="qtdS" />
 				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
 
 				<p:outputLabel value="Local: " />
 				<p:selectOneMenu id="localfaj" value="#{saidaMB.s.id_localizacao}">
@@ -23,6 +24,7 @@
 					<f:selectItems value="#{tabelaMB.localfL}" var="lf"
 						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
 				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
 
 				<p:outputLabel value="Funcionario: " />
 				<p:selectOneMenu id="fun" value="#{saidaMB.s.id_funcionario}">
@@ -30,22 +32,26 @@
 					<f:selectItems value="#{tabelaMB.funciL}" var="fs"
 						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />
 				</p:selectOneMenu>
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg1').show();" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="qtdS" value="#{saidaMB.s.saida}"
-					max="#{saidaMB.i.estoque_at}">
+					max="#{saidaMB.i.estoque_at}" min="0">
 					<p:ajax process="@this" event="keyup" update="qtdS" />
 				</p:spinner>
+				<p:outputLabel />
 
-				<p:outputLabel value="O.S.: "/>
-				<p:inputText id="os" value="#{saidaMB.s.OS}"/>
-				
+				<p:outputLabel value="O.S.: " />
+				<p:inputText id="os" value="#{saidaMB.s.OS}" />
+				<p:outputLabel />
+
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" update=":formCorpo"
 				oncomplete="PF('dlg8').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
-				actionListener="#{saidaMB.fazerSaida}" update=":formF :formI :formL :formE :formS :formME :formMS" />
+				actionListener="#{saidaMB.fazerSaida}"
+				update=":formF :formI :formL :formE :formS :formME :formMS" />
 		</h:form>
 	</h:body>
 </ui:composition>
