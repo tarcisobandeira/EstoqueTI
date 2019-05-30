@@ -11,7 +11,11 @@
 				<p:outputLabel value="Descrição: " />
 				<p:inputText id="descricao" value="#{itensMB.i.descricao}" />
 				<p:outputLabel value="Unidade: " />
-				<p:inputText id="unidade" value="#{itensMB.i.unidade}" />
+				<p:selectOneMenu id="unidade" value="#{itensMB.i.id_unidade}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.unidadeL}" var="unidadeL"
+						itemLabel="#{unidadeL.unidade}" itemValue="#{unidadeL.id}" />
+				</p:selectOneMenu>
 				<p:outputLabel value="Minimo: " />
 				<p:inputText id="minimo" value="#{itensMB.i.minimo}" />
 			</p:panelGrid>

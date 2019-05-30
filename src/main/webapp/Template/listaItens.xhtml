@@ -22,9 +22,9 @@
 			<p:outputLabel value="#{itensL.descricao}" />
 		</p:column>
 
-		<p:column filterBy="#{itensL.unidade}" headerText="Unidade"
+		<p:column filterBy="#{itensL.unidade.unidade}" headerText="Unidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{itensL.unidade}" />
+			<p:outputLabel value="#{itensL.unidade.unidade}" />
 		</p:column>
 
 		<p:column id="minimo" filterBy="#{itensL.minimo}" headerText="Minimo"

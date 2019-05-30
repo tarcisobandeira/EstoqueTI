@@ -146,4 +146,28 @@ public class TabelaMB {
 		this.saidaL = saidaL;
 	}
 
+	public unidadeDAO getuDAO() {
+		return uDAO;
+	}
+
+	public void setuDAO(unidadeDAO uDAO) {
+		this.uDAO = uDAO;
+	}
+
+	public List<Unidade> getUnidadeL() {
+		return unidadeL;
+	}
+
+	public void setUnidadeL(List<Unidade> unidadeL) {
+		this.unidadeL = unidadeL;
+	}
+
+	public int getOpt() {
+		return opt;
+	}
+
+	public void setOpt(int opt) {
+		this.opt = opt;
+	}
+
 }

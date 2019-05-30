@@ -60,7 +60,7 @@ public class ItensMB {
 	}
 
 	public boolean testarCampos() {
-		if ((i.getDescricao().equals("")) || (i.getUnidade() == null) || (i.getMinimo() == null)
+		if ((i.getDescricao().equals("")) || (i.getId_unidade() == null) || (i.getMinimo() == null)
 				|| (i.getId_localizacao() == null)) {
 			return false;
 		} else {
@@ -69,7 +69,7 @@ public class ItensMB {
 	}
 
 	public boolean testarCamposE() {
-		if ((i.getDescricao().equals("")) || (i.getUnidade() == null) || (i.getMinimo() == null)) {
+		if ((i.getDescricao().equals("")) || (i.getId_unidade() == null) || (i.getMinimo() == null)) {
 			return false;
 		} else {
 			return true;

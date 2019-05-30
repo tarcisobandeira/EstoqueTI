@@ -4,7 +4,7 @@ USE estoque;
 
 CREATE TABLE Unidade(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-	unidade		VARCHAR(20)
+	unidade		VARCHAR(50)
 );
 
 CREATE TABLE Localizacao(

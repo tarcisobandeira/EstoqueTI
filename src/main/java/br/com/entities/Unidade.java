@@ -5,6 +5,16 @@ public class Unidade {
 	private Integer id;
 	private String unidade;
 	
+	public Unidade() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Unidade(Integer id, String unidade) {
+		super();
+		this.id = id;
+		this.unidade = unidade;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
