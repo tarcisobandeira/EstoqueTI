@@ -10,28 +10,30 @@
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Descrição: " />
 				<p:inputText id="descricao" value="#{itensMB.i.descricao}" />
-				<p:outputLabel/>
-				
+				<p:outputLabel />
+
 				<p:outputLabel value="Unidade: " />
-				<p:selectOneMenu id="unidade" value="#{itensMB.i.id_unidade}">
+				<p:selectOneMenu id="unidade" filter="true"
+					filterMatchMode="contains" value="#{itensMB.i.id_unidade}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.unidadeL}" var="unidadeL"
 						itemLabel="#{unidadeL.unidade}" itemValue="#{unidadeL.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg12').show();"/>
-				
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg12').show();" />
+
 				<p:outputLabel value="Minimo: " />
 				<p:inputText id="minimo" value="#{itensMB.i.minimo}" />
-				<p:outputLabel/>
-				
+				<p:outputLabel />
+
 				<p:outputLabel value="Local: " />
-				<p:selectOneMenu id="local" value="#{itensMB.i.id_localizacao}">
+				<p:selectOneMenu id="local" filter="true" filterMatchMode="contains"
+					value="#{itensMB.i.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.localnL}" var="localL"
 						itemLabel="#{localL.local_nome}" itemValue="#{localL.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();"/>
-				
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
+
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}"

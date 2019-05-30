@@ -190,8 +190,9 @@ public class SaidaMB {
 	}
 
 	public void listarTotal() {
-		int id = s.getId_itens();
-		i = iDAO.buscarItem(id);
+		if (s.getId_itens() != null) {
+			i = iDAO.buscarItem(s.getId_itens());
+		}
 	}
 
 	public void zerar() {

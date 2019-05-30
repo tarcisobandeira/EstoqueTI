@@ -9,7 +9,8 @@
 		<h:form id="formE">
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
-				<p:selectOneMenu id="itens" value="#{entradaMB.en.id_itens}">
+				<p:selectOneMenu id="itens" filter="true" filterMatchMode="contains"
+					value="#{entradaMB.en.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.itensL}" var="ii"
 						itemLabel="#{ii.descricao}" itemValue="#{ii.id}" />

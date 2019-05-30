@@ -9,7 +9,8 @@
 		<h:form id="formMS">
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
-				<p:selectOneMenu id="itensS" value="#{saidaMB.s.id_itens}">
+				<p:selectOneMenu id="itensS" filter="true"
+					filterMatchMode="contains" value="#{saidaMB.s.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.itensL}" var="is"
 						itemLabel="#{is.descricao}" itemValue="#{is.id}" />
@@ -19,7 +20,8 @@
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
 
 				<p:outputLabel value="Local: " />
-				<p:selectOneMenu id="localfaj" value="#{saidaMB.s.id_localizacao}">
+				<p:selectOneMenu id="localfaj" filter="true"
+					filterMatchMode="contains" value="#{saidaMB.s.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.localfL}" var="lf"
 						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
@@ -27,7 +29,8 @@
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
 
 				<p:outputLabel value="Funcionario: " />
-				<p:selectOneMenu id="fun" value="#{saidaMB.s.id_funcionario}">
+				<p:selectOneMenu id="fun" filter="true" filterMatchMode="contains"
+					value="#{saidaMB.s.id_funcionario}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.funciL}" var="fs"
 						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />

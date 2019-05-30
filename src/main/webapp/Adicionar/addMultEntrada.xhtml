@@ -9,7 +9,7 @@
 		<h:form id="formME">
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
-				<p:selectOneMenu id="itens" filter="true"
+				<p:selectOneMenu id="itens" filter="true" filterMatchMode="contains"
 					value="#{entradaMB.en.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.itensL}" var="ii"
@@ -31,13 +31,13 @@
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{entradaMB.codigo}" />
 				<p:outputLabel />
-				
+
 				<p:outputLabel />
 				<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
-				ajax="true" update=":formME" />
+					ajax="true" update=":formME" />
 				<p:outputLabel />
 			</p:panelGrid>
-			
+
 			<p:dataTable id="multEntrada" value="#{entradaMB.listE}" var="listE"
 				selection="#{entradaMB.selc}" selectionMode="single"
 				rowKey="#{listE.itens}">
