@@ -24,8 +24,10 @@ public class TemplateMB {
 			return "/Template/listaSaida.xhtml";
 		} else if (opt == 7) {
 			return "/Template/listaMovimentacao.xhtml";
-		} else {
+		} else if (opt == 8){
 			return "/Template/listaEmprestimo.xhtml";
+		} else {
+			return "/Template/listaUnidade.xhtml";
 		}
 	}
 

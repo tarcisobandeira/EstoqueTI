@@ -87,13 +87,3 @@ INSERT INTO `localizacao` (`id`, `local_nome`, `localNF`) VALUES
 (5, 'Armario ', 1),
 (6, 'CSC', 2),
 (7, 'LAB 8', 2);
-
-INSERT INTO `itens` (`id`, `descricao`, `unidade`, `minimo`, `id_localizacao`) VALUES
-(1, 'Pilha AA', 2, 41, 1),
-(2, 'Monitor', 1, 0, 2),
-(3, 'seial', 10, 100, 1),
-(4, 'Bubinas', 2, 0, 2),
-(7, 'Mouse', 1, 70, 1),
-(8, 'Goiaba', 2, 14, 1),
-(9, 'acasoh', 12, 21, 2),
-(10, 'Navio', 2, 2, 2);

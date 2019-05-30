@@ -11,6 +11,7 @@ import br.com.entities.Unidade;
 public class UnidadeMB {
 
 	Unidade u = new Unidade();
+	Unidade selc;
 	unidadeDAO uDAO = new unidadeDAO();
 
 	public void criarUnidade() {
@@ -36,6 +37,7 @@ public class UnidadeMB {
 
 	public void zerar() {
 		u = new Unidade();
+		selc = null;
 	}
 
 	public Unidade getU() {
@@ -52,6 +54,14 @@ public class UnidadeMB {
 
 	public void setuDAO(unidadeDAO uDAO) {
 		this.uDAO = uDAO;
+	}
+
+	public Unidade getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Unidade selc) {
+		this.selc = selc;
 	}
 
 }
