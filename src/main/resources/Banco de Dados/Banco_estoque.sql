@@ -54,24 +54,24 @@ CREATE TABLE Entrada(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	codigo		INT,
 	id_itens	INT,
-	id_li		INT,
+	id_localizacao INT,
 	entrada		INT,
 	dia			VARCHAR(12),
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_li) REFERENCES LI (id)
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao(id)
 );
 
 CREATE TABLE Saida(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	id_itens	INT,
-	id_li		INT,
+	id_localizacao INT,
 	id_funcionario INT,
 	saida		INT,
 	dia			VARCHAR(12),
 	OS  		INT,
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_li) REFERENCES LI (id),
-	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id)
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao(id),
+	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id)
 );
 
 INSERT INTO `funcionarios` (`id`, `nome`, `funcao`, `login`, `senha`) VALUES
