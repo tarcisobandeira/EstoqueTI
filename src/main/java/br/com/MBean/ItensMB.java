@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.DAO.itensDAO;
+import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.entities.Itens;
 import br.com.entities.LI;
@@ -14,6 +15,7 @@ public class ItensMB {
 
 	localizacaoDAO lDAO = new localizacaoDAO();
 	itensDAO iDAO = new itensDAO();
+	liDAO liDAO = new liDAO();
 	Itens i = new Itens();
 	Itens selc;
 	Itens is = new Itens();
@@ -35,8 +37,13 @@ public class ItensMB {
 			is = iDAO.buscarItemDescricao(i.getDescricao());
 			if (is == null) {
 				if (iDAO.inserir(i)) {
-					System.out.println("EstoqueTI:Item criado.");
-					zerar();
+					is = iDAO.buscarItemDescricao(i.getDescricao());
+					if (liDAO.inserir(is.getId(), li.getId_localizacao())) {
+						System.out.println("EstoqueTI:Item criado.");
+						zerar();
+					} else {
+						System.out.println("EstoqueTI:Erro ao fazer a ligação com o local.");
+					}
 				} else {
 					System.out.println("EstoqueTI:Erro ao criar item.");
 				}
