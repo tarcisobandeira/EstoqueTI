@@ -11,9 +11,11 @@ import javax.faces.bean.ViewScoped;
 
 import br.com.DAO.entradaDAO;
 import br.com.DAO.itensDAO;
+import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.entities.Entrada;
 import br.com.entities.Itens;
+import br.com.entities.LI;
 import br.com.entities.Localizacao;
 
 @ManagedBean
@@ -23,10 +25,15 @@ public class EntradaMB {
 	entradaDAO eDAO = new entradaDAO();
 	itensDAO iDAO = new itensDAO();
 	localizacaoDAO lDAO = new localizacaoDAO();
+	liDAO liDAO = new liDAO();
+
 	Entrada en = new Entrada();
 	Itens i = new Itens();
 	Localizacao l = new Localizacao();
+
 	List<Entrada> listE = new ArrayList<Entrada>();
+	List<LI> listLi = new ArrayList<LI>();
+
 	Integer codigo;
 	Entrada selc;
 
@@ -38,8 +45,6 @@ public class EntradaMB {
 
 			i = iDAO.buscarItem(en.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
-
-			en.setId_localizacao(l.getId());
 
 			if (en.getCodigo() == null) {
 				en.setCodigo(0);
@@ -93,7 +98,7 @@ public class EntradaMB {
 			entrada.setItens(i);
 			entrada.setEntrada(en.getEntrada());
 			entrada.setId_itens(en.getId_itens());
-			entrada.setId_localizacao(l.getId());
+			entrada.setId_localizacao(en.getId_localizacao());
 
 			if (codigo == null || codigo == 0) {
 				entrada.setCodigo(0);
@@ -149,9 +154,7 @@ public class EntradaMB {
 	}
 
 	public void listarLocal() {
-		int id = en.getId_itens();
-		i = iDAO.buscarItem(id);
-		//l = lDAO.buscarLocal(i.getId_localizacao());
+		listLi = liDAO.listarLocal(en.getId_itens());
 	}
 
 	public void zerar() {
@@ -212,6 +215,22 @@ public class EntradaMB {
 
 	public Localizacao getL() {
 		return l;
+	}
+
+	public liDAO getLiDAO() {
+		return liDAO;
+	}
+
+	public void setLiDAO(liDAO liDAO) {
+		this.liDAO = liDAO;
+	}
+
+	public List<LI> getListLi() {
+		return listLi;
+	}
+
+	public void setListLi(List<LI> listLi) {
+		this.listLi = listLi;
 	}
 
 	public void setL(Localizacao l) {

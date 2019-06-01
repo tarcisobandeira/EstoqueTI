@@ -15,12 +15,17 @@
 					<f:selectItems value="#{tabelaMB.itensL}" var="ii"
 						itemLabel="#{ii.descricao}" itemValue="#{ii.id}" />
 					<p:ajax listener="#{entradaMB.listarLocal}" event="change"
-						update="txtLocal" />
+						update="sLocal" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
 
 				<p:outputLabel value="Local: " />
-				<p:outputLabel id="txtLocal" value="#{entradaMB.l.local_nome}" />
+				<p:selectOneMenu id="sLocal" filter="true"
+					filterMatchMode="contains" value="#{entradaMB.en.id_localizacao}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{entradaMB.listLi}" var="ll"
+						itemLabel="#{ll.localizacao.local_nome}" itemValue="#{ll.id}" />
+				</p:selectOneMenu>
 				<p:outputLabel />
 
 				<p:outputLabel value="Quantidade: " />
@@ -31,7 +36,6 @@
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{entradaMB.en.codigo}" />
 				<p:outputLabel />
-
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" update=":formCorpo"
