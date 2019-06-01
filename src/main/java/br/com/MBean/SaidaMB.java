@@ -12,11 +12,13 @@ import javax.faces.bean.ViewScoped;
 import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
 import br.com.DAO.itensDAO;
+import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.DAO.saidaDAO;
 import br.com.entities.Entrada;
 import br.com.entities.Funcionarios;
 import br.com.entities.Itens;
+import br.com.entities.LI;
 import br.com.entities.Localizacao;
 import br.com.entities.Saida;
 
@@ -29,11 +31,17 @@ public class SaidaMB {
 	localizacaoDAO lDAO = new localizacaoDAO();
 	funcionariosDAO fDAO = new funcionariosDAO();
 	entradaDAO eDAO = new entradaDAO();
+	liDAO liDAO = new liDAO();
+
 	Saida s = new Saida();
 	Itens i = new Itens();
 	Localizacao l = new Localizacao();
 	Funcionarios f = new Funcionarios();
+	LI li = new LI();
+
 	List<Saida> listS = new ArrayList<Saida>();
+	List<LI> listLi = new ArrayList<LI>();
+
 	Integer codigo;
 	Saida selc;
 
@@ -49,10 +57,13 @@ public class SaidaMB {
 
 			i = iDAO.buscarItem(s.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() - s.getSaida());
+			
+			li = liDAO.buscarEstoque(s.getId_itens(), li.getId_localizacao());
+			li.setEstoque(li.getEstoque() - s.getSaida());
 
 			if (sDAO.inserir(s)) {
 				System.out.println("EstoqueTI:Foi feita a saída de " + i.getDescricao() + ".");
-				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
+				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
 					zerar();
 					zerarList();
@@ -131,8 +142,8 @@ public class SaidaMB {
 	}
 
 	public boolean testarCampos() {
-		if ((s.getId_itens() == null) || (s.getId_localizacao() == null) || (s.getId_funcionario() == null)
-				|| (s.getSaida() == null)) {
+		if ((s.getId_itens() == null) || (li.getId_localizacao() == null) || (s.getId_localizacao() == null)
+				|| (s.getId_funcionario() == null) || (s.getSaida() == 0)) {
 			return false;
 		} else {
 			return true;
@@ -189,9 +200,19 @@ public class SaidaMB {
 		}
 	}
 
+	public void listarLocal() {
+		listLi = new ArrayList<LI>();
+		listLi = liDAO.listarLocal(s.getId_itens());
+		li = new LI();
+		li.setEstoque(0);
+		s.setSaida(0);
+	}
+
 	public void listarTotal() {
-		if (s.getId_itens() != null) {
-			i = iDAO.buscarItem(s.getId_itens());
+		li.setEstoque(0);
+		s.setSaida(0);
+		if (li.getId_localizacao() != null) {
+			li = liDAO.buscarEstoque(s.getId_itens(), li.getId_localizacao());
 		}
 	}
 
@@ -200,11 +221,13 @@ public class SaidaMB {
 		i = new Itens();
 		l = new Localizacao();
 		f = new Funcionarios();
+		li = new LI();
 		selc = null;
 	}
 
 	public void zerarList() {
 		listS = new ArrayList<Saida>();
+		listLi = new ArrayList<LI>();
 	}
 
 	public void editar() {
@@ -266,6 +289,30 @@ public class SaidaMB {
 
 	public void setfDAO(funcionariosDAO fDAO) {
 		this.fDAO = fDAO;
+	}
+
+	public liDAO getLiDAO() {
+		return liDAO;
+	}
+
+	public void setLiDAO(liDAO liDAO) {
+		this.liDAO = liDAO;
+	}
+
+	public LI getLi() {
+		return li;
+	}
+
+	public void setLi(LI li) {
+		this.li = li;
+	}
+
+	public List<LI> getListLi() {
+		return listLi;
+	}
+
+	public void setListLi(List<LI> listLi) {
+		this.listLi = listLi;
 	}
 
 	public Localizacao getL() {
