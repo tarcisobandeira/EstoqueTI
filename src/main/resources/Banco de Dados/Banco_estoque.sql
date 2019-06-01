@@ -26,6 +26,7 @@ CREATE TABLE LI(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	id_localizacao	INT,
 	id_itens	INT,
+	estoque		INT,
 	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
 	FOREIGN KEY (id_itens) REFERENCES Itens (id)
 );

@@ -37,9 +37,10 @@
 			<p:outputLabel value="#{itensL.estoque_at}" />
 		</p:column>
 
-		<p:column filterBy="#{a}"
-			headerText="Local" filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+		<p:column headerText="Local">
+			<p:commandButton update=":formI" oncomplete="PF('dlg14').show()" icon="ui-icon-search" title="View">
+				<f:setPropertyActionListener value="#{itensL}" target="#{itensMB.selc}"/>
+			</p:commandButton>
 		</p:column>
 	</p:dataTable>
 	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"

@@ -30,6 +30,7 @@ public class TabelaMB {
 	entradaDAO eDAO = new entradaDAO();
 	saidaDAO sDAO = new saidaDAO();
 	unidadeDAO uDAO = new unidadeDAO();
+	
 	List<Itens> itensL = new ArrayList<Itens>();
 	List<Localizacao> localnL = new ArrayList<Localizacao>();
 	List<Localizacao> localfL = new ArrayList<Localizacao>();
@@ -37,6 +38,7 @@ public class TabelaMB {
 	List<Entrada> entradaL = new ArrayList<Entrada>();
 	List<Saida> saidaL = new ArrayList<Saida>();
 	List<Unidade> unidadeL = new ArrayList<Unidade>();
+	
 	int opt;
 
 	public TabelaMB() {

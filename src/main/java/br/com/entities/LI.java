@@ -5,6 +5,7 @@ public class LI {
 	private Integer id;
 	private Integer id_itens;
 	private Integer id_localizacao;
+	private Integer estoque;
 	private Localizacao localizacao;
 	private Itens itens;
 
@@ -12,11 +13,12 @@ public class LI {
 
 	}
 
-	public LI(Integer id, Integer id_itens, Integer id_localizacao) {
+	public LI(Integer id, Integer id_itens, Integer id_localizacao, Integer estoque) {
 		super();
 		this.id = id;
 		this.id_itens = id_itens;
 		this.id_localizacao = id_localizacao;
+		this.estoque = estoque;
 	}
 
 	public Integer getId() {
@@ -57,6 +59,14 @@ public class LI {
 
 	public void setItens(Itens itens) {
 		this.itens = itens;
+	}
+
+	public Integer getEstoque() {
+		return estoque;
+	}
+
+	public void setEstoque(Integer estoque) {
+		this.estoque = estoque;
 	}
 
 }

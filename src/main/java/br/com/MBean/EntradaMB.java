@@ -30,6 +30,7 @@ public class EntradaMB {
 	Entrada en = new Entrada();
 	Itens i = new Itens();
 	Localizacao l = new Localizacao();
+	LI li = new LI();
 
 	List<Entrada> listE = new ArrayList<Entrada>();
 	List<LI> listLi = new ArrayList<LI>();
@@ -45,14 +46,19 @@ public class EntradaMB {
 
 			i = iDAO.buscarItem(en.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
-
+			
+			li.setId_itens(i.getId());
+			li.setId_localizacao(en.getId_localizacao());
+			li = liDAO.buscarEstoque(li);
+			li.setEstoque(en.getEntrada() + li.getEstoque());
+			
 			if (en.getCodigo() == null) {
 				en.setCodigo(0);
 			}
 
 			if (eDAO.inserir(en)) {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + i.getDescricao() + ".");
-				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
+				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
 					zerar();
 					codigo = null;

@@ -21,17 +21,36 @@ public class liDAO {
 	}
 
 	public boolean inserir(int id1, int id2) {
-		String sql = " INSERT INTO LI (id_itens, id_localizacao) VALUES (?,?) ";
+		String sql = " INSERT INTO LI (id_itens, id_localizacao, estoque) VALUES (?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, id1);
 			ps.setInt(2, id2);
+			ps.setInt(3, 0);
 
 			if (ps.executeUpdate() == 1) {
 				return true;
 			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean updateEstoque(LI li) {
+		String sql = " UPDATE LI SET estoque = ? WHERE id_localizacao = ? AND id_itens = ? ";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, li.getEstoque());
+			ps.setInt(2, li.getId_localizacao());
+			ps.setInt(3, li.getId_itens());
+			
+			if(ps.executeUpdate() == 1) {
+				return true;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,6 +73,7 @@ public class liDAO {
 				l.setId(rs.getInt("id"));
 				l.setId_itens(rs.getInt("id_itens"));
 				l.setId_localizacao(rs.getInt("id_localizacao"));
+				l.setEstoque(rs.getInt("estoque"));
 				l.setItens(new Itens(l.getId_itens(), rs.getString("nomeItens"), null, null, null));
 				l.setLocalizacao(new Localizacao(l.getId_localizacao(), rs.getString("nomeLocal"), null));
 				
@@ -64,6 +84,29 @@ public class liDAO {
 		}
 		
 		return list;
+	}
+	
+	public LI buscarEstoque(LI li) {
+		String sql = "SELECT * FROM LI WHERE id_itens = ? AND id_localizacao = ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, li.getId_itens());
+			ps.setInt(2, li.getId_localizacao());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				LI ll = new LI();
+				ll.setId(rs.getInt("id"));
+				ll.setId_itens(li.getId_itens());
+				ll.setId_localizacao(li.getId_localizacao());
+				ll.setEstoque(rs.getInt("estoque"));
+				return ll;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
