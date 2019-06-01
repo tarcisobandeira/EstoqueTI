@@ -36,17 +36,14 @@
 			headerText="Atual" filterMatchMode="contains">
 			<p:outputLabel value="#{itensL.estoque_at}" />
 		</p:column>
-
-		<p:column headerText="Local">
-			<p:commandButton update=":formI" oncomplete="PF('dlg14').show()" icon="ui-icon-search" title="View">
-				<f:setPropertyActionListener value="#{itensL}" target="#{itensMB.selc}"/>
-			</p:commandButton>
-		</p:column>
 	</p:dataTable>
 	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"
 		ajax="true" update=":formCorpo" />
 	<p:commandButton value="Completa" actionListener="#{tabelaMB.listar}"
 		ajax="true" update=":formCorpo" />
+	<p:commandButton value="Locais"
+		actionListener="#{itensMB.mostrarLocais}" ajax="true" update=":formLi"
+		oncomplete="PF('dlg14').show();" disabled="#{itensMB.selc == null}" />
 	<p:commandButton value="Editar" actionListener="#{itensMB.editar}"
 		ajax="true" update=":formEI" oncomplete="PF('dlg10').show();"
 		disabled="#{itensMB.selc == null}" />

@@ -1,5 +1,8 @@
 package br.com.MBean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -16,10 +19,14 @@ public class ItensMB {
 	localizacaoDAO lDAO = new localizacaoDAO();
 	itensDAO iDAO = new itensDAO();
 	liDAO liDAO = new liDAO();
+	
 	Itens i = new Itens();
-	Itens selc;
 	Itens is = new Itens();
 	LI li = new LI();
+	
+	List<LI> listLi = new ArrayList<LI>();
+	
+	Itens selc;
 
 	public void salvar() {
 		if (i.getId() != null) {
@@ -93,6 +100,10 @@ public class ItensMB {
 		is = new Itens();
 		selc = null;
 	}
+	
+	public void mostrarLocais() {
+		listLi = liDAO.listarLocal(selc.getId());
+	}
 
 	public itensDAO getiDAO() {
 		return iDAO;
@@ -140,6 +151,22 @@ public class ItensMB {
 
 	public void setLi(LI li) {
 		this.li = li;
+	}
+
+	public liDAO getLiDAO() {
+		return liDAO;
+	}
+
+	public void setLiDAO(liDAO liDAO) {
+		this.liDAO = liDAO;
+	}
+
+	public List<LI> getListLi() {
+		return listLi;
+	}
+
+	public void setListLi(List<LI> listLi) {
+		this.listLi = listLi;
 	}
 
 }
