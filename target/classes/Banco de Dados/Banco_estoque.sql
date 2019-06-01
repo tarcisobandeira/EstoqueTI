@@ -19,9 +19,7 @@ CREATE TABLE Itens(
 	id_unidade	INT,
 	minimo		INT,
 	estoque_at	INT,
-	id_localizacao INT,
-	FOREIGN KEY (id_unidade) REFERENCES Unidade (id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
+	FOREIGN KEY (id_unidade) REFERENCES Unidade (id)
 );
 
 CREATE TABLE LI(
@@ -60,7 +58,7 @@ CREATE TABLE Entrada(
 	entrada		INT,
 	dia			VARCHAR(12),
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id)
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao(id)
 );
 
 CREATE TABLE Saida(
@@ -72,8 +70,8 @@ CREATE TABLE Saida(
 	dia			VARCHAR(12),
 	OS  		INT,
 	FOREIGN KEY (id_itens) REFERENCES Itens(id),
-	FOREIGN KEY (id_localizacao) REFERENCES Localizacao (id),
-	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id)
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao(id),
+	FOREIGN KEY (id_funcionario) REFERENCES Funcionarios(id)
 );
 
 INSERT INTO `funcionarios` (`id`, `nome`, `funcao`, `login`, `senha`) VALUES
