@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.entities.Itens;
-import br.com.entities.Localizacao;
 import br.com.entities.Unidade;
 import br.com.jdbc.ConnectionDB;
 
@@ -21,7 +20,7 @@ public class itensDAO {
 	}
 
 	public boolean inserir(Itens i) {
-		String sql = "INSERT INTO Itens (descricao, id_unidade, minimo, estoque_at, id_localizacao) VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO Itens (descricao, id_unidade, minimo, estoque_at) VALUES (?,?,?,?)";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -29,7 +28,6 @@ public class itensDAO {
 			ps.setInt(2, i.getId_unidade());
 			ps.setInt(3, i.getMinimo());
 			ps.setInt(4, 0);
-			ps.setInt(5, i.getId_localizacao());
 
 			if (ps.executeUpdate() == 1) {
 				return true;
@@ -75,7 +73,6 @@ public class itensDAO {
 				i.setId_unidade(rs.getInt("id_unidade"));
 				i.setMinimo(rs.getInt("minimo"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
-				i.setId_localizacao(rs.getInt("id_localizacao"));
 
 				return i;
 			}
@@ -100,7 +97,6 @@ public class itensDAO {
 				i.setId_unidade(rs.getInt("id_unidade"));
 				i.setMinimo(rs.getInt("minimo"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
-				i.setId_localizacao(rs.getInt("id_localizacao"));
 
 				return i;
 			}
@@ -112,12 +108,10 @@ public class itensDAO {
 
 	public List<Itens> listarTodos() {
 		List<Itens> list = new ArrayList<Itens>();
-		String sql = " SELECT i.*, l.local_nome AS nomeLocal, u.unidade AS nomeUnidade " 
+		String sql = " SELECT i.*, u.unidade AS nomeUnidade " 
 				+ " FROM itens i " 
-				+ " INNER JOIN localizacao l "
 				+ " INNER JOIN Unidade u "
-				+ " ON i.id_localizacao = l.id "
-				+ " AND i.id_unidade = u.id "
+				+ " ON i.id_unidade = u.id "
 				+ " ORDER BY i.id ASC ";
 
 		try {
@@ -131,7 +125,6 @@ public class itensDAO {
 				i.setUnidade(new Unidade(i.getId_unidade(), rs.getString("nomeUnidade")));
 				i.setMinimo(rs.getInt("minimo"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
-				i.setLocalizacao(new Localizacao(i.getId_localizacao(), rs.getString("nomeLocal"), null));
 				list.add(i);
 			}
 
@@ -145,12 +138,10 @@ public class itensDAO {
 
 	public List<Itens> listarItensFalta() {
 		List<Itens> list = new ArrayList<Itens>();
-		String sql = " SELECT i.*, l.local_nome AS nomeLocal, u.unidade AS nomeUnidade " 
+		String sql = " SELECT i.*, u.unidade AS nomeUnidade " 
 				+ " FROM itens i " 
-				+ " INNER JOIN localizacao l "
 				+ " INNER JOIN Unidade u "
-				+ " ON i.id_localizacao = l.id "
-				+ "	AND i.id_unidade = u.id	" 
+				+ "	ON i.id_unidade = u.id	" 
 				+ " WHERE i.estoque_at <= i.minimo " 
 				+ " ORDER BY i.estoque_at ASC ";
 
@@ -165,7 +156,6 @@ public class itensDAO {
 				i.setUnidade(new Unidade(i.getId_unidade(), rs.getString("nomeUnidade")));
 				i.setMinimo(rs.getInt("minimo"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
-				i.setLocalizacao(new Localizacao(i.getId_localizacao(), rs.getString("nomeLocal"), null));
 				list.add(i);
 			}
 

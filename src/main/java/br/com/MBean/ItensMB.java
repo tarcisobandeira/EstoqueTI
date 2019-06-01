@@ -6,6 +6,7 @@ import javax.faces.bean.ViewScoped;
 import br.com.DAO.itensDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.entities.Itens;
+import br.com.entities.LI;
 
 @ManagedBean
 @ViewScoped
@@ -16,6 +17,7 @@ public class ItensMB {
 	Itens i = new Itens();
 	Itens selc;
 	Itens is = new Itens();
+	LI li = new LI();
 
 	public void salvar() {
 		if (i.getId() != null) {
@@ -60,8 +62,7 @@ public class ItensMB {
 	}
 
 	public boolean testarCampos() {
-		if ((i.getDescricao().equals("")) || (i.getId_unidade() == null) || (i.getMinimo() == null)
-				|| (i.getId_localizacao() == null)) {
+		if ((i.getDescricao().equals("")) || (i.getId_unidade() == null) || (i.getMinimo() == null)) {
 			return false;
 		} else {
 			return true;
@@ -124,6 +125,14 @@ public class ItensMB {
 
 	public void setIs(Itens is) {
 		this.is = is;
+	}
+
+	public LI getLi() {
+		return li;
+	}
+
+	public void setLi(LI li) {
+		this.li = li;
 	}
 
 }

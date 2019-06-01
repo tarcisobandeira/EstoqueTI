@@ -151,7 +151,7 @@ public class EntradaMB {
 	public void listarLocal() {
 		int id = en.getId_itens();
 		i = iDAO.buscarItem(id);
-		l = lDAO.buscarLocal(i.getId_localizacao());
+		//l = lDAO.buscarLocal(i.getId_localizacao());
 	}
 
 	public void zerar() {

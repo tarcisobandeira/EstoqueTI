@@ -63,7 +63,7 @@ public class saidaDAO {
 				s.setSaida(rs.getInt("saida"));
 				s.setDia(rs.getString("dia"));
 				s.setOS(rs.getInt("OS"));
-				s.setItens(new Itens(s.getId_itens(), rs.getString("iDescricao"), null, null, null, null));
+				s.setItens(new Itens(s.getId_itens(), rs.getString("iDescricao"), null, null, null));
 				s.setLocalizacao(new Localizacao(s.getId_localizacao(), rs.getString("lNome"), null));
 				s.setFuncionarios(new Funcionarios(s.getId_funcionario(), rs.getString("fNome"), null, null, null));
 

@@ -37,9 +37,9 @@
 			<p:outputLabel value="#{itensL.estoque_at}" />
 		</p:column>
 
-		<p:column filterBy="#{itensL.localizacao.local_nome}"
+		<p:column filterBy="#{a}"
 			headerText="Local" filterMatchMode="contains">
-			<p:outputLabel value="#{itensL.localizacao.local_nome}" />
+			<p:outputLabel value="#{a}" />
 		</p:column>
 	</p:dataTable>
 	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"
