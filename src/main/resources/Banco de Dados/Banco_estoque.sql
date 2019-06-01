@@ -1,6 +1,6 @@
-CREATE DATABASE estoque;
+CREATE DATABASE estoqueTi;
 
-USE estoque;
+USE estoqueTi;
 
 CREATE TABLE Unidade(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
