@@ -98,6 +98,7 @@ public class ItensMB {
 	public void zerar() {
 		i = new Itens();
 		is = new Itens();
+		li = new LI();
 		selc = null;
 	}
 	
