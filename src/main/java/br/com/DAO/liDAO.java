@@ -86,20 +86,20 @@ public class liDAO {
 		return list;
 	}
 	
-	public LI buscarEstoque(LI li) {
+	public LI buscarEstoque(int id1, int id2) {
 		String sql = "SELECT * FROM LI WHERE id_itens = ? AND id_localizacao = ? ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, li.getId_itens());
-			ps.setInt(2, li.getId_localizacao());
+			ps.setInt(1, id1);
+			ps.setInt(2, id2);
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
 				LI ll = new LI();
 				ll.setId(rs.getInt("id"));
-				ll.setId_itens(li.getId_itens());
-				ll.setId_localizacao(li.getId_localizacao());
+				ll.setId_itens(id1);
+				ll.setId_localizacao(id2);
 				ll.setEstoque(rs.getInt("estoque"));
 				return ll;
 			}

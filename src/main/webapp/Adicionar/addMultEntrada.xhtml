@@ -23,10 +23,11 @@
 				<p:selectOneMenu id="sLocal" filter="true"
 					filterMatchMode="contains" value="#{entradaMB.en.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{entradaMB.listLi}" var="ll"
-						itemLabel="#{ll.localizacao.local_nome}" itemValue="#{ll.id}" />
+					<f:selectItems value="#{entradaMB.listLi}" var="listLi"
+						itemLabel="#{listLi.localizacao.local_nome}" itemValue="#{listLi.id_localizacao}" />
+					<p:ajax event="change" update="loo" />
 				</p:selectOneMenu>
-				<p:outputLabel />
+				<p:outputLabel id="loo" value="#{entradaMB.li.id_localizacao}" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:inputText id="qtd" value="#{entradaMB.en.entrada}" />

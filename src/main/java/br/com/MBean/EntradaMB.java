@@ -46,12 +46,10 @@ public class EntradaMB {
 
 			i = iDAO.buscarItem(en.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + en.getEntrada());
-			
-			li.setId_itens(i.getId());
-			li.setId_localizacao(en.getId_localizacao());
-			li = liDAO.buscarEstoque(li);
+
+			li = liDAO.buscarEstoque(i.getId(), en.getId_localizacao());
 			li.setEstoque(en.getEntrada() + li.getEstoque());
-			
+
 			if (en.getCodigo() == null) {
 				en.setCodigo(0);
 			}
@@ -79,9 +77,12 @@ public class EntradaMB {
 			i = iDAO.buscarItem(entrada.getId_itens());
 			i.setEstoque_at(i.getEstoque_at() + entrada.getEntrada());
 
+			li = liDAO.buscarEstoque(entrada.getId_itens(), entrada.getId_localizacao());
+			li.setEstoque(entrada.getEntrada() + li.getEstoque());
+
 			if (eDAO.inserir(entrada)) {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + entrada.getItens().getDescricao() + ".");
-				if (iDAO.updateEstoque(i.getEstoque_at(), i.getId())) {
+				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
 				} else {
 					System.out.println("EstoqueTI:Erro ao atualizar estoque.");
@@ -160,6 +161,7 @@ public class EntradaMB {
 	}
 
 	public void listarLocal() {
+		listLi = new ArrayList<LI>();
 		listLi = liDAO.listarLocal(en.getId_itens());
 	}
 
@@ -167,6 +169,7 @@ public class EntradaMB {
 		en = new Entrada();
 		i = new Itens();
 		l = new Localizacao();
+		li = new LI();
 		selc = null;
 	}
 
@@ -265,6 +268,14 @@ public class EntradaMB {
 
 	public void setSelc(Entrada selc) {
 		this.selc = selc;
+	}
+
+	public LI getLi() {
+		return li;
+	}
+
+	public void setLi(LI li) {
+		this.li = li;
 	}
 
 }
