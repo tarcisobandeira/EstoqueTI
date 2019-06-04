@@ -91,6 +91,6 @@ INSERT INTO `localizacao` (`id`, `local_nome`, `localNF`) VALUES
 (2, 'Armário 2', 1),
 (3, 'CA', 2),
 (4, 'HEV', 2),
-(5, 'Armario ', 1),
+(5, 'Armário 3', 1),
 (6, 'CSC', 2),
 (7, 'LAB 8', 2);
