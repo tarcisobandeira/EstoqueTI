@@ -12,6 +12,7 @@ public class Saida {
 	private Itens itens;
 	private Localizacao localizacao;
 	private Funcionarios funcionarios;
+	private LI li;
 
 	public Integer getId() {
 		return id;
@@ -91,6 +92,14 @@ public class Saida {
 
 	public void setOS(Integer oS) {
 		OS = oS;
+	}
+
+	public LI getLi() {
+		return li;
+	}
+
+	public void setLi(LI li) {
+		this.li = li;
 	}
 
 }
