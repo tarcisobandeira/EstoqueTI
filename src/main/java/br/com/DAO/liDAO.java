@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.entities.Itens;
 import br.com.entities.LI;
 import br.com.entities.Localizacao;
+import br.com.entities.Troca;
 import br.com.jdbc.ConnectionDB;
 
 public class liDAO {
@@ -28,6 +29,25 @@ public class liDAO {
 			ps.setInt(1, id1);
 			ps.setInt(2, id2);
 			ps.setInt(3, 0);
+
+			if (ps.executeUpdate() == 1) {
+				return true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean inserirTroca(Troca t) {
+		String sql = " INSERT INTO LI (id_itens, id_localizacao, estoque) VALUES (?,?,?) ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, t.getId_itens());
+			ps.setInt(2, t.getId_localAt());
+			ps.setInt(3, t.getQuantidade());
 
 			if (ps.executeUpdate() == 1) {
 				return true;

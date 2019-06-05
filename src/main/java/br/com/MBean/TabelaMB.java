@@ -12,12 +12,14 @@ import br.com.DAO.funcionariosDAO;
 import br.com.DAO.itensDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.DAO.saidaDAO;
+import br.com.DAO.trocaDAO;
 import br.com.DAO.unidadeDAO;
 import br.com.entities.Entrada;
 import br.com.entities.Funcionarios;
 import br.com.entities.Itens;
 import br.com.entities.Localizacao;
 import br.com.entities.Saida;
+import br.com.entities.Troca;
 import br.com.entities.Unidade;
 
 @ManagedBean
@@ -30,6 +32,7 @@ public class TabelaMB {
 	entradaDAO eDAO = new entradaDAO();
 	saidaDAO sDAO = new saidaDAO();
 	unidadeDAO uDAO = new unidadeDAO();
+	trocaDAO tDAO = new trocaDAO();
 	
 	List<Itens> itensL = new ArrayList<Itens>();
 	List<Localizacao> localnL = new ArrayList<Localizacao>();
@@ -38,6 +41,7 @@ public class TabelaMB {
 	List<Entrada> entradaL = new ArrayList<Entrada>();
 	List<Saida> saidaL = new ArrayList<Saida>();
 	List<Unidade> unidadeL = new ArrayList<Unidade>();
+	List<Troca> trocaL = new ArrayList<Troca>();
 	
 	int opt;
 
@@ -53,6 +57,7 @@ public class TabelaMB {
 		entradaL = eDAO.listarTodos();
 		saidaL = sDAO.listarTodos();
 		unidadeL = uDAO.listarTodos();
+		trocaL = tDAO.listarTodos();
 	}
 
 	public void orderBy() {
@@ -170,6 +175,22 @@ public class TabelaMB {
 
 	public void setOpt(int opt) {
 		this.opt = opt;
+	}
+
+	public trocaDAO gettDAO() {
+		return tDAO;
+	}
+
+	public void settDAO(trocaDAO tDAO) {
+		this.tDAO = tDAO;
+	}
+
+	public List<Troca> getTrocaL() {
+		return trocaL;
+	}
+
+	public void setTrocaL(List<Troca> trocaL) {
+		this.trocaL = trocaL;
 	}
 
 }

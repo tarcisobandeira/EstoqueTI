@@ -6,37 +6,35 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Troca de Local" />
-	
-	<p:dataTable id="tbTroca" scrollable="true"
+
+	<p:dataTable id="tbTroca" scrollable="true" value="#{tabelaMB.trocaL}" var="tl"
 		scrollHeight="500" emptyMessage="Nenhum item encontrado">
-		
-		<p:column filterBy="#{a}" headerText="Item"
-			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+
+		<p:column filterBy="#{tl.itens.descricao}" headerText="Item" filterMatchMode="contains">
+			<p:outputLabel value="#{tl.itens.descricao}" />
 		</p:column>
-		
-		<p:column filterBy="#{a}" headerText="Local anterior"
+
+		<p:column filterBy="#{tl.LAN.local_nome}" headerText="Local anterior"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{tl.LAN.local_nome}" />
 		</p:column>
-		
-		<p:column filterBy="#{a}" headerText="Local atual"
+
+		<p:column filterBy="#{tl.LAT.local_nome}" headerText="Local atual"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{tl.LAT.local_nome}" />
 		</p:column>
-		
-		<p:column filterBy="#{a}" headerText="Quantidade"
+
+		<p:column filterBy="#{tl.quantidade}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{tl.quantidade}" />
 		</p:column>
-		
-		<p:column filterBy="#{a}" headerText="Data"
-			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+
+		<p:column filterBy="#{tl.dia}" headerText="Data" filterMatchMode="contains">
+			<p:outputLabel value="#{tl.dia}" />
 		</p:column>
-		
+
 	</p:dataTable>
-	
-	<p:commandButton value="New" onclick="PF('dlg13').show();"/>
-	
+
+	<p:commandButton value="New" onclick="PF('dlg13').show();" />
+
 </ui:composition>

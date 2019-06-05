@@ -9,23 +9,34 @@
 		<h:form id="formT">
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
-				<p:selectOneMenu id="item" value="#{a}">
+				<p:selectOneMenu id="item" value="#{trocaEstoqueMB.t.id_itens}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.itensL}" var="is"
+						itemLabel="#{is.descricao}" itemValue="#{is.id}" />
+					<p:ajax listener="#{trocaEstoqueMB.listarLocal}" event="change"
+						update="localAt" />
 				</p:selectOneMenu>
 				<p:outputLabel />
 
 				<p:outputLabel value="Local atual: " />
-				<p:inputText id="localAt" value="#{a}" />
+				<p:selectOneMenu id="localAt" value="#{trocaEstoqueMB.t.id_localAn}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{trocaEstoqueMB.listLi}" var="lil"
+						itemLabel="#{lil.localizacao.local_nome} tem #{lil.estoque}"
+						itemValue="#{lil.id}" />
+				</p:selectOneMenu>
 				<p:outputLabel />
 
 				<p:outputLabel value="Novo Local: " />
-				<p:selectOneMenu id="localN" value="#{a}">
+				<p:selectOneMenu id="localN" value="#{trocaEstoqueMB.t.id_localAt}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.localnL}" var="localnL"
+						itemLabel="#{localnL.local_nome}" itemValue="#{localnL.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
 
 				<p:outputLabel value="Quantidade: " />
-				<p:inputText id="qtd" value="#{a}" />
+				<p:inputText id="qtd" value="#{trocaEstoqueMB.t.quantidade}" />
 				<p:outputLabel />
 
 			</p:panelGrid>
@@ -35,7 +46,7 @@
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU"
 				oncomplete="PF('dlg13').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
-				actionListener="#{localizacaoMB.criarLocal}" update=":formL" />
+				actionListener="#{trocaEstoqueMB.fazerMovimento}" update=":formT" />
 		</h:form>
 	</h:body>
 </ui:composition>
