@@ -112,14 +112,14 @@ public class SaidaMB {
 			i = iDAO.buscarItem(s.getId_itens());
 			l = lDAO.buscarLocal(s.getId_localizacao());
 			f = fDAO.buscarFuncionarioId(s.getId_funcionario());
-			
+
 			saida.setItens(i);
 			saida.setLocalizacao(l);
 			saida.setFuncionarios(f);
 			saida.setSaida(s.getSaida());
 			saida.setId_itens(s.getId_itens());
 			saida.setId_localizacao(s.getId_localizacao());
-			saida.setId_funcionario(s.getId_funcionario());			
+			saida.setId_funcionario(s.getId_funcionario());
 			saida.setLi(li);
 			saida.getLi().setEstoque(saida.getLi().getEstoque() - saida.getSaida());
 
@@ -167,6 +167,18 @@ public class SaidaMB {
 		int contador = 0;
 		for (Saida saida : listS) {
 			if (saida.equals(s)) {
+				listS.remove(contador);
+				return true;
+			}
+			contador++;
+		}
+		return false;
+	}
+
+	public boolean deletList() {
+		int contador = 0;
+		for (Saida saida : listS) {
+			if (saida.equals(selc)) {
 				listS.remove(contador);
 				return true;
 			}
