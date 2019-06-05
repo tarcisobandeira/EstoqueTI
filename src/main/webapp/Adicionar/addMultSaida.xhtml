@@ -24,7 +24,7 @@
 					filterMatchMode="contains" value="#{saidaMB.li.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{saidaMB.listLi}" var="lnl"
-						itemLabel="#{lnl.localizacao.local_nome} tem #{lnl.estoque}"
+						itemLabel="#{lnl.localizacao.local_nome} contem #{lnl.estoque}"
 						itemValue="#{lnl.localizacao.id}" />
 					<p:ajax listener="#{saidaMB.listarTotal}" event="change"
 						update="qtdS" />
