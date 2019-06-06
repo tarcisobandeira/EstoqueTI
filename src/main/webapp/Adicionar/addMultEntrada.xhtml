@@ -24,7 +24,8 @@
 					filterMatchMode="contains" value="#{entradaMB.en.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{entradaMB.listLi}" var="listLi"
-						itemLabel="#{listLi.localizacao.local_nome}" itemValue="#{listLi.id_localizacao}" />
+						itemLabel="#{listLi.localizacao.local_nome}"
+						itemValue="#{listLi.id_localizacao}" />
 					<p:ajax event="change" update="loo" />
 				</p:selectOneMenu>
 				<p:outputLabel id="loo" value="#{entradaMB.li.id_localizacao}" />
@@ -68,7 +69,7 @@
 				actionListener="#{entradaMB.deletList}" ajax="true" update=":formME"
 				disabled="#{entradaMB.selc == null}" />
 			<p:commandButton value="Salvar" ajax="true"
-				update=":formF :formI :formL :formE :formS :formME :formMS"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
 				actionListener="#{entradaMB.fazerMultEntrada}" />
 		</h:form>
 	</h:body>

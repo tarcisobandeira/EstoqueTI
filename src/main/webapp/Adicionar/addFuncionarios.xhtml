@@ -25,7 +25,7 @@
 				<p:commandButton value="Voltar" ajax="true"
 					actionListener="#{tabelaMB.listar}"
 					action="#{funcionariosMB.zerar}" oncomplete="PF('dlg1').hide();"
-					update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
+					update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
 					process="@this" />
 				<p:commandButton value="Salvar" ajax="true"
 					actionListener="#{funcionariosMB.salvar}" update=":formF" />

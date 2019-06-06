@@ -24,7 +24,8 @@
 					filterMatchMode="contains" value="#{entradaMB.en.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{entradaMB.listLi}" var="ll"
-						itemLabel="#{ll.localizacao.local_nome}" itemValue="#{ll.id_localizacao}" />
+						itemLabel="#{ll.localizacao.local_nome}"
+						itemValue="#{ll.id_localizacao}" />
 				</p:selectOneMenu>
 				<p:outputLabel />
 
@@ -41,7 +42,7 @@
 				actionListener="#{tabelaMB.listar}" update=":formCorpo"
 				oncomplete="PF('dlg5').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
-				update=":formF :formI :formL :formE :formS :formME :formMS :formU"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
 				actionListener="#{entradaMB.fazerEntrada}" />
 		</h:form>
 	</h:body>
