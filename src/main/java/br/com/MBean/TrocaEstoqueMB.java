@@ -35,37 +35,49 @@ public class TrocaEstoqueMB {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 			Calendar data = new GregorianCalendar();
 			t.setDia(sdf.format(data.getTime()));
-			
-			if (liDAO.confirmarLigacao(t)) {
-				if(tDAO.inserir(t)) {
-					li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAt());
-					int etq = li.getEstoque() + t.getQuantidade();
-							
-					if (liDAO.inserirTroca(t, etq)) {
 
-						li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAn());
-						li.setEstoque(li.getEstoque() - t.getQuantidade());
-
-						if (liDAO.updateEstoque(li)) {
-							System.out.println("EstoqueTI:Troca de local completa.");
+			if (tDAO.inserir(t)) {
+				if (!liDAO.confirmarLigacao(t)) {
+					if (liDAO.inserirTroca(t)) {
+						if (liDAO.updateEstoque(descontar(t))) {
+							System.out.println("EstoqueTI:Troca de estoque realizada.");
 							zerar();
+						} else {
+							System.out.println("EstoqueTI:Erro ao descontar no estoque.");
 						}
 					} else {
-						System.out.println("EstoqueTI:Erro ao fazer a ligação com o novo local.");
+						System.out.println("EstoqueTI:Erro ao fazer ligação.");
 					}
-				}else {
-					
+				} else {
+					if (liDAO.updateEstoque(acrescentar(t))) {
+						if (liDAO.updateEstoque(descontar(t))) {
+							System.out.println("EstoqueTI:Troca de estoque realizada.");
+							zerar();
+						} else {
+							System.out.println("EstoqueTI:Erro ao descontar no estoque.");
+						}
+					} else {
+						System.out.println("EstoqueTI:Erro ao acrescentar no estoque.");
+					}
 				}
 			} else {
-				if(tDAO) {
-					
-				}else {
-					
-				}
+				System.out.println("EstoqueTI:Erro ao trocar de local.");
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em troca de estoque.");
 		}
+	}
+
+	public LI descontar(Troca tr) {
+		li = liDAO.buscarEstoque(tr.getId_itens(), tr.getId_localAn());
+		li.setEstoque(li.getEstoque() - tr.getQuantidade());
+		return li;
+	}
+
+	public LI acrescentar(Troca tr) {
+		li = liDAO.buscarEstoque(tr.getId_itens(), tr.getId_localAt());
+		li.setEstoque(li.getEstoque() + tr.getQuantidade());
+		return li;
 	}
 
 	public void listarLocal() {
@@ -88,7 +100,9 @@ public class TrocaEstoqueMB {
 
 	public void zerar() {
 		t = new Troca();
+		li = new LI();
 		listLi = new ArrayList<LI>();
+		listL = new ArrayList<Localizacao>();
 	}
 
 	public Troca getT() {

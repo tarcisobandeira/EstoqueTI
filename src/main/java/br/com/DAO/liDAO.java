@@ -58,14 +58,14 @@ public class liDAO {
 		return false;
 	}
 	
-	public boolean inserirTroca(Troca t, int etq) {
+	public boolean inserirTroca(Troca t) {
 		String sql = " INSERT INTO LI (id_itens, id_localizacao, estoque) VALUES (?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, t.getId_itens());
 			ps.setInt(2, t.getId_localAt());
-			ps.setInt(3, etq);
+			ps.setInt(3, t.getQuantidade());
 
 			if (ps.executeUpdate() == 1) {
 				return true;
