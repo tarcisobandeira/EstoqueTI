@@ -57,6 +57,28 @@ public class localizacaoDAO {
 		}
 		return list;
 	}
+	
+	public List<Localizacao> lDisponivel(int id) {
+		List<Localizacao> list = new ArrayList<Localizacao>();
+		String sql = " SELECT * FROM Localizacao WHERE localNF = 1 AND id != ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Localizacao l = new Localizacao();
+				l.setId(rs.getInt("id"));
+				l.setLocal_nome(rs.getString("local_nome"));
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
 
 	public List<Localizacao> listarTodosF() {
 		List<Localizacao> list = new ArrayList<Localizacao>();

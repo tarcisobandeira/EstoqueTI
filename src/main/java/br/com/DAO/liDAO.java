@@ -40,14 +40,32 @@ public class liDAO {
 		return false;
 	}
 	
-	public boolean inserirTroca(Troca t) {
+	public boolean confirmarLigacao(Troca t) {
+		String sql = " SELECT * FROM LI WHERE id_itens = ? AND id_localizacao = ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, t.getId_itens());
+			ps.setInt(2, t.getId_localAt());
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean inserirTroca(Troca t, int etq) {
 		String sql = " INSERT INTO LI (id_itens, id_localizacao, estoque) VALUES (?,?,?) ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, t.getId_itens());
 			ps.setInt(2, t.getId_localAt());
-			ps.setInt(3, t.getQuantidade());
+			ps.setInt(3, etq);
 
 			if (ps.executeUpdate() == 1) {
 				return true;

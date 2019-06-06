@@ -10,8 +10,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.DAO.liDAO;
+import br.com.DAO.localizacaoDAO;
 import br.com.DAO.trocaDAO;
 import br.com.entities.LI;
+import br.com.entities.Localizacao;
 import br.com.entities.Troca;
 
 @ManagedBean
@@ -19,11 +21,14 @@ import br.com.entities.Troca;
 public class TrocaEstoqueMB {
 
 	Troca t = new Troca();
+	LI li = new LI();
 
 	liDAO liDAO = new liDAO();
 	trocaDAO tDAO = new trocaDAO();
+	localizacaoDAO lDAO = new localizacaoDAO();
 
 	List<LI> listLi = new ArrayList<LI>();
+	List<Localizacao> listL = new ArrayList<Localizacao>();
 
 	public void fazerMovimento() {
 		if (testarCampos()) {
@@ -31,18 +36,34 @@ public class TrocaEstoqueMB {
 			Calendar data = new GregorianCalendar();
 			t.setDia(sdf.format(data.getTime()));
 			
-			if(tDAO.inserir(t)) {
-				if(liDAO.inserirTroca(t)) {
-					System.out.println("EstoqueTI:Troca de local completa.");
-					zerar();
+			if (liDAO.confirmarLigacao(t)) {
+				if(tDAO.inserir(t)) {
+					li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAt());
+					int etq = li.getEstoque() + t.getQuantidade();
+							
+					if (liDAO.inserirTroca(t, etq)) {
+
+						li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAn());
+						li.setEstoque(li.getEstoque() - t.getQuantidade());
+
+						if (liDAO.updateEstoque(li)) {
+							System.out.println("EstoqueTI:Troca de local completa.");
+							zerar();
+						}
+					} else {
+						System.out.println("EstoqueTI:Erro ao fazer a ligação com o novo local.");
+					}
 				}else {
-					System.out.println("EstoqueTI:Erro ao fazer a ligação com o novo local.");
+					
 				}
-			}else {
-				System.out.println("EstoqueTI:Erro ao fazer a troca no banco.");
+			} else {
+				if(tDAO) {
+					
+				}else {
+					
+				}
 			}
-			
-		}else {
+		} else {
 			System.out.println("EstoqueTI:Campo vazio em troca de estoque.");
 		}
 	}
@@ -50,6 +71,10 @@ public class TrocaEstoqueMB {
 	public void listarLocal() {
 		listLi = new ArrayList<LI>();
 		listLi = liDAO.listarLocal(t.getId_itens());
+	}
+
+	public void listarDisponivel() {
+		listL = lDAO.lDisponivel(t.getId_localAn());
 	}
 
 	public boolean testarCampos() {
@@ -60,8 +85,8 @@ public class TrocaEstoqueMB {
 			return true;
 		}
 	}
-	
-	public void zerar(){
+
+	public void zerar() {
 		t = new Troca();
 		listLi = new ArrayList<LI>();
 	}
@@ -88,5 +113,37 @@ public class TrocaEstoqueMB {
 
 	public void setListLi(List<LI> listLi) {
 		this.listLi = listLi;
+	}
+
+	public LI getLi() {
+		return li;
+	}
+
+	public void setLi(LI li) {
+		this.li = li;
+	}
+
+	public trocaDAO gettDAO() {
+		return tDAO;
+	}
+
+	public void settDAO(trocaDAO tDAO) {
+		this.tDAO = tDAO;
+	}
+
+	public localizacaoDAO getlDAO() {
+		return lDAO;
+	}
+
+	public void setlDAO(localizacaoDAO lDAO) {
+		this.lDAO = lDAO;
+	}
+
+	public List<Localizacao> getListL() {
+		return listL;
+	}
+
+	public void setListL(List<Localizacao> listL) {
+		this.listL = listL;
 	}
 }

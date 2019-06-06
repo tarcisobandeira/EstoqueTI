@@ -33,7 +33,7 @@ public class TabelaMB {
 	saidaDAO sDAO = new saidaDAO();
 	unidadeDAO uDAO = new unidadeDAO();
 	trocaDAO tDAO = new trocaDAO();
-	
+
 	List<Itens> itensL = new ArrayList<Itens>();
 	List<Localizacao> localnL = new ArrayList<Localizacao>();
 	List<Localizacao> localfL = new ArrayList<Localizacao>();
@@ -42,7 +42,7 @@ public class TabelaMB {
 	List<Saida> saidaL = new ArrayList<Saida>();
 	List<Unidade> unidadeL = new ArrayList<Unidade>();
 	List<Troca> trocaL = new ArrayList<Troca>();
-	
+
 	int opt;
 
 	public TabelaMB() {

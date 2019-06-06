@@ -7,10 +7,11 @@
 
 	<p:outputLabel value="Troca de Local" />
 
-	<p:dataTable id="tbTroca" scrollable="true" value="#{tabelaMB.trocaL}" var="tl"
-		scrollHeight="500" emptyMessage="Nenhum item encontrado">
+	<p:dataTable id="tbTroca" scrollable="true" value="#{tabelaMB.trocaL}"
+		var="tl" scrollHeight="500" emptyMessage="Nenhum item encontrado">
 
-		<p:column filterBy="#{tl.itens.descricao}" headerText="Item" filterMatchMode="contains">
+		<p:column filterBy="#{tl.itens.descricao}" headerText="Item"
+			filterMatchMode="contains">
 			<p:outputLabel value="#{tl.itens.descricao}" />
 		</p:column>
 
@@ -29,7 +30,8 @@
 			<p:outputLabel value="#{tl.quantidade}" />
 		</p:column>
 
-		<p:column filterBy="#{tl.dia}" headerText="Data" filterMatchMode="contains">
+		<p:column filterBy="#{tl.dia}" headerText="Data"
+			filterMatchMode="contains">
 			<p:outputLabel value="#{tl.dia}" />
 		</p:column>
 

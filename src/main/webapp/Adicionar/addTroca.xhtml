@@ -23,15 +23,17 @@
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{trocaEstoqueMB.listLi}" var="lil"
 						itemLabel="#{lil.localizacao.local_nome} tem #{lil.estoque}"
-						itemValue="#{lil.id}" />
+						itemValue="#{lil.id_localizacao}" />
+					<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}" event="change"
+						update="localN" />
 				</p:selectOneMenu>
 				<p:outputLabel />
 
 				<p:outputLabel value="Novo Local: " />
 				<p:selectOneMenu id="localN" value="#{trocaEstoqueMB.t.id_localAt}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItems value="#{tabelaMB.localnL}" var="localnL"
-						itemLabel="#{localnL.local_nome}" itemValue="#{localnL.id}" />
+					<f:selectItems value="#{trocaEstoqueMB.listL}" var="listL"
+						itemLabel="#{listL.local_nome}" itemValue="#{listL.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
 

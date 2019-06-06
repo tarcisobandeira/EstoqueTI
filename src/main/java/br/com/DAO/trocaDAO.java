@@ -39,6 +39,11 @@ public class trocaDAO {
 		}
 		return false;
 	}
+	
+	public boolean update(Troca t) {
+		String sql = " UPDATE Troca SET quantidade = ? WHERE id_itens = ? AND id_local ";
+		
+	}
 
 	public List<Troca> listarTodos() {
 		List<Troca> list = new ArrayList<Troca>();
