@@ -24,8 +24,8 @@
 					<f:selectItems value="#{trocaEstoqueMB.listLi}" var="lil"
 						itemLabel="#{lil.localizacao.local_nome} tem #{lil.estoque}"
 						itemValue="#{lil.id_localizacao}" />
-					<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}" event="change"
-						update="localN" />
+					<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}"
+						event="change" update="localN qtd" />
 				</p:selectOneMenu>
 				<p:outputLabel />
 
@@ -38,13 +38,16 @@
 				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
 
 				<p:outputLabel value="Quantidade: " />
-				<p:inputText id="qtd" value="#{trocaEstoqueMB.t.quantidade}" />
+				<p:spinner id="qtd" value="#{trocaEstoqueMB.t.quantidade}"
+					max="#{trocaEstoqueMB.li.estoque}" min="0">
+					<p:ajax process="@this" event="keyup" update="qtd" />
+				</p:spinner>
 				<p:outputLabel />
 
 			</p:panelGrid>
 
 			<p:commandButton value="Voltar" ajax="true"
-				actionListener="#{tabelaMB.listar}"
+				actionListener="#{tabelaMB.listar}" action="#{trocaEstoqueMB.zerar}"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
 				oncomplete="PF('dlg13').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"

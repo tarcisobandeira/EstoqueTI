@@ -99,7 +99,7 @@ public class liDAO {
 		List<LI> list = new ArrayList<LI>();
 		String sql = " SELECT li.*, i.descricao AS nomeItens, l.local_nome AS nomeLocal " + " FROM LI li "
 				+ " INNER JOIN itens i " + " ON li.id_itens = i.id " + " INNER JOIN localizacao l "
-				+ " ON li.id_localizacao = l.id " + " WHERE li.id_itens = ? ";
+				+ " ON li.id_localizacao = l.id " + " WHERE li.id_itens = ? AND li.estoque != 0 ";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
