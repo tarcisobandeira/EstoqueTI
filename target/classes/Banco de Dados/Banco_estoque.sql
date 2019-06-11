@@ -51,6 +51,17 @@ CREATE TABLE Troca(
 	FOREIGN KEY (id_localAt) REFERENCES Localizacao(id)
 );
 
+CREATE TABLE Emprestimos(
+	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	dia_saida	VARCHAR(12),
+	dia_devo	VARCHAR(12),
+	colaborador VARCHAR(30),
+	id_itens	INT,
+	quantidade	INT,
+	obs			VARCHAR(500),
+	FOREIGN KEY (id_itens) REFERENCES Itens(id)
+);
+
 CREATE TABLE Entrada(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	codigo		INT,
