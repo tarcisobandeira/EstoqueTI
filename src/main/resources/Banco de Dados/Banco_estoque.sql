@@ -54,7 +54,7 @@ CREATE TABLE Troca(
 CREATE TABLE Emprestimos(
 	id			INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	dia_saida	VARCHAR(12),
-	dia_devo	VARCHAR(12),
+	dia_devol	VARCHAR(12),
 	colaborador VARCHAR(30),
 	id_itens	INT,
 	quantidade	INT,

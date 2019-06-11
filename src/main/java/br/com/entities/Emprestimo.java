@@ -1,0 +1,95 @@
+package br.com.entities;
+
+public class Emprestimo {
+
+	private Integer id;
+	private String dia_saida;
+	private String dia_devol;
+	private String colaborador;
+	private Integer id_itens;
+	private Integer quantidade;
+	private String OBS;
+	private Itens itens;
+
+	public Emprestimo(Integer id, String dia_saida, String dia_devol, String colaborador, Integer id_itens,
+			Integer quantidade, String OBS) {
+		super();
+		this.id = id;
+		this.dia_saida = dia_saida;
+		this.dia_devol = dia_devol;
+		this.colaborador = colaborador;
+		this.id_itens = id_itens;
+		this.quantidade = quantidade;
+		this.OBS = OBS;
+		
+	}
+
+	public Emprestimo() {
+
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDia_saida() {
+		return dia_saida;
+	}
+
+	public void setDia_saida(String dia_saida) {
+		this.dia_saida = dia_saida;
+	}
+
+	public String getDia_devol() {
+		return dia_devol;
+	}
+
+	public void setDia_devol(String dia_devol) {
+		this.dia_devol = dia_devol;
+	}
+
+	public String getColaborador() {
+		return colaborador;
+	}
+
+	public void setColaborador(String colaborador) {
+		this.colaborador = colaborador;
+	}
+
+	public Integer getId_itens() {
+		return id_itens;
+	}
+
+	public void setId_itens(Integer id_itens) {
+		this.id_itens = id_itens;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getOBS() {
+		return OBS;
+	}
+
+	public void setOBS(String oBS) {
+		OBS = oBS;
+	}
+
+	public Itens getItens() {
+		return itens;
+	}
+
+	public void setItens(Itens itens) {
+		this.itens = itens;
+	}
+
+}
