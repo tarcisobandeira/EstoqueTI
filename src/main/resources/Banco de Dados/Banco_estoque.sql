@@ -59,6 +59,7 @@ CREATE TABLE Emprestimos(
 	id_itens	INT,
 	quantidade	INT,
 	obs			VARCHAR(500),
+	limite		INT,
 	FOREIGN KEY (id_itens) REFERENCES Itens(id)
 );
 

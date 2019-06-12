@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+	<h:body>
+		<h:form id="formEM">
+			<p:panelGrid columns="2">
+
+				<p:outputLabel value="Item: " />
+				<p:selectOneMenu id="itens" filter="true" filterMatchMode="contains"
+					value="#{emprestimoMB.em.id_itens}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{tabelaMB.itensL}" var="ii"
+						itemLabel="#{ii.descricao}" itemValue="#{ii.id}" />
+					<p:ajax listener="#{emprestimoMB.listarLocal}" event="change"
+						update="local" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Local: " />
+				<p:selectOneMenu id="local" filter="true" filterMatchMode="contains"
+					value="#{emprestimoMB.li.id_localizacao}">
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{emprestimoMB.listLi}" var="li"
+						itemLabel="#{lnl.localizacao.local_nome} contem #{lnl.estoque}"
+						itemValue="#{lnl.localizacao.id}" />
+					<p:ajax listener="#{emprestimoMB.listarTotal}" event="change"
+						update="quan" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Data: " />
+				<p:datePicker selectionMode="range" value="#{emprestimoMB.dia}"
+					readonlyInput="true" />
+
+				<p:outputLabel value="Colaborador: " />
+				<p:inputText value="#{emprestimoMB.em.colaborador}" />
+
+				<p:outputLabel value="Quantidade: " />
+				<p:spinner id="quan" value="#{emprestimoMB.em.quantidade}"
+					max="#{emprestimoMB.li.estoque}" min="0" />
+
+				<p:outputLabel value="OBS: " />
+				<p:inputTextarea value="#{emprestimoMB.em.OBS}" maxlength="500" />
+
+			</p:panelGrid>
+			<p:commandButton value="Voltar" ajax="true"
+				actionListener="#{tabelaMB.listar}"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
+				oncomplete="PF('dlg15').hide();" process="@this" />
+			<p:commandButton value="Salvar" ajax="true" update=":formEM"
+				actionListener="#{emprestimoMB.fazerEmprestimo}" />
+		</h:form>
+	</h:body>
+</ui:composition>

@@ -7,4 +7,35 @@
 
 	<p:outputLabel value="Empréstimos" />
 
+	<p:dataTable id="tabela8" value="#{a}" scrollable="true"
+		scrollHeight="500" var="ee" emptyMessage="Nenhum item encontrado">
+
+		<p:column filterBy="#{a}" headerText="Item" filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+
+		<p:column filterBy="#{a}" headerText="Colaborador"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+
+		<p:column filterBy="#{a}" headerText="Saída"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+
+		<p:column filterBy="#{a}" headerText="Devoloução"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+
+		<p:column filterBy="#{a}" headerText="Quantidade"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{a}" />
+		</p:column>
+
+	</p:dataTable>
+
+	<p:commandButton value="New" oncomplete="PF('dlg15').show();" />
+
 </ui:composition>

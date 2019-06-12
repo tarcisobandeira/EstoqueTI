@@ -9,10 +9,11 @@ public class Emprestimo {
 	private Integer id_itens;
 	private Integer quantidade;
 	private String OBS;
+	private Integer limite;
 	private Itens itens;
 
 	public Emprestimo(Integer id, String dia_saida, String dia_devol, String colaborador, Integer id_itens,
-			Integer quantidade, String OBS) {
+			Integer quantidade, String OBS, Integer limite) {
 		super();
 		this.id = id;
 		this.dia_saida = dia_saida;
@@ -21,7 +22,7 @@ public class Emprestimo {
 		this.id_itens = id_itens;
 		this.quantidade = quantidade;
 		this.OBS = OBS;
-		
+		this.limite = limite;
 	}
 
 	public Emprestimo() {
@@ -90,6 +91,14 @@ public class Emprestimo {
 
 	public void setItens(Itens itens) {
 		this.itens = itens;
+	}
+
+	public Integer getLimite() {
+		return limite;
+	}
+
+	public void setLimite(Integer limite) {
+		this.limite = limite;
 	}
 
 }
