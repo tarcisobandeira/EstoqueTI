@@ -57,10 +57,12 @@ CREATE TABLE Emprestimos(
 	dia_devol	VARCHAR(12),
 	colaborador VARCHAR(30),
 	id_itens	INT,
+	id_localizacao INT,
 	quantidade	INT,
 	obs			VARCHAR(500),
 	limite		INT,
-	FOREIGN KEY (id_itens) REFERENCES Itens(id)
+	FOREIGN KEY (id_itens) REFERENCES Itens(id),
+	FOREIGN KEY (id_localizacao) REFERENCES Localizacao(id)
 );
 
 CREATE TABLE Entrada(

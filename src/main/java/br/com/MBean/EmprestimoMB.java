@@ -2,7 +2,9 @@ package br.com.MBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -25,18 +27,25 @@ public class EmprestimoMB {
 
 	liDAO liDAO = new liDAO();
 	emprestimoDAO emDAO = new emprestimoDAO();
+	
+	Date dataMin;
+	
+	public EmprestimoMB() {
+		Calendar data = new GregorianCalendar();
+		setDataMin(data.getTime());
+	}
 
 	public void fazerEmprestimo() {
 		salvarData();
-		
-		if(testarCampo()) {
-			if(emDAO.inserir(em)) {
+		em.setLimite(0);
+		if (testarCampo()) {
+			if (emDAO.inserir(em)) {
 				System.out.println("EstoqueTI:Empréstimo feito.");
 				zerar();
-			}else {
+			} else {
 				System.out.println("EstoqueTI:Erro ao fazer empréstimo.");
 			}
-		}else {
+		} else {
 			System.out.println("EstoqueTI:Campo vazio em empréstimo.");
 		}
 	}
@@ -57,9 +66,10 @@ public class EmprestimoMB {
 	public boolean testarCampo() {
 		if ((em.getId_itens() == null) || (li.getId_localizacao() == null) || (em.getQuantidade() == null)
 				|| (em.getDia_saida() == null) || (em.getDia_devol() == null)) {
+			return false;
+		} else {
 			return true;
 		}
-		return false;
 	}
 
 	public void listarLocal() {
@@ -74,7 +84,7 @@ public class EmprestimoMB {
 			li = liDAO.buscarEstoque(em.getId_itens(), li.getId_localizacao());
 		}
 	}
-	
+
 	public void zerar() {
 		dia = new ArrayList<Date>();
 		li = new LI();
@@ -120,6 +130,22 @@ public class EmprestimoMB {
 
 	public void setLiDAO(liDAO liDAO) {
 		this.liDAO = liDAO;
+	}
+
+	public emprestimoDAO getEmDAO() {
+		return emDAO;
+	}
+
+	public void setEmDAO(emprestimoDAO emDAO) {
+		this.emDAO = emDAO;
+	}
+
+	public Date getDataMin() {
+		return dataMin;
+	}
+
+	public void setDataMin(Date dataMin) {
+		this.dataMin = dataMin;
 	}
 
 }

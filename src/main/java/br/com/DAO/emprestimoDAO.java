@@ -16,7 +16,7 @@ public class emprestimoDAO {
 	}
 	
 	public boolean inserir(Emprestimo em) {
-		String sql = " INSERT INTO Emprestimos (dia_saida, dia_devol, colaborador, id_itens, quantidade, obs, limite) VALUES (?,?,?,?,?,?,?) ";
+		String sql = " INSERT INTO Emprestimos (dia_saida, dia_devol, colaborador, id_itens, id_localizacao, quantidade, obs, limite) VALUES (?,?,?,?,?,?,?,?) ";
 		
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -24,9 +24,10 @@ public class emprestimoDAO {
 			ps.setString(2, em.getDia_devol());
 			ps.setString(3, em.getColaborador());
 			ps.setInt(4, em.getId_itens());
-			ps.setInt(5, em.getQuantidade());
-			ps.setString(6, em.getOBS());
-			ps.setInt(7, em.getLimite());
+			ps.setInt(5, em.getId_localizacao());
+			ps.setInt(6, em.getQuantidade());
+			ps.setString(7, em.getOBS());
+			ps.setInt(8, em.getLimite());
 			
 			if(ps.executeUpdate() == 1) {
 				return true;

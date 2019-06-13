@@ -16,22 +16,24 @@
 					<f:selectItems value="#{tabelaMB.itensL}" var="ii"
 						itemLabel="#{ii.descricao}" itemValue="#{ii.id}" />
 					<p:ajax listener="#{emprestimoMB.listarLocal}" event="change"
-						update="local" />
+						update="lllocal" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Local: " />
-				<p:selectOneMenu id="local" filter="true" filterMatchMode="contains"
-					value="#{emprestimoMB.li.id_localizacao}">
+				<p:selectOneMenu id="lllocal" filter="true"
+					filterMatchMode="contains"
+					value="#{emprestimoMB.em.id_localizacao}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{emprestimoMB.listLi}" var="li"
-						itemLabel="#{lnl.localizacao.local_nome} contem #{lnl.estoque}"
-						itemValue="#{lnl.localizacao.id}" />
+						itemLabel="#{li.localizacao.local_nome} contem #{li.estoque}"
+						itemValue="#{li.localizacao.id}" />
 					<p:ajax listener="#{emprestimoMB.listarTotal}" event="change"
 						update="quan" />
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Data: " />
-				<p:datePicker selectionMode="range" value="#{emprestimoMB.dia}"
+				<p:datePicker selectionMode="range"
+					mindate="#{emprestimoMB.dataMin}" value="#{emprestimoMB.dia}"
 					readonlyInput="true" />
 
 				<p:outputLabel value="Colaborador: " />
@@ -39,7 +41,9 @@
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="quan" value="#{emprestimoMB.em.quantidade}"
-					max="#{emprestimoMB.li.estoque}" min="0" />
+					max="#{emprestimoMB.li.estoque}" min="0">
+					<p:ajax process="@this" event="keyup" update="quan" />
+				</p:spinner>
 
 				<p:outputLabel value="OBS: " />
 				<p:inputTextarea value="#{emprestimoMB.em.OBS}" maxlength="500" />
