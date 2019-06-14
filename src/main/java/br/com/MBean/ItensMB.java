@@ -103,7 +103,7 @@ public class ItensMB {
 	}
 	
 	public void mostrarLocais() {
-		listLi = liDAO.listarLocal(selc.getId());
+		listLi = liDAO.listarLocalSemFalta(selc.getId());
 	}
 
 	public itensDAO getiDAO() {

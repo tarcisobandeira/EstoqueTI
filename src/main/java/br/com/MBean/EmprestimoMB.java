@@ -2,9 +2,7 @@ package br.com.MBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -27,12 +25,12 @@ public class EmprestimoMB {
 
 	liDAO liDAO = new liDAO();
 	emprestimoDAO emDAO = new emprestimoDAO();
-	
+
 	Date dataMin;
-	
+
 	public EmprestimoMB() {
-		Calendar data = new GregorianCalendar();
-		setDataMin(data.getTime());
+		Date hoje = new Date();
+		dataMin = new Date(hoje.getTime() - 3);
 	}
 
 	public void fazerEmprestimo() {
@@ -40,8 +38,12 @@ public class EmprestimoMB {
 		em.setLimite(0);
 		if (testarCampo()) {
 			if (emDAO.inserir(em)) {
-				System.out.println("EstoqueTI:Empréstimo feito.");
-				zerar();
+				if (liDAO.updateEstoque(descontar(em))) {
+					System.out.println("EstoqueTI:Empréstimo feito.");
+					zerar();
+				} else {
+					System.out.println("EstoqueTI:Erro ao descontar no estoque.");
+				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao fazer empréstimo.");
 			}
@@ -63,6 +65,18 @@ public class EmprestimoMB {
 		}
 	}
 
+	public LI descontar(Emprestimo emp) {
+		li = liDAO.buscarEstoque(emp.getId_itens(), emp.getId_localizacao());
+		li.setEstoque(li.getEstoque() - emp.getQuantidade());
+		return li;
+	}
+
+	public LI acrescentar(Emprestimo emp) {
+		li = liDAO.buscarEstoque(emp.getId_itens(), emp.getId_localizacao());
+		li.setEstoque(li.getEstoque() + emp.getQuantidade());
+		return li;
+	}
+
 	public boolean testarCampo() {
 		if ((em.getId_itens() == null) || (li.getId_localizacao() == null) || (em.getQuantidade() == null)
 				|| (em.getDia_saida() == null) || (em.getDia_devol() == null)) {
@@ -80,8 +94,8 @@ public class EmprestimoMB {
 	public void listarTotal() {
 		li.setEstoque(0);
 		em.setQuantidade(0);
-		if (li.getId_localizacao() != null) {
-			li = liDAO.buscarEstoque(em.getId_itens(), li.getId_localizacao());
+		if (em.getId_localizacao() != null) {
+			li = liDAO.buscarEstoque(em.getId_itens(), em.getId_localizacao());
 		}
 	}
 

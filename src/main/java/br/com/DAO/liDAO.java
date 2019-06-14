@@ -99,6 +99,35 @@ public class liDAO {
 		List<LI> list = new ArrayList<LI>();
 		String sql = " SELECT li.*, i.descricao AS nomeItens, l.local_nome AS nomeLocal " + " FROM LI li "
 				+ " INNER JOIN itens i " + " ON li.id_itens = i.id " + " INNER JOIN localizacao l "
+				+ " ON li.id_localizacao = l.id " + " WHERE li.id_itens = ? ";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				LI l = new LI();
+				l.setId(rs.getInt("id"));
+				l.setId_itens(rs.getInt("id_itens"));
+				l.setId_localizacao(rs.getInt("id_localizacao"));
+				l.setEstoque(rs.getInt("estoque"));
+				l.setItens(new Itens(l.getId_itens(), rs.getString("nomeItens"), null, null, null));
+				l.setLocalizacao(new Localizacao(l.getId_localizacao(), rs.getString("nomeLocal"), null));
+				
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	public List<LI> listarLocalSemFalta(int id) {
+		List<LI> list = new ArrayList<LI>();
+		String sql = " SELECT li.*, i.descricao AS nomeItens, l.local_nome AS nomeLocal " + " FROM LI li "
+				+ " INNER JOIN itens i " + " ON li.id_itens = i.id " + " INNER JOIN localizacao l "
 				+ " ON li.id_localizacao = l.id " + " WHERE li.id_itens = ? AND li.estoque != 0 ";
 		
 		try {

@@ -82,7 +82,7 @@ public class TrocaEstoqueMB {
 
 	public void listarLocal() {
 		listLi = new ArrayList<LI>();
-		listLi = liDAO.listarLocal(t.getId_itens());
+		listLi = liDAO.listarLocalSemFalta(t.getId_itens());
 	}
 
 	public void listarDisponivel() {
