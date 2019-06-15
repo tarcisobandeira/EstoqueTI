@@ -25,12 +25,16 @@ public class EmprestimoMB {
 
 	liDAO liDAO = new liDAO();
 	emprestimoDAO emDAO = new emprestimoDAO();
-
-	Date dataMin;
+	Date minDate = new Date();
 
 	public EmprestimoMB() {
+		privarData();
+	}
+
+	public void privarData() {
 		Date hoje = new Date();
-		dataMin = new Date(hoje.getTime() - 3);
+		long oneDay = 24 * 60 * 60 * 1000;
+		setMinDate(new Date(hoje.getTime() - oneDay));
 	}
 
 	public void fazerEmprestimo() {
@@ -106,14 +110,6 @@ public class EmprestimoMB {
 		listLi = new ArrayList<LI>();
 	}
 
-	public Emprestimo getEm() {
-		return em;
-	}
-
-	public void setEm(Emprestimo em) {
-		this.em = em;
-	}
-
 	public List<Date> getDia() {
 		return dia;
 	}
@@ -128,6 +124,14 @@ public class EmprestimoMB {
 
 	public void setListLi(List<LI> listLi) {
 		this.listLi = listLi;
+	}
+
+	public Emprestimo getEm() {
+		return em;
+	}
+
+	public void setEm(Emprestimo em) {
+		this.em = em;
 	}
 
 	public LI getLi() {
@@ -154,12 +158,12 @@ public class EmprestimoMB {
 		this.emDAO = emDAO;
 	}
 
-	public Date getDataMin() {
-		return dataMin;
+	public Date getMinDate() {
+		return minDate;
 	}
 
-	public void setDataMin(Date dataMin) {
-		this.dataMin = dataMin;
+	public void setMinDate(Date minDate) {
+		this.minDate = minDate;
 	}
 
 }

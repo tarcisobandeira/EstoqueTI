@@ -32,9 +32,8 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Data: " />
-				<p:datePicker selectionMode="range"
-					mindate="#{emprestimoMB.dataMin}" value="#{emprestimoMB.dia}"
-					readonlyInput="true" />
+				<p:datePicker value="#{emprestimoMB.dia}" selectionMode="range"
+					mindate="#{emprestimoMB.minDate}" locale="pt_BR" />
 
 				<p:outputLabel value="Colaborador: " />
 				<p:inputText value="#{emprestimoMB.em.colaborador}" />
