@@ -6,36 +6,40 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Empréstimos" />
-
-	<p:dataTable id="tabela8" value="#{a}" scrollable="true"
-		scrollHeight="500" var="ee" emptyMessage="Nenhum item encontrado">
-
-		<p:column filterBy="#{a}" headerText="Item" filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+	<p:dataTable id="tabela8" value="#{tabelaMB.emprestimoL}"
+		scrollable="true" scrollHeight="500" var="em"
+		emptyMessage="Nenhum item encontrado" selection="#{emprestimoMB.selc}"
+		selectionMode="single" rowKey="#{em.id}">
+		<p:ajax event="rowSelect" update=":formCorpo" />
+		<p:column filterBy="#{em.itens.descricao}" headerText="Item"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{em.itens.descricao}" />
 		</p:column>
 
-		<p:column filterBy="#{a}" headerText="Colaborador"
+		<p:column filterBy="#{em.colaborador}" headerText="Colaborador"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{em.colaborador}" />
 		</p:column>
 
-		<p:column filterBy="#{a}" headerText="Saída"
+		<p:column filterBy="#{em.dia_saida}" headerText="Saída"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{em.dia_saida}" />
 		</p:column>
 
-		<p:column filterBy="#{a}" headerText="Devoloução"
+		<p:column filterBy="#{em.dia_devol}" headerText="Devoloução"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{em.dia_devol}" />
 		</p:column>
 
-		<p:column filterBy="#{a}" headerText="Quantidade"
+		<p:column filterBy="#{em.quantidade}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{a}" />
+			<p:outputLabel value="#{em.quantidade}" />
 		</p:column>
 
 	</p:dataTable>
 
-	<p:commandButton value="New" oncomplete="PF('dlg15').show();" />
-
+	<p:commandButton value="Novo Emprestimo"
+		oncomplete="PF('dlg15').show();" />
+	<p:commandButton value="Informações" ajax="true" update=":formOBS"
+		disabled="#{emprestimoMB.selc == null}" />
 </ui:composition>

@@ -12,6 +12,7 @@ public class Emprestimo {
 	private String OBS;
 	private Integer limite;
 	private Itens itens;
+	private Localizacao localizacao;
 
 	public Emprestimo(Integer id, String dia_saida, String dia_devol, String colaborador, Integer id_itens,
 			Integer id_localizacao, Integer quantidade, String OBS, Integer limite) {
@@ -109,6 +110,14 @@ public class Emprestimo {
 
 	public void setId_localizacao(Integer id_localizacao) {
 		this.id_localizacao = id_localizacao;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
 	}
 
 }

@@ -9,8 +9,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import br.com.DAO.emprestimoDAO;
+import br.com.DAO.itensDAO;
 import br.com.DAO.liDAO;
 import br.com.entities.Emprestimo;
+import br.com.entities.Itens;
 import br.com.entities.LI;
 
 @ManagedBean
@@ -22,10 +24,14 @@ public class EmprestimoMB {
 
 	Emprestimo em = new Emprestimo();
 	LI li = new LI();
+	Date minDate = new Date();
+	Itens i = new Itens();
 
 	liDAO liDAO = new liDAO();
 	emprestimoDAO emDAO = new emprestimoDAO();
-	Date minDate = new Date();
+	itensDAO iDAO = new itensDAO();
+
+	Emprestimo selc;
 
 	public EmprestimoMB() {
 		privarData();
@@ -40,11 +46,18 @@ public class EmprestimoMB {
 	public void fazerEmprestimo() {
 		salvarData();
 		em.setLimite(0);
+
+		i = iDAO.buscarItem(em.getId_itens());
+		i.setEstoque_at(i.getEstoque_at() - em.getQuantidade());
 		if (testarCampo()) {
 			if (emDAO.inserir(em)) {
 				if (liDAO.updateEstoque(descontar(em))) {
-					System.out.println("EstoqueTI:Empréstimo feito.");
-					zerar();
+					if (iDAO.updateEstoque(i.getEstoque_at(), em.getId_itens())) {
+						System.out.println("EstoqueTI:Empréstimo feito.");
+						zerar();
+					} else {
+						System.out.println("EstoqueTI:Erro ao descontar no item.");
+					}
 				} else {
 					System.out.println("EstoqueTI:Erro ao descontar no estoque.");
 				}
@@ -88,6 +101,10 @@ public class EmprestimoMB {
 		} else {
 			return true;
 		}
+	}
+	
+	public void detalhes() {
+		em = selc;
 	}
 
 	public void listarLocal() {
@@ -164,6 +181,30 @@ public class EmprestimoMB {
 
 	public void setMinDate(Date minDate) {
 		this.minDate = minDate;
+	}
+
+	public Itens getI() {
+		return i;
+	}
+
+	public void setI(Itens i) {
+		this.i = i;
+	}
+
+	public itensDAO getiDAO() {
+		return iDAO;
+	}
+
+	public void setiDAO(itensDAO iDAO) {
+		this.iDAO = iDAO;
+	}
+
+	public Emprestimo getSelc() {
+		return selc;
+	}
+
+	public void setSelc(Emprestimo selc) {
+		this.selc = selc;
 	}
 
 }

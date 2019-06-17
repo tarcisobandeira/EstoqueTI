@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import br.com.DAO.emprestimoDAO;
 import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
 import br.com.DAO.itensDAO;
@@ -14,6 +15,7 @@ import br.com.DAO.localizacaoDAO;
 import br.com.DAO.saidaDAO;
 import br.com.DAO.trocaDAO;
 import br.com.DAO.unidadeDAO;
+import br.com.entities.Emprestimo;
 import br.com.entities.Entrada;
 import br.com.entities.Funcionarios;
 import br.com.entities.Itens;
@@ -33,6 +35,7 @@ public class TabelaMB {
 	saidaDAO sDAO = new saidaDAO();
 	unidadeDAO uDAO = new unidadeDAO();
 	trocaDAO tDAO = new trocaDAO();
+	emprestimoDAO emDAO = new emprestimoDAO();
 
 	List<Itens> itensL = new ArrayList<Itens>();
 	List<Localizacao> localnL = new ArrayList<Localizacao>();
@@ -42,6 +45,7 @@ public class TabelaMB {
 	List<Saida> saidaL = new ArrayList<Saida>();
 	List<Unidade> unidadeL = new ArrayList<Unidade>();
 	List<Troca> trocaL = new ArrayList<Troca>();
+	List<Emprestimo> emprestimoL = new ArrayList<Emprestimo>();
 
 	int opt;
 
@@ -58,6 +62,7 @@ public class TabelaMB {
 		saidaL = sDAO.listarTodos();
 		unidadeL = uDAO.listarTodos();
 		trocaL = tDAO.listarTodos();
+		emprestimoL = emDAO.listarTodos();
 	}
 
 	public void orderBy() {
@@ -163,6 +168,22 @@ public class TabelaMB {
 
 	public List<Unidade> getUnidadeL() {
 		return unidadeL;
+	}
+
+	public emprestimoDAO getEmDAO() {
+		return emDAO;
+	}
+
+	public void setEmDAO(emprestimoDAO emDAO) {
+		this.emDAO = emDAO;
+	}
+
+	public List<Emprestimo> getEmprestimoL() {
+		return emprestimoL;
+	}
+
+	public void setEmprestimoL(List<Emprestimo> emprestimoL) {
+		this.emprestimoL = emprestimoL;
 	}
 
 	public void setUnidadeL(List<Unidade> unidadeL) {
