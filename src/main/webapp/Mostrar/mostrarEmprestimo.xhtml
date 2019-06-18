@@ -8,21 +8,25 @@
 	<h:body>
 		<h:form id="formOBS">
 			<p:panelGrid columns="2">
-				<p:outputLabel value="Nome: " />
-				<p:inputText id="nome_fun" value="#{funcionariosMB.f.nome}" />
-				<p:outputLabel value="Função: " />
-				<p:selectOneMenu id="funcao" value="#{funcionariosMB.f.funcao}">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="Estagiário" itemValue="1" />
-					<f:selectItem itemLabel="Efetivo" itemValue="2" />
-				</p:selectOneMenu>
-				<p:outputLabel value="Login: " />
-				<p:inputText id="login" value="#{funcionariosMB.f.login}" />
-				<p:outputLabel value="Senha: " />
-				<p:password id="senha" value="#{funcionariosMB.f.senha}" />
+				<p:outputLabel value="Colaborador" />
+				<p:outputLabel value="#{emprestimoMB.em.colaborador}" />
+				<p:outputLabel value="Item" />
+				<p:outputLabel value="#{emprestimoMB.em.itens.descricao}" />
+				<p:outputLabel value="Quantidade" />
+				<p:outputLabel value="#{emprestimoMB.em.quantidade}" />
+				<p:outputLabel value="Saida" />
+				<p:outputLabel value="#{emprestimoMB.em.dia_saida}" />
+				<p:outputLabel value="Devolução" />
+				<p:outputLabel value="#{emprestimoMB.em.dia_devol}" />
+				<p:outputLabel value="Localização do item" />
+				<p:outputLabel value="#{emprestimoMB.em.localizacao.local_nome}" />
+				<p:outputLabel value="OBS" />
+				<p:outputLabel value="#{emprestimoMB.em.OBS}" />
+				<p:outputLabel value="Limite"/>
+				<p:outputLabel value="#{emprestimoMB.em.limite}"/>
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
-				oncomplete="PF('dlg11').hide();" process="@this" />
+				oncomplete="PF('dlg16').hide();" process="@this" />
 		</h:form>
 	</h:body>
 </ui:composition>

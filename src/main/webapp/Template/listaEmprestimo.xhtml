@@ -9,26 +9,24 @@
 	<p:dataTable id="tabela8" value="#{tabelaMB.emprestimoL}"
 		scrollable="true" scrollHeight="500" var="em"
 		emptyMessage="Nenhum item encontrado" selection="#{emprestimoMB.selc}"
-		selectionMode="single" rowKey="#{em.id}">
+		selectionMode="single" rowKey="#{em.id}"
+		rowStyleClass="#{em.limite eq 1 ? 'limite' : (em.limite eq 2 ? 'passou' : (em.limite eq 3 ? 'ok' : null))}">
+
 		<p:ajax event="rowSelect" update=":formCorpo" />
-		<p:column filterBy="#{em.itens.descricao}" headerText="Item"
-			filterMatchMode="contains">
-			<p:outputLabel value="#{em.itens.descricao}" />
-		</p:column>
 
 		<p:column filterBy="#{em.colaborador}" headerText="Colaborador"
 			filterMatchMode="contains">
 			<p:outputLabel value="#{em.colaborador}" />
 		</p:column>
 
-		<p:column filterBy="#{em.dia_saida}" headerText="Saída"
-			filterMatchMode="contains">
-			<p:outputLabel value="#{em.dia_saida}" />
-		</p:column>
-
 		<p:column filterBy="#{em.dia_devol}" headerText="Devoloução"
 			filterMatchMode="contains">
 			<p:outputLabel value="#{em.dia_devol}" />
+		</p:column>
+
+		<p:column filterBy="#{em.itens.descricao}" headerText="Item"
+			filterMatchMode="contains">
+			<p:outputLabel value="#{em.itens.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{em.quantidade}" headerText="Quantidade"
@@ -41,5 +39,41 @@
 	<p:commandButton value="Novo Emprestimo"
 		oncomplete="PF('dlg15').show();" />
 	<p:commandButton value="Informações" ajax="true" update=":formOBS"
-		disabled="#{emprestimoMB.selc == null}" />
+		disabled="#{emprestimoMB.selc == null}"
+		actionListener="#{emprestimoMB.detalhes}"
+		oncomplete="PF('dlg16').show();" />
+	<p:commandButton value="Finalizar"
+		disabled="#{emprestimoMB.selc == null}"
+		actionListener="#{emprestimoMB.fecharEmprestimo}">
+		<p:confirm header="Confirmation"
+			message="Deseja finalizar emprestimo?"
+			icon="pi pi-exclamation-triangle" />
+	</p:commandButton>
+
+	<p:confirmDialog global="true" closable="false">
+		<p:commandButton value="Sim" type="button"
+			styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+			actionListener="#{tabelaMB.listar}" ajax="true" update=":formCorpo" />
+		<p:commandButton value="Não" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+	<style>
+.limite {
+	background-color: #00ffff !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.passou {
+	background-color: red !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+
+.ok {
+	background-color: #00ff40 !important;
+	background-image: none !important;
+	color: #000000 !important;
+}
+</style>
 </ui:composition>

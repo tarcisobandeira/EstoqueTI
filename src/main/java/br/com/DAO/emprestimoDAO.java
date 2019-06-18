@@ -48,7 +48,8 @@ public class emprestimoDAO {
 		List<Emprestimo> list = new ArrayList<Emprestimo>();
 		String sql = "  SELECT em.*, i.descricao AS nomeItem, l.local_nome AS nomeLocal " + " FROM emprestimos em "
 				+ " INNER JOIN Itens i " + " ON em.id_itens = i.id " + " INNER JOIN localizacao l "
-				+ " ON em.id_localizacao = l.id ";
+				+ " ON em.id_localizacao = l.id "
+				+ " ORDER BY em.limite, em.dia_devol ASC";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -64,6 +65,7 @@ public class emprestimoDAO {
 				em.setColaborador(rs.getString("colaborador"));
 				em.setQuantidade(rs.getInt("quantidade"));
 				em.setOBS(rs.getString("obs"));
+				em.setLimite(rs.getInt("limite"));
 				em.setItens(new Itens(em.getId_itens(), rs.getString("nomeItem"), null, null, null));
 				em.setLocalizacao(new Localizacao(em.getId_localizacao(), rs.getString("nomeLocal"), null));
 				
@@ -74,6 +76,23 @@ public class emprestimoDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+	
+	public boolean updateLimite(Emprestimo em) {
+		String sql = " UPDATE Emprestimos set limite = ? WHERE id = ? ";
+		
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, em.getLimite());
+			ps.setInt(2, em.getId());
+			
+			if(ps.executeUpdate() == 1) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

@@ -1,7 +1,10 @@
 
 package br.com.MBean;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -50,6 +53,7 @@ public class TabelaMB {
 	int opt;
 
 	public TabelaMB() {
+		conferir();
 		listar();
 	}
 
@@ -63,6 +67,22 @@ public class TabelaMB {
 		unidadeL = uDAO.listarTodos();
 		trocaL = tDAO.listarTodos();
 		emprestimoL = emDAO.listarTodos();
+	}
+
+	public void conferir() {
+		emprestimoL = emDAO.listarTodos();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		Calendar data = new GregorianCalendar();
+		for (Emprestimo emprestimo : emprestimoL) {
+			if (emprestimo.getDia_devol().equals(sdf.format(data.getTime())) && (emprestimo.getLimite() == 0)) {
+				emprestimo.setLimite(1);
+				emDAO.updateLimite(emprestimo);
+			} else if (!emprestimo.getDia_devol().equals(sdf.format(data.getTime())) && (emprestimo.getLimite() == 1)) {
+				emprestimo.setLimite(2);
+				emDAO.updateLimite(emprestimo);
+			}
+		}
+
 	}
 
 	public void orderBy() {

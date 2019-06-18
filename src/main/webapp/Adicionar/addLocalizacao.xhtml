@@ -19,8 +19,11 @@
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}"
-				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
-				oncomplete="PF('dlg3').hide();" process="@this" />
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
+				oncomplete="PF('dlg3').hide();" process="@this">
+				<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}"
+					event="click" update=":formT:localN :formT:qtd" />
+			</p:commandButton>
 			<p:commandButton value="Salvar" ajax="true"
 				actionListener="#{localizacaoMB.criarLocal}" update=":formL" />
 		</h:form>

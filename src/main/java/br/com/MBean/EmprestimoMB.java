@@ -21,6 +21,7 @@ public class EmprestimoMB {
 
 	List<Date> dia = new ArrayList<Date>();
 	List<LI> listLi = new ArrayList<LI>();
+	List<Emprestimo> listEm = new ArrayList<Emprestimo>();
 
 	Emprestimo em = new Emprestimo();
 	LI li = new LI();
@@ -67,6 +68,12 @@ public class EmprestimoMB {
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em empréstimo.");
 		}
+	}
+	
+	public void fecharEmprestimo() {
+		selc.setLimite(3);
+		emDAO.updateLimite(selc);
+		zerar();
 	}
 
 	public void salvarData() {
@@ -125,6 +132,7 @@ public class EmprestimoMB {
 		li = new LI();
 		em = new Emprestimo();
 		listLi = new ArrayList<LI>();
+		selc = null;
 	}
 
 	public List<Date> getDia() {
