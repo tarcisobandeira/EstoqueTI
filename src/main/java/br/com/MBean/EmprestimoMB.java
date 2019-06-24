@@ -69,11 +69,25 @@ public class EmprestimoMB {
 			System.out.println("EstoqueTI:Campo vazio em empréstimo.");
 		}
 	}
-	
+
 	public void fecharEmprestimo() {
 		selc.setLimite(3);
-		emDAO.updateLimite(selc);
-		zerar();
+		i = iDAO.buscarItem(selc.getId());
+		i.setEstoque_at(i.getEstoque_at() + selc.getQuantidade());
+		if (emDAO.updateLimite(selc)) {
+			if (liDAO.updateEstoque(acrescentar(selc))) {
+				if (iDAO.updateEstoque(i.getEstoque_at(), selc.getId_itens())) {
+					System.out.println("EstoqueTI:Empréstimo finalizado.");
+					zerar();
+				} else {
+					System.out.println("EstoqueTI:Erro ao acrescentar no itens.");
+				}
+			} else {
+				System.out.println("EstoqueTI:Erro ao acrescentar no estoque.");
+			}
+		} else {
+			System.out.println("EstoqueTI:Erro ao finalizar empréstimo.");
+		}
 	}
 
 	public void salvarData() {
@@ -109,7 +123,7 @@ public class EmprestimoMB {
 			return true;
 		}
 	}
-	
+
 	public void detalhes() {
 		em = selc;
 	}

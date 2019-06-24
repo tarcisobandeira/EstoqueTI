@@ -48,7 +48,7 @@
 
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" action="#{trocaEstoqueMB.zerar}"
-				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT"
+				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
 				oncomplete="PF('dlg13').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
 				actionListener="#{trocaEstoqueMB.fazerMovimento}" update=":formT" />
