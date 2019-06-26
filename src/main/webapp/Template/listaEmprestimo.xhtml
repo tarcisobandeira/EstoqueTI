@@ -41,21 +41,20 @@
 		disabled="#{emprestimoMB.selc == null}"
 		actionListener="#{emprestimoMB.detalhes}"
 		oncomplete="PF('dlg16').show();" />
-	<p:commandButton value="Finalizar"
-		disabled="#{emprestimoMB.selc == null}"
-		actionListener="#{emprestimoMB.fecharEmprestimo}">
-		<p:confirm header="Confirmation"
-			message="Deseja finalizar emprestimo?"
-			icon="pi pi-exclamation-triangle" />
-	</p:commandButton>
 
-	<p:confirmDialog global="true" closable="false">
-		<p:commandButton value="Sim" type="button"
-			styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-			actionListener="#{tabelaMB.listar}" ajax="true" update=":formCorpo" />
-		<p:commandButton value="Não" type="button"
-			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	<p:commandButton value="Finalizar"
+		disabled="#{emprestimoMB.selc == null || emprestimoMB.selc.limite == 3 }"
+		type="button" onclick="PF('confirm').show();" />
+	<p:confirmDialog message="Deseja finalizar o empréstimo?"
+		header="Finalizar" severity="alert" widgetVar="confirm">
+		<p:commandButton value="Sim" icon="ui-icon-check"
+			actionListener="#{emprestimoMB.fecharEmprestimo}"
+			action="#{tabelaMB.listar}" update=":formCorpo"
+			oncomplete="PF('confirm').hide()" />
+		<p:commandButton value="Não" icon="ui-icon-close"
+			onclick="PF('confirm').hide();" type="button" />
 	</p:confirmDialog>
+
 	<style>
 .limite {
 	background-color: #00ffff !important;

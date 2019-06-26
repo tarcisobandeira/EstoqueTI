@@ -108,3 +108,8 @@ INSERT INTO `localizacao` (`id`, `local_nome`, `localNF`) VALUES
 (5, 'Armário 3', 1),
 (6, 'CSC', 2),
 (7, 'LAB 8', 2);
+
+INSERT INTO Unidade (id, unidade) VALUES
+(1, 'UN'),
+(2, '2 UN'),
+(3, 'Caixa');

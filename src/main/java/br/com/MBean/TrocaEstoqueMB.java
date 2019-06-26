@@ -86,8 +86,10 @@ public class TrocaEstoqueMB {
 	}
 
 	public void listarDisponivel() {
-		listL = lDAO.lDisponivel(t.getId_localAn());
-		li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAn());
+		if (t.getId_localAn() != null) {
+			listL = lDAO.lDisponivel(t.getId_localAn());
+			li = liDAO.buscarEstoque(t.getId_itens(), t.getId_localAn());
+		}
 	}
 
 	public boolean testarCampos() {

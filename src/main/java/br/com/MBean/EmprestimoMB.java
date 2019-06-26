@@ -72,7 +72,7 @@ public class EmprestimoMB {
 
 	public void fecharEmprestimo() {
 		selc.setLimite(3);
-		i = iDAO.buscarItem(selc.getId());
+		i = iDAO.buscarItem(selc.getId_itens());
 		i.setEstoque_at(i.getEstoque_at() + selc.getQuantidade());
 		if (emDAO.updateLimite(selc)) {
 			if (liDAO.updateEstoque(acrescentar(selc))) {
