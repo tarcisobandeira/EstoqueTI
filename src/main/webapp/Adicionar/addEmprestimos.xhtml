@@ -32,13 +32,12 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Data de Saída: " />
-				<p:calendar value="#{emprestimoMB.saida}"
-					mindate="#{emprestimoMB.minDate}">
+				<p:calendar value="#{emprestimoMB.saida}">
 					<p:ajax event="dateSelect" update="devol" />
 				</p:calendar>
 
 				<p:outputLabel value="Data da Devolução: " />
-				<p:calendar id="devol" value="#{emprestimoMB.devol}"
+				<p:calendar id="devol" value="#{emprestimoMB.devol}" 
 					mindate="#{emprestimoMB.saida}"/>
 
 				<p:outputLabel value="Colaborador: " />
@@ -61,5 +60,34 @@
 			<p:commandButton value="Salvar" ajax="true" update=":formEM"
 				actionListener="#{emprestimoMB.fazerEmprestimo}" />
 		</h:form>
+		<script type="text/javascript">
+		PrimeFaces.locales ['pt_BR'] = {
+			    closeText: 'Fechar',
+			    prevText: 'Anterior',
+			    nextText: 'Próximo',
+			    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+			    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+			    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+			    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+			    weekHeader: 'Semana',
+			    weekNumberTitle: 'Sm',
+			    firstDay: 0,
+			    isRTL: false,
+			    showMonthAfterYear: false,
+			    yearSuffix:'',
+			    timeOnlyTitle: 'Só Horas',
+			    timeText: 'Tempo',
+			    hourText: 'Hora',
+			    minuteText: 'Minuto',
+			    secondText: 'Segundo',
+			    currentText: 'Começo',
+			    ampm: false,
+			    month: 'Mês',
+			    week: 'Semana',
+			    day: 'Dia',
+			    allDayText: 'Todo o Dia'
+			    };
+		</script>
 	</h:body>
 </ui:composition>

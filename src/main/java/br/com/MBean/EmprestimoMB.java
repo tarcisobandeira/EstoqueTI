@@ -24,9 +24,8 @@ public class EmprestimoMB {
 
 	Emprestimo em = new Emprestimo();
 	LI li = new LI();
-	Date minDate = new Date();
-	Date saida = new Date();
-	Date devol = new Date();
+	Date saida;
+	Date devol;
 	Itens i = new Itens();
 
 	liDAO liDAO = new liDAO();
@@ -36,13 +35,6 @@ public class EmprestimoMB {
 	Emprestimo selc;
 
 	public EmprestimoMB() {
-		privarData();
-	}
-
-	public void privarData() {
-		Date hoje = new Date();
-		int i = 24*60*60*1000;
-		setMinDate(new Date(hoje.getTime() - i));
 	}
 
 	public void fazerEmprestimo() {
@@ -176,14 +168,6 @@ public class EmprestimoMB {
 
 	public void setEmDAO(emprestimoDAO emDAO) {
 		this.emDAO = emDAO;
-	}
-
-	public Date getMinDate() {
-		return minDate;
-	}
-
-	public void setMinDate(Date minDate) {
-		this.minDate = minDate;
 	}
 
 	public Itens getI() {
