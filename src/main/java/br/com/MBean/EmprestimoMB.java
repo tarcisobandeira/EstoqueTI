@@ -19,13 +19,14 @@ import br.com.entities.LI;
 @ViewScoped
 public class EmprestimoMB {
 
-	List<Date> dia = new ArrayList<Date>();
 	List<LI> listLi = new ArrayList<LI>();
 	List<Emprestimo> listEm = new ArrayList<Emprestimo>();
 
 	Emprestimo em = new Emprestimo();
 	LI li = new LI();
 	Date minDate = new Date();
+	Date saida = new Date();
+	Date devol = new Date();
 	Itens i = new Itens();
 
 	liDAO liDAO = new liDAO();
@@ -40,13 +41,15 @@ public class EmprestimoMB {
 
 	public void privarData() {
 		Date hoje = new Date();
-		long oneDay = 24 * 60 * 60 * 1000;
-		setMinDate(new Date(hoje.getTime() - oneDay));
+		int i = 24*60*60*1000;
+		setMinDate(new Date(hoje.getTime() - i));
 	}
 
 	public void fazerEmprestimo() {
-		salvarData();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		em.setLimite(0);
+		em.setDia_saida(sdf.format(saida));
+		em.setDia_devol(sdf.format(devol));
 
 		i = iDAO.buscarItem(em.getId_itens());
 		i.setEstoque_at(i.getEstoque_at() - em.getQuantidade());
@@ -90,19 +93,6 @@ public class EmprestimoMB {
 		}
 	}
 
-	public void salvarData() {
-		int i = 1;
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
-		for (Date d : dia) {
-			if (i == 1) {
-				em.setDia_saida(sdf.format(d));
-			} else {
-				em.setDia_devol(sdf.format(d));
-			}
-			i++;
-		}
-	}
-
 	public LI descontar(Emprestimo emp) {
 		li = liDAO.buscarEstoque(emp.getId_itens(), emp.getId_localizacao());
 		li.setEstoque(li.getEstoque() - emp.getQuantidade());
@@ -142,19 +132,10 @@ public class EmprestimoMB {
 	}
 
 	public void zerar() {
-		dia = new ArrayList<Date>();
 		li = new LI();
 		em = new Emprestimo();
 		listLi = new ArrayList<LI>();
 		selc = null;
-	}
-
-	public List<Date> getDia() {
-		return dia;
-	}
-
-	public void setDia(List<Date> dia) {
-		this.dia = dia;
 	}
 
 	public List<LI> getListLi() {
@@ -227,6 +208,30 @@ public class EmprestimoMB {
 
 	public void setSelc(Emprestimo selc) {
 		this.selc = selc;
+	}
+
+	public List<Emprestimo> getListEm() {
+		return listEm;
+	}
+
+	public void setListEm(List<Emprestimo> listEm) {
+		this.listEm = listEm;
+	}
+
+	public Date getSaida() {
+		return saida;
+	}
+
+	public void setSaida(Date saida) {
+		this.saida = saida;
+	}
+
+	public Date getDevol() {
+		return devol;
+	}
+
+	public void setDevol(Date devol) {
+		this.devol = devol;
 	}
 
 }

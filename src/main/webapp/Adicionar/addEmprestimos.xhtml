@@ -31,9 +31,15 @@
 						update="quan" />
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Data: " />
-				<p:datePicker value="#{emprestimoMB.dia}" selectionMode="range"
-					mindate="#{emprestimoMB.minDate}" locale="pt_BR" />
+				<p:outputLabel value="Data de Saída: " />
+				<p:calendar value="#{emprestimoMB.saida}"
+					mindate="#{emprestimoMB.minDate}">
+					<p:ajax event="dateSelect" update="devol" />
+				</p:calendar>
+
+				<p:outputLabel value="Data da Devolução: " />
+				<p:calendar id="devol" value="#{emprestimoMB.devol}"
+					mindate="#{emprestimoMB.saida}"/>
 
 				<p:outputLabel value="Colaborador: " />
 				<p:inputText value="#{emprestimoMB.em.colaborador}" />
