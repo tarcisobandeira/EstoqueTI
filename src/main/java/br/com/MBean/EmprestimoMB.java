@@ -2,6 +2,7 @@ package br.com.MBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +25,7 @@ public class EmprestimoMB {
 
 	Emprestimo em = new Emprestimo();
 	LI li = new LI();
+	Date min;
 	Date saida;
 	Date devol;
 	Itens i = new Itens();
@@ -35,8 +37,9 @@ public class EmprestimoMB {
 	Emprestimo selc;
 
 	public EmprestimoMB() {
-	}
 
+	}
+	
 	public void fazerEmprestimo() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		em.setLimite(0);
@@ -128,6 +131,8 @@ public class EmprestimoMB {
 		em = new Emprestimo();
 		listLi = new ArrayList<LI>();
 		selc = null;
+		saida = null;
+		devol = null;
 	}
 
 	public List<LI> getListLi() {
@@ -216,6 +221,14 @@ public class EmprestimoMB {
 
 	public void setDevol(Date devol) {
 		this.devol = devol;
+	}
+
+	public Date getMin() {
+		return min;
+	}
+
+	public void setMin(Date min) {
+		this.min = min;
 	}
 
 }
