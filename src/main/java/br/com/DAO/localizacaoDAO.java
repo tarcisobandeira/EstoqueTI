@@ -121,4 +121,21 @@ public class localizacaoDAO {
 		}
 		return null;
 	}
+	
+	public boolean buscarLocalNome(String nome) {
+		String sql = "SELECT * FROM Localizacao WHERE local_nome = ?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, nome);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
 }

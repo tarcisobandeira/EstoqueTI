@@ -86,10 +86,12 @@ public class SaidaMB {
 			for (Saida saida : listS) {
 				i = iDAO.buscarItem(saida.getId_itens());
 				i.setEstoque_at(i.getEstoque_at() - saida.getSaida());
-
+				
+				descontarEstoque(saida);
+				
 				if (sDAO.inserir(saida)) {
 					System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
-					if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(saida.getLi()))) {
+					if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 						System.out.println("EstoqueTI:Estoque atualizado.");
 					} else {
 						System.out.println("EstoqueTI:Erro ao atualizar estoque.");
@@ -104,6 +106,11 @@ public class SaidaMB {
 		} else {
 			System.out.println("EstoqueTI:Algum item(ns) com informações vazias.");
 		}
+	}
+	
+	public void descontarEstoque(Saida s) {
+		li = liDAO.buscarEstoque(s.getLi().getId_itens(), s.getLi().getId_localizacao());
+		li.setEstoque(li.getEstoque() - s.getSaida());
 	}
 
 	public void addListS() {
@@ -121,7 +128,6 @@ public class SaidaMB {
 			saida.setId_localizacao(s.getId_localizacao());
 			saida.setId_funcionario(s.getId_funcionario());
 			saida.setLi(li);
-			saida.getLi().setEstoque(saida.getLi().getEstoque() - saida.getSaida());
 
 			if (s.getOS() == null) {
 				saida.setOS(0);

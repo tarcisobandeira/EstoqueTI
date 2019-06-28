@@ -58,4 +58,21 @@ public class unidadeDAO {
 		return list;
 	}
 	
+	public boolean buscarUnidadeNome(String nome) {
+		String sql = "SELECT * FROM Unidade WHERE unidade = ?";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, nome);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
 }

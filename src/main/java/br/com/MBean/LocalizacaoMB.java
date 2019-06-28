@@ -17,11 +17,15 @@ public class LocalizacaoMB {
 
 	public void criarLocal() {
 		if (testarCampos()) {
-			if (lDAO.inserir(l)) {
-				System.out.println("EstoqueTI:Local criado.");
-				zerar();
+			if (lDAO.buscarLocalNome(l.getLocal_nome())) {
+				if (lDAO.inserir(l)) {
+					System.out.println("EstoqueTI:Local criado.");
+					zerar();
+				} else {
+					System.out.println("EstoqueTI:Erro ao criar local.");
+				}
 			} else {
-				System.out.println("EstoqueTI:Erro ao criar local.");
+				System.out.println("EstoqueTI:Esse local já existe.");
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em localização.");

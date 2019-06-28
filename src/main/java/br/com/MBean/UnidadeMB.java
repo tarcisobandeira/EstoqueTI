@@ -16,11 +16,15 @@ public class UnidadeMB {
 
 	public void criarUnidade() {
 		if (testarCampo()) {
-			if (uDAO.inserir(u)) {
-				System.out.println("EstoqueTI:Unidade criada.");
-				zerar();
+			if (uDAO.buscarUnidadeNome(u.getUnidade())) {
+				if (uDAO.inserir(u)) {
+					System.out.println("EstoqueTI:Unidade criada.");
+					zerar();
+				} else {
+					System.out.println("EstoqueTI:Erro ao criar no banco.");
+				}
 			} else {
-				System.out.println("EstoqueTI:Erro ao criar no banco.");
+				System.out.println("EstoqueTI:Essa unidade já existe.");
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em Unidade.");
