@@ -32,13 +32,10 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Data de Saída: " />
-				<p:calendar id="saidaa" value="#{emprestimoMB.saida}">
-					<p:ajax event="dateSelect" update="devol" />
-				</p:calendar>
+				<p:calendar id="saidaa" value="#{emprestimoMB.saida}" />
 
 				<p:outputLabel value="Data da Devolução: " />
-				<p:calendar id="devol" value="#{emprestimoMB.devol}"
-					disabled="#{emprestimoMB.saida == null}" />
+				<p:calendar id="devol" value="#{emprestimoMB.devol}" />
 
 				<p:outputLabel value="Colaborador: " />
 				<p:inputText value="#{emprestimoMB.em.colaborador}" />

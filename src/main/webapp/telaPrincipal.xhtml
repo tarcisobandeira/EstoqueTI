@@ -16,29 +16,34 @@
 					<p:menuitem value="Unidades" onclick="PF('dlg12').show();" />
 				</p:submenu>
 				<p:submenu label="Listas">
-					<p:menuitem value="Itens" action="#{templateMB.setOpt(1)}"
-						ajax="true" update=":formCorpo" />
-					<p:menuitem value="Funcionarios" action="#{templateMB.setOpt(2)}"
-						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Itens" actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(1)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Funcionarios"
+						actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(2)}" ajax="true" update=":formCorpo" />
 					<p:menuitem value="Locais do Núcleo"
-						action="#{templateMB.setOpt(3)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Locais da FAJ" action="#{templateMB.setOpt(4)}"
-						ajax="true" update=":formCorpo" />
-					<p:menuitem value="Unidade" action="#{templateMB.setOpt(9)}"
-						ajax="true" update=":formCorpo" />
-					<p:menuitem value="Entrada" action="#{templateMB.setOpt(5)}"
-						ajax="true" update=":formCorpo" />
-					<p:menuitem value="Saída" action="#{templateMB.setOpt(6)}"
-						ajax="true" update=":formCorpo" />
+						action="#{templateMB.setOpt(3)}"
+						actionListener="#{tabelaMB.listar}" ajax="true"
+						update=":formCorpo" />
+					<p:menuitem value="Locais da FAJ"
+						actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(4)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Unidade" actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(9)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Entrada" actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(5)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Saída" actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(6)}" ajax="true" update=":formCorpo" />
 				</p:submenu>
 				<p:submenu label="Movimentação">
 					<p:menuitem value="Entrada" onclick="PF('dlg4').show();" />
 					<p:menuitem value="Saída" onclick="PF('dlg7').show();" />
-					<p:menuitem value="Troca de local" action="#{templateMB.setOpt(7)}"
-						ajax="true" update=":formCorpo" />
+					<p:menuitem value="Troca de local"
+						actionListener="#{tabelaMB.listar}"
+						action="#{templateMB.setOpt(7)}" ajax="true" update=":formCorpo" />
 				</p:submenu>
-				<p:menuitem value="Empréstimos" action="#{templateMB.setOpt(8)}"
-					ajax="true" update=":formCorpo" />
+				<p:menuitem value="Empréstimos" actionListener="#{tabelaMB.listar}"
+					action="#{templateMB.setOpt(8)}" ajax="true" update=":formCorpo" />
 				<p:menuitem value="Sair" />
 			</p:menubar>
 		</div>
@@ -109,7 +114,7 @@
 		<ui:include src="/Template/listaLocalItem.xhtml" />
 	</p:dialog>
 	<p:dialog header="Empréstimo" widgetVar="dlg15" modal="true"
-		resizable="false" closable="false" height="500px">
+		resizable="false" closable="false">
 		<ui:include src="/Adicionar/addEmprestimos.xhtml" />
 	</p:dialog>
 	<p:dialog header="Informações" widgetVar="dlg16" width="32%"
