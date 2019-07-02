@@ -7,58 +7,66 @@
 	<title>Estoque</title>
 	<meta charset="UTF-8" />
 	<h:form id="formPrimario">
-		<div>
-			<p:menubar id="menu">
-				<p:submenu label="Adicionar" icon="ui-icon-plus"
-					disabled="#{loginMB.f.funcao == 1}">
-					<p:menuitem value="Funcionarios" onclick="PF('dlg1').show();" />
-					<p:menuitem value="Itens" onclick="PF('dlg2').show();" />
-					<p:menuitem value="Locais" onclick="PF('dlg3').show();" />
-					<p:menuitem value="Unidades" onclick="PF('dlg12').show();" />
-				</p:submenu>
-				<p:submenu label="Listas">
-					<p:menuitem value="Itens" actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(1)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Funcionarios"
+		<h:panelGroup rendered="#{loginMB.logado}">
+			<div>
+				<p:menubar id="menu">
+					<p:submenu label="Adicionar" icon="ui-icon-plus"
+						disabled="#{loginMB.f.funcao == 1}">
+						<p:menuitem value="Funcionarios" onclick="PF('dlg1').show();" />
+						<p:menuitem value="Itens" onclick="PF('dlg2').show();" />
+						<p:menuitem value="Locais" onclick="PF('dlg3').show();" />
+						<p:menuitem value="Unidades" onclick="PF('dlg12').show();" />
+					</p:submenu>
+					<p:submenu label="Listas">
+						<p:menuitem value="Itens" actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(1)}" ajax="true" update=":formCorpo" />
+						<p:menuitem value="Funcionarios"
+							actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(2)}" ajax="true" update=":formCorpo" />
+						<p:menuitem value="Locais do Núcleo"
+							action="#{templateMB.setOpt(3)}"
+							actionListener="#{tabelaMB.listar}" ajax="true"
+							update=":formCorpo" />
+						<p:menuitem value="Locais da FAJ"
+							actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(4)}" ajax="true" update=":formCorpo" />
+						<p:menuitem value="Unidade" actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(9)}" ajax="true" update=":formCorpo" />
+						<p:menuitem value="Entrada" actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(5)}" ajax="true" update=":formCorpo" />
+						<p:menuitem value="Saída" actionListener="#{tabelaMB.listar}"
+							action="#{templateMB.setOpt(6)}" ajax="true" update=":formCorpo" />
+					</p:submenu>
+					<p:submenu label="Movimentação">
+						<p:menuitem value="Entrada" disabled="#{loginMB.f.funcao == 1}"
+							onclick="PF('dlg4').show();" />
+						<p:menuitem value="Saída" onclick="PF('dlg7').show();" />
+						<p:menuitem value="Troca de local"
+							actionListener="#{tabelaMB.listar}"
+							disabled="#{loginMB.f.funcao == 1}"
+							action="#{templateMB.setOpt(7)}" ajax="true" update=":formCorpo" />
+					</p:submenu>
+					<p:menuitem value="Empréstimos" disabled="#{loginMB.f.funcao == 1}"
 						actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(2)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Locais do Núcleo"
-						action="#{templateMB.setOpt(3)}"
-						actionListener="#{tabelaMB.listar}" ajax="true"
-						update=":formCorpo" />
-					<p:menuitem value="Locais da FAJ"
-						actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(4)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Unidade" actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(9)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Entrada" actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(5)}" ajax="true" update=":formCorpo" />
-					<p:menuitem value="Saída" actionListener="#{tabelaMB.listar}"
-						action="#{templateMB.setOpt(6)}" ajax="true" update=":formCorpo" />
-				</p:submenu>
-				<p:submenu label="Movimentação">
-					<p:menuitem value="Entrada" disabled="#{loginMB.f.funcao == 1}"
-						onclick="PF('dlg4').show();" />
-					<p:menuitem value="Saída" onclick="PF('dlg7').show();" />
-					<p:menuitem value="Troca de local"
-						actionListener="#{tabelaMB.listar}"
-						disabled="#{loginMB.f.funcao == 1}"
-						action="#{templateMB.setOpt(7)}" ajax="true" update=":formCorpo" />
-				</p:submenu>
-				<p:menuitem value="Empréstimos" disabled="#{loginMB.f.funcao == 1}"
-					actionListener="#{tabelaMB.listar}"
-					action="#{templateMB.setOpt(8)}" ajax="true" update=":formCorpo" />
-				<p:menuitem value="Sair" action="#{loginMB.deslogar}" />
-			</p:menubar>
-		</div>
+						action="#{templateMB.setOpt(8)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Sair" action="#{loginMB.deslogar}" />
+				</p:menubar>
+			</div>
+		</h:panelGroup>
+		<h:panelGroup rendered="#{!loginMB.logado}">
+			Você não está logado, será redirecionado em 2s!
+			<meta http-equiv="refresh" content="2; url=telaLogin.xhtml" />
+		</h:panelGroup>
 	</h:form>
 </h:head>
 <h:body>
 
 	<h:form id="formCorpo">
-		<ui:insert>
-			<ui:include src="#{templateMB.mudar()}" />
-		</ui:insert>
+		<h:panelGroup rendered="#{loginMB.logado}">
+			<ui:insert>
+				<ui:include src="#{templateMB.mudar()}" />
+			</ui:insert>
+		</h:panelGroup>
 	</h:form>
 
 	<p:dialog header="Funcionarios" widgetVar="dlg1" modal="true"
