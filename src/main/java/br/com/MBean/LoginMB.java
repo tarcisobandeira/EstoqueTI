@@ -35,6 +35,13 @@ public class LoginMB {
 		
 	}
 	
+	public String deslogar() {
+		logado = false;
+		System.out.println("EstoqueTI:" + f.getNome() + " deslogou.");
+		f = null;
+		return "telaLogin?faces-redirect=true";
+	}
+	
 	public String getLogin() {
 		return login;
 	}
