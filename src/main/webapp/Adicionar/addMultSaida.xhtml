@@ -38,7 +38,8 @@
 					<f:selectItems value="#{tabelaMB.localfL}" var="lf"
 						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
+				<p:commandButton icon="ui-icon-plus"
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg3').show();" />
 
 				<p:outputLabel value="Funcionario: " />
 				<p:selectOneMenu id="fun" filter="true" filterMatchMode="contains"
@@ -47,7 +48,8 @@
 					<f:selectItems value="#{tabelaMB.funciL}" var="fs"
 						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg1').show();" />
+				<p:commandButton icon="ui-icon-plus"
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg1').show();" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="qtdS" value="#{saidaMB.s.saida}"

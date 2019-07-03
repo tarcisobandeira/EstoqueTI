@@ -48,8 +48,7 @@ public class emprestimoDAO {
 		List<Emprestimo> list = new ArrayList<Emprestimo>();
 		String sql = "  SELECT em.*, i.descricao AS nomeItem, l.local_nome AS nomeLocal " + " FROM emprestimos em "
 				+ " INNER JOIN Itens i " + " ON em.id_itens = i.id " + " INNER JOIN localizacao l "
-				+ " ON em.id_localizacao = l.id "
-				+ " ORDER BY em.limite, em.dia_devol ASC";
+				+ " ON em.id_localizacao = l.id " + " ORDER BY em.limite, em.dia_devol ASC";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -60,6 +59,7 @@ public class emprestimoDAO {
 				em.setId(rs.getInt("id"));
 				em.setDia_saida(rs.getString("dia_saida"));
 				em.setDia_devol(rs.getString("dia_devol"));
+				em.setDia_retor(rs.getString("dia_retor"));
 				em.setId_itens(rs.getInt("id_itens"));
 				em.setId_localizacao(rs.getInt("id_localizacao"));
 				em.setColaborador(rs.getString("colaborador"));
@@ -68,7 +68,7 @@ public class emprestimoDAO {
 				em.setLimite(rs.getInt("limite"));
 				em.setItens(new Itens(em.getId_itens(), rs.getString("nomeItem"), null, null, null));
 				em.setLocalizacao(new Localizacao(em.getId_localizacao(), rs.getString("nomeLocal"), null));
-				
+
 				list.add(em);
 			}
 
@@ -77,16 +77,17 @@ public class emprestimoDAO {
 		}
 		return list;
 	}
-	
+
 	public boolean updateLimite(Emprestimo em) {
-		String sql = " UPDATE Emprestimos set limite = ? WHERE id = ? ";
-		
+		String sql = " UPDATE Emprestimos SET limite = ?, dia_retor = ? WHERE id = ? ";
+
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, em.getLimite());
-			ps.setInt(2, em.getId());
-			
-			if(ps.executeUpdate() == 1) {
+			ps.setString(2, em.getDia_retor());
+			ps.setInt(3, em.getId());
+
+			if (ps.executeUpdate() == 1) {
 				return true;
 			}
 		} catch (SQLException e) {

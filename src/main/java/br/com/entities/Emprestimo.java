@@ -5,6 +5,7 @@ public class Emprestimo {
 	private Integer id;
 	private String dia_saida;
 	private String dia_devol;
+	private String dia_retor;
 	private String colaborador;
 	private Integer id_itens;
 	private Integer id_localizacao;
@@ -14,12 +15,13 @@ public class Emprestimo {
 	private Itens itens;
 	private Localizacao localizacao;
 
-	public Emprestimo(Integer id, String dia_saida, String dia_devol, String colaborador, Integer id_itens,
-			Integer id_localizacao, Integer quantidade, String OBS, Integer limite) {
+	public Emprestimo(Integer id, String dia_saida, String dia_devol, String dia_retor, String colaborador,
+			Integer id_itens, Integer id_localizacao, Integer quantidade, String OBS, Integer limite) {
 		super();
 		this.id = id;
 		this.dia_saida = dia_saida;
 		this.dia_devol = dia_devol;
+		this.dia_retor = dia_retor;
 		this.colaborador = colaborador;
 		this.id_itens = id_itens;
 		this.id_localizacao = id_localizacao;
@@ -54,6 +56,14 @@ public class Emprestimo {
 
 	public void setDia_devol(String dia_devol) {
 		this.dia_devol = dia_devol;
+	}
+
+	public String getDia_retor() {
+		return dia_retor;
+	}
+
+	public void setDia_retor(String dia_retor) {
+		this.dia_retor = dia_retor;
 	}
 
 	public String getColaborador() {

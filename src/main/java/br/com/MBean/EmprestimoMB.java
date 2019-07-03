@@ -2,7 +2,9 @@ package br.com.MBean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -68,7 +70,10 @@ public class EmprestimoMB {
 	}
 
 	public void fecharEmprestimo() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
+		Calendar data = new GregorianCalendar();
 		selc.setLimite(3);
+		selc.setDia_retor(sdf.format(data.getTime()));
 		i = iDAO.buscarItem(selc.getId_itens());
 		i.setEstoque_at(i.getEstoque_at() + selc.getQuantidade());
 		if (emDAO.updateLimite(selc)) {

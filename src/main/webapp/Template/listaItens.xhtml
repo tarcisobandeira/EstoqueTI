@@ -46,7 +46,7 @@
 		oncomplete="PF('dlg14').show();" disabled="#{itensMB.selc == null}" />
 	<p:commandButton value="Editar" actionListener="#{itensMB.editar}"
 		ajax="true" update=":formEI" oncomplete="PF('dlg10').show();"
-		disabled="#{itensMB.selc == null}" />
+		disabled="#{itensMB.selc == null || loginMB.f.funcao == 1}" />
 	<style>
 .baixo {
 	background-color: red !important;
