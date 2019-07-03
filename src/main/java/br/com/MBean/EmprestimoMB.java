@@ -40,7 +40,7 @@ public class EmprestimoMB {
 	public EmprestimoMB() {
 
 	}
-	
+
 	public void fazerEmprestimo() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		em.setLimite(0);
