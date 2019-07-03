@@ -12,7 +12,7 @@
 		selectionMode="single" rowKey="#{em.id}"
 		rowStyleClass="#{em.limite eq 1 ? 'limite' : (em.limite eq 2 ? 'passou' : (em.limite eq 3 ? 'ok' : null))}">
 
-		<p:ajax event="rowSelect" update=":formCorpo" />
+		<p:ajax event="rowSelect" update=":formCorpo :formMImpre" />
 
 		<p:column filterBy="#{em.colaborador}" headerText="Colaborador"
 			filterMatchMode="contains">
@@ -37,6 +37,7 @@
 	</p:dataTable>
 	<p:commandButton value="Novo Emprestimo"
 		oncomplete="PF('dlg15').show();" />
+
 	<p:commandButton value="Informações" ajax="true" update=":formOBS"
 		disabled="#{emprestimoMB.selc == null}"
 		actionListener="#{emprestimoMB.detalhes}"
@@ -45,6 +46,12 @@
 	<p:commandButton value="Finalizar"
 		disabled="#{emprestimoMB.selc == null || emprestimoMB.selc.limite == 3 }"
 		type="button" onclick="PF('confirm').show();" />
+
+	<p:commandButton value="Print" disabled="#{emprestimoMB.selc == null}"
+		type="button" icon="pi pi-print">
+		<p:printer target=":formMImpre" />
+	</p:commandButton>
+
 	<p:confirmDialog message="Deseja finalizar o empréstimo?"
 		header="Finalizar" severity="alert" widgetVar="confirm">
 		<p:commandButton value="Sim" icon="ui-icon-check"
