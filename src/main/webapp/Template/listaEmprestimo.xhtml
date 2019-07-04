@@ -47,9 +47,9 @@
 		disabled="#{emprestimoMB.selc == null || emprestimoMB.selc.limite == 3 }"
 		type="button" onclick="PF('confirm').show();" />
 
-	<p:commandButton value="Print" disabled="#{emprestimoMB.selc == null}"
-		type="button" icon="pi pi-print">
-		<p:printer target=":formMImpre" />
+	<p:commandButton value="Impressão"
+		disabled="#{emprestimoMB.selc == null}">
+		<p:printer target="formMImpre" />
 	</p:commandButton>
 
 	<p:confirmDialog message="Deseja finalizar o empréstimo?"

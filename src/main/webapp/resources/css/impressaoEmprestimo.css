@@ -1,11 +1,22 @@
-.formMImpre .img{
-	width: 10px !important;
+.formMImpre .img {
+	width: 100% !important;
 }
 
-.formMImpre .texto table tbody tr td .ui-outputlabel{
-	font-size: 500px !important;
+.formMImpre .texto table tbody tr td .ui-outputlabel {
+	font-size: 40px !important;
 }
 
-#formCorpo{
+.formMImpre .texto table tbody tr td {
+	border-left: 0px !important;
+	border-right: 0px !important;
+}
+
+.formMImpre .texto {
+	margin: auto;
+	width: 55%;
+	padding: 5px;
+}
+
+#formCorpo {
 	backgrond: black !important;
 }
