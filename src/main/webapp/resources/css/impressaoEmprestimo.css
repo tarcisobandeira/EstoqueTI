@@ -1,3 +1,11 @@
 .formMImpre .img{
-	width: 200% !important;
+	width: 10px !important;
+}
+
+.formMImpre .texto table tbody tr td .ui-outputlabel{
+	font-size: 500px !important;
+}
+
+#formCorpo{
+	backgrond: black !important;
 }

@@ -7,11 +7,11 @@
 	<title>Estoque</title>
 	<meta charset="UTF-8" />
 	<ui:define name="style">
-		<h:outputStylesheet library="css" name="impressaoEmprestimo.css" />
+		<h:outputStylesheet library="css" name="cssCoordenador.css" />
 	</ui:define>
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/impressaoEmprestimo.css" />
-	<h:form id="formPrimario">
+	<h:form styleClass="formPrimario" id="formPrimario">
 		<h:panelGroup rendered="#{loginMB.logado}">
 			<div>
 				<p:menubar id="menu">
@@ -66,7 +66,7 @@
 </h:head>
 <h:body>
 
-	<h:form id="formCorpo">
+	<h:form styleClass="formCorpo" id="formCorpo">
 		<h:panelGroup rendered="#{loginMB.logado}">
 			<ui:insert>
 				<ui:include src="#{templateMB.mudar()}" />
@@ -137,10 +137,6 @@
 	<p:dialog header="Informações" widgetVar="dlg16" width="32%"
 		modal="true" resizable="false" closable="false">
 		<ui:include src="/Mostrar/mostrarEmprestimo.xhtml" />
-	</p:dialog>
-	<p:dialog header="Impressão" widgetVar="dlg17" width="32%" modal="true"
-		resizable="false" closable="false">
-		<ui:include src="/Mostrar/mostrarImpressão.xhtml" />
 	</p:dialog>
 </h:body>
 </html>
