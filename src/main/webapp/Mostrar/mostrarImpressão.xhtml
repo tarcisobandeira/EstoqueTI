@@ -4,11 +4,14 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-
+	<head>
+		<link rel="stylesheet" type="text/css"
+		href="resources/css/impressaoEmprestimo.css" />
+	</head>
 	<h:body>
-		<h:form id="formMImpre">
-			<h:graphicImage class="imagens" library="img"
-				value="/src/main/resources/Imagens/unifaj.png" />
+		<h:form styleClass="formMImpre" id="formMImpre">
+			<p:graphicImage styleClass="img" id="unifaj"
+				value="/resources/Imagens/unifaj.png" />
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Colaborador" />
 				<p:outputLabel value="#{emprestimoMB.selc.colaborador}" />

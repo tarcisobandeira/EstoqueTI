@@ -6,10 +6,14 @@
 <h:head>
 	<title>Estoque</title>
 	<meta charset="UTF-8" />
+	<ui:define name="style">
+		<h:outputStylesheet library="css" name="impressaoEmprestimo.css" />
+	</ui:define>
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/impressaoEmprestimo.css" />
 	<h:form id="formPrimario">
 		<h:panelGroup rendered="#{loginMB.logado}">
 			<div>
-				<p:graphicImage value="/resource/Imagens/Unifajicone2.png" />
 				<p:menubar id="menu">
 					<p:submenu label="Adicionar" icon="ui-icon-plus"
 						disabled="#{loginMB.f.funcao == 1}">
