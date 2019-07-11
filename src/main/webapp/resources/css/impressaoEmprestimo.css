@@ -1,5 +1,5 @@
-.formMImpre .img {
-	width: 100% !important;
+.img {
+	width: 50% !important;
 }
 
 .formMImpre .texto table tbody tr td .ui-outputlabel {
@@ -12,12 +12,19 @@
 	padding-right: 200px !important;
 }
 
-.formMImpre .texto {
-	margin: auto;
-	width: 50%;
-	padding: 5px;
+.formMImpre .texto table tbody tr, .formMImpre .texto table thead tr,
+	.formMImpre .texto table thead tr td {
+	border: 0px !important;
 }
 
 #formCorpo {
 	backgrond: black !important;
+}
+
+.grid .ui-widget-content {
+	margin: auto;
+	border-top: 0px !important;
+	border-left: 0px !important;
+	border-right: 0px !important;
+	border-bottom: 1px solid !important;
 }
