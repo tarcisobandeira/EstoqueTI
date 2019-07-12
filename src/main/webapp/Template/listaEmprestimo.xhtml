@@ -47,7 +47,7 @@
 		disabled="#{emprestimoMB.selc == null || emprestimoMB.selc.limite == 3 }"
 		type="button" onclick="PF('confirm').show();" />
 
-	<p:commandButton value="Impressão"
+	<p:commandButton value="Impressão" onclick="PF('dlg17').show();"
 		disabled="#{emprestimoMB.selc == null}">
 		<p:printer target="formMImpre" />
 	</p:commandButton>

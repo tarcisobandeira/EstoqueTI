@@ -1,5 +1,6 @@
 .img {
 	width: 50% !important;
+	margin-bottom: 50px;
 }
 
 .formMImpre .texto table tbody tr td .ui-outputlabel {
@@ -27,4 +28,15 @@
 	border-left: 0px !important;
 	border-right: 0px !important;
 	border-bottom: 1px solid !important;
+}
+
+.ui {
+	text-align: center;
+	font-size: 12px;
+	margin-top: 200px;
+}
+
+.ui .ui-g-2 {
+	border-top: 1px solid;
+	margin-left: 23%;
 }
