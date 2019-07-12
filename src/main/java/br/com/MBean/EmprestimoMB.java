@@ -53,7 +53,7 @@ public class EmprestimoMB {
 			if (emDAO.inserir(em)) {
 				if (liDAO.updateEstoque(descontar(em))) {
 					if (iDAO.updateEstoque(i.getEstoque_at(), em.getId_itens())) {
-						System.out.println("EstoqueTI:Empréstimo feito.");
+						System.out.println("EstoqueTI:EmprÃ©stimo feito.");
 						zerar();
 					} else {
 						System.out.println("EstoqueTI:Erro ao descontar no item.");
@@ -62,10 +62,10 @@ public class EmprestimoMB {
 					System.out.println("EstoqueTI:Erro ao descontar no estoque.");
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro ao fazer empréstimo.");
+				System.out.println("EstoqueTI:Erro ao fazer emprÃ©stimo.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Campo vazio em empréstimo.");
+			System.out.println("EstoqueTI:Campo vazio em emprÃ©stimo.");
 		}
 	}
 
@@ -79,7 +79,7 @@ public class EmprestimoMB {
 		if (emDAO.updateLimite(selc)) {
 			if (liDAO.updateEstoque(acrescentar(selc))) {
 				if (iDAO.updateEstoque(i.getEstoque_at(), selc.getId_itens())) {
-					System.out.println("EstoqueTI:Empréstimo finalizado.");
+					System.out.println("EstoqueTI:EmprÃ©stimo finalizado.");
 					zerar();
 				} else {
 					System.out.println("EstoqueTI:Erro ao acrescentar no itens.");
@@ -88,7 +88,7 @@ public class EmprestimoMB {
 				System.out.println("EstoqueTI:Erro ao acrescentar no estoque.");
 			}
 		} else {
-			System.out.println("EstoqueTI:Erro ao finalizar empréstimo.");
+			System.out.println("EstoqueTI:Erro ao finalizar emprÃ©stimo.");
 		}
 	}
 
