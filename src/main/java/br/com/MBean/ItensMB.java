@@ -3,8 +3,10 @@ package br.com.MBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.itensDAO;
 import br.com.DAO.liDAO;
@@ -19,16 +21,18 @@ public class ItensMB {
 	localizacaoDAO lDAO = new localizacaoDAO();
 	itensDAO iDAO = new itensDAO();
 	liDAO liDAO = new liDAO();
-	
+
 	Itens i = new Itens();
 	Itens is = new Itens();
 	LI li = new LI();
-	
+
 	List<LI> listLi = new ArrayList<LI>();
-	
+
+	FacesContext context;
 	Itens selc;
 
 	public void salvar() {
+		context = FacesContext.getCurrentInstance();
 		if (i.getId() != null) {
 			Itens itens = iDAO.buscarItem(i.getId());
 			if (itens != null && itens.getId().equals(i.getId())) {
@@ -47,18 +51,27 @@ public class ItensMB {
 					is = iDAO.buscarItemDescricao(i.getDescricao());
 					if (liDAO.inserir(is.getId(), li.getId_localizacao())) {
 						System.out.println("EstoqueTI:Item criado.");
+						context.addMessage(null, new FacesMessage("Sucesso", is.getDescricao() + " foi criado."));
 						zerar();
 					} else {
-						System.out.println("EstoqueTI:Erro ao fazer a liga��o com o local.");
+						System.out.println("EstoqueTI:Erro ao fazer a ligação com o local.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
 					System.out.println("EstoqueTI:Erro ao criar item.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
-				System.out.println("EstoqueTI:Item j� foi criado.");
+				System.out.println("EstoqueTI:Item já foi criado.");
+				context.addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_WARN, "Item repetido", "Esse item já foi criado."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em Itens.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -66,12 +79,17 @@ public class ItensMB {
 		if (testarCamposE()) {
 			if (iDAO.editar(i)) {
 				System.out.println("EstoqueTI:Item modificado.");
+				context.addMessage(null, new FacesMessage("Sucesso", i.getDescricao() + " foi editado."));
 				zerar();
 			} else {
 				System.out.println("EstoqueTI:Erro ao editar o item.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em editar itens.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -101,7 +119,7 @@ public class ItensMB {
 		li = new LI();
 		selc = null;
 	}
-	
+
 	public void mostrarLocais() {
 		listLi = liDAO.listarLocalSemFalta(selc.getId());
 	}

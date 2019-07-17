@@ -1,8 +1,11 @@
 package br.com.MBean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.PrimeFaces.Ajax;
 
 import br.com.DAO.funcionariosDAO;
 import br.com.entities.Funcionarios;
@@ -17,31 +20,37 @@ public class LoginMB {
 	Funcionarios f;
 	FacesContext context;
 	private boolean logado = false;
+	Ajax ajax;
+
+	public LoginMB() {
+
+	}
 
 	public String logar() {
-		
 		context = FacesContext.getCurrentInstance();
 		fDAO = new funcionariosDAO();
 		f = fDAO.buscarFuncionario(login);
-		
-		if(f != null && f.getSenha().equals(senha)) {
+
+		if (f != null && f.getSenha().equals(senha)) {
 			logado = true;
 			System.out.println("EstoqueTI:" + f.getNome() + " fez login.");
 			return "telaPrincipal?faces-redirect=true";
-		}else {
+		} else {
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo incorreto", "Login ou senha incorretos."));
 			System.out.println("EstoqueTI:Erro ao fazer login.");
 			return null;
 		}
-		
+
 	}
-	
+
 	public String deslogar() {
 		logado = false;
 		System.out.println("EstoqueTI:" + f.getNome() + " deslogou.");
 		f = null;
 		return "telaLogin?faces-redirect=true";
 	}
-	
+
 	public String getLogin() {
 		return login;
 	}
