@@ -1,7 +1,9 @@
 package br.com.MBean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.funcionariosDAO;
 import br.com.entities.Funcionarios;
@@ -14,7 +16,10 @@ public class FuncionariosMB {
 	Funcionarios f = new Funcionarios();
 	Funcionarios selc;
 
+	FacesContext context;
+
 	public void salvar() {
+		context = FacesContext.getCurrentInstance();
 		if (f.getId() != null) {
 			editarFuncionario();
 		} else {
@@ -28,18 +33,28 @@ public class FuncionariosMB {
 				if (!fDAO.confirmLogin(f.getLogin(), 0)) {
 					if (fDAO.inserir(f)) {
 						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " criado.");
+						context.addMessage(null,
+								new FacesMessage("Sucesso", "Funcionario " + f.getNome() + " foi criado."));
 						zerar();
 					} else {
 						System.out.println("EstoqueTI:Erro ao criar.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
-					System.out.println("EstoqueTI:Erro no login.");
+					System.out.println("EstoqueTI:Erro de login repetido.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Repetido",
+							"Esse login já está sendo usado por outro funcionario."));
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro no nome.");
+				System.out.println("EstoqueTI:Erro de nome repetido.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Nome Repetido",
+						"Esse nome já está sendo usado por outro funcionario."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Algum campo vazio.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -49,18 +64,28 @@ public class FuncionariosMB {
 				if (!fDAO.confirmLogin(f.getLogin(), f.getId())) {
 					if (fDAO.editar(f)) {
 						System.out.println("EstoqueTI:Funcionario " + f.getNome() + " editado.");
+						context.addMessage(null,
+								new FacesMessage("Sucesso", "Funcionario " + f.getNome() + " foi editado."));
 						zerar();
 					} else {
 						System.out.println("EstoqueTI:Erro ao editar.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
-					System.out.println("EstoqueTI:Erro no login.");
+					System.out.println("EstoqueTI:Erro de login repetido.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Repetido",
+							"Esse login já está sendo usado por outro funcionario."));
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro no nome.");
+				System.out.println("EstoqueTI:Erro de nome repetido.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Nome Repetido",
+						"Esse nome já está sendo usado por outro funcionario."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Algum campo vazio.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 

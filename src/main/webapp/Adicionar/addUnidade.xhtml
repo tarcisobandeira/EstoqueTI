@@ -7,6 +7,9 @@
 
 	<h:body>
 		<h:form id="formU">
+			<p:growl id="gwUnidade" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Tipo de unidade: " />
 				<p:inputText id="unidade" value="#{unidadeMB.u.unidade}" />

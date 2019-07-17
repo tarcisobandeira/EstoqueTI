@@ -1,7 +1,9 @@
 package br.com.MBean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.localizacaoDAO;
 import br.com.entities.Localizacao;
@@ -15,20 +17,31 @@ public class LocalizacaoMB {
 	Localizacao selcN = new Localizacao();
 	Localizacao selcF = new Localizacao();
 
+	FacesContext context;
+
 	public void criarLocal() {
+		context = FacesContext.getCurrentInstance();
 		if (testarCampos()) {
 			if (lDAO.buscarLocalNome(l.getLocal_nome())) {
 				if (lDAO.inserir(l)) {
 					System.out.println("EstoqueTI:Local criado.");
+					context.addMessage(null, new FacesMessage("Sucesso",
+							"Local " + l.getLocal_nome() + " foi criado para o/a " + texto()));
 					zerar();
 				} else {
 					System.out.println("EstoqueTI:Erro ao criar local.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
-				System.out.println("EstoqueTI:Esse local j� existe.");
+				System.out.println("EstoqueTI:Esse local já existe.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Local Repetido",
+						"Esse local já está cadastrado."));
 			}
 		} else {
-			System.out.println("EstoqueTI:Campo vazio em localiza��o.");
+			System.out.println("EstoqueTI:Campo vazio em localização.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -37,6 +50,14 @@ public class LocalizacaoMB {
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	public String texto() {
+		if (l.getLocalNF() == 1) {
+			return "Núcleo.";
+		} else {
+			return "FAJ.";
 		}
 	}
 

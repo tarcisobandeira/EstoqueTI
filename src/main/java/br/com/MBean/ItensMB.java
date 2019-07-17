@@ -51,7 +51,8 @@ public class ItensMB {
 					is = iDAO.buscarItemDescricao(i.getDescricao());
 					if (liDAO.inserir(is.getId(), li.getId_localizacao())) {
 						System.out.println("EstoqueTI:Item criado.");
-						context.addMessage(null, new FacesMessage("Sucesso", is.getDescricao() + " foi criado."));
+						context.addMessage(null,
+								new FacesMessage("Sucesso", "Item " + is.getDescricao() + " foi criado."));
 						zerar();
 					} else {
 						System.out.println("EstoqueTI:Erro ao fazer a ligação com o local.");
@@ -79,7 +80,7 @@ public class ItensMB {
 		if (testarCamposE()) {
 			if (iDAO.editar(i)) {
 				System.out.println("EstoqueTI:Item modificado.");
-				context.addMessage(null, new FacesMessage("Sucesso", i.getDescricao() + " foi editado."));
+				context.addMessage(null, new FacesMessage("Sucesso", "Item " + i.getDescricao() + " foi editado."));
 				zerar();
 			} else {
 				System.out.println("EstoqueTI:Erro ao editar o item.");
