@@ -13,9 +13,9 @@
 		<p:growl id="gwLogin" showDetail="true" />
 		<p:panelGrid columns="2" cellpadding="10" cellspacing="1">
 			<p:outputLabel value="Login: " />
-			<p:inputText id="login" value="#{loginMB.login}" />
+			<p:inputText id="login" value="#{loginMB.login}" required="true" requiredMessage="Campo vazio em Login."/>
 			<p:outputLabel value="Senha: " />
-			<p:password id="senha" value="#{loginMB.senha}" />
+			<p:password id="senha" value="#{loginMB.senha}" required="true" requiredMessage="Campo vazio em Senha."/>
 
 			<h:commandButton id="logar" value="Logar" action="#{loginMB.logar}" />
 		</p:panelGrid>
