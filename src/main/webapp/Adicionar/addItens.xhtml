@@ -7,9 +7,9 @@
 
 	<h:body>
 		<h:form id="formI">
-		<p:growl id="gwItens" showDetail="true" >
-			<p:autoUpdate/>
-		</p:growl>
+			<p:growl id="gwItens" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Descrição: " />
 				<p:inputText id="descricao" value="#{itensMB.i.descricao}" />
@@ -22,7 +22,8 @@
 					<f:selectItems value="#{tabelaMB.unidadeL}" var="unidadeL"
 						itemLabel="#{unidadeL.unidade}" itemValue="#{unidadeL.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg12').show();" />
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg12').show();"
+					title="Permite adicionar uma nova unidade" />
 
 				<p:outputLabel value="Minimo: " />
 				<p:inputText id="minimo" value="#{itensMB.i.minimo}" />
@@ -35,11 +36,12 @@
 					<f:selectItems value="#{tabelaMB.localnL}" var="localL"
 						itemLabel="#{localL.local_nome}" itemValue="#{localL.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();"
+					title="Permite adicionar um novo local" />
 
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
-				actionListener="#{tabelaMB.listar}"
+				actionListener="#{tabelaMB.listar}" action="#{itensMB.zerar}"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
 				oncomplete="PF('dlg2').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true" update=":formI"

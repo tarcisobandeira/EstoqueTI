@@ -17,7 +17,7 @@
 				<p:menubar id="menu">
 					<p:submenu label="Adicionar" icon="ui-icon-plus"
 						disabled="#{loginMB.f.funcao == 1}">
-						<p:menuitem value="Funcionarios" onclick="PF('dlg1').show();" />
+						<p:menuitem value="Funcionários" onclick="PF('dlg1').show();" />
 						<p:menuitem value="Itens" onclick="PF('dlg2').show();" />
 						<p:menuitem value="Locais" onclick="PF('dlg3').show();" />
 						<p:menuitem value="Unidades" onclick="PF('dlg12').show();" />
@@ -74,7 +74,7 @@
 		</h:panelGroup>
 	</h:form>
 
-	<p:dialog header="Funcionarios" widgetVar="dlg1" modal="true"
+	<p:dialog header="Funcionários" widgetVar="dlg1" modal="true"
 		resizable="false" closable="false" height="50%">
 		<ui:include src="/Adicionar/addFuncionarios.xhtml" />
 	</p:dialog>
@@ -114,7 +114,7 @@
 		resizable="false" closable="false" height="50%">
 		<ui:include src="/Editar/edtItens.xhtml" />
 	</p:dialog>
-	<p:dialog header="Editar Funcionario" widgetVar="dlg11" modal="true"
+	<p:dialog header="Editar Funcionário" widgetVar="dlg11" modal="true"
 		resizable="false" closable="false" height="50%">
 		<ui:include src="/Editar/edtFuncionarios.xhtml" />
 	</p:dialog>

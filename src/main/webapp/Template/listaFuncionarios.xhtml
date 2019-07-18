@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
-	<p:outputLabel value="Lista de funcionarios" />
+	<p:outputLabel value="Lista de funcionários" />
 	<p:dataTable id="tabela2" value="#{tabelaMB.funciL}" scrollable="true"
 		selection="#{funcionariosMB.selc}" selectionMode="single"
 		scrollHeight="500" rowKey="#{ff.id}" var="ff"
@@ -31,6 +31,6 @@
 	<p:commandButton value="Editar"
 		disabled="#{funcionariosMB.selc == null || loginMB.f.funcao == 1}"
 		ajax="true" update=":formEF" actionListener="#{funcionariosMB.editar}"
-		oncomplete="PF('dlg11').show();" />
+		oncomplete="PF('dlg11').show();" title="Permite editar um funcionário"/>
 
 </ui:composition>

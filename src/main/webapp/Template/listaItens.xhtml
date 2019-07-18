@@ -38,15 +38,19 @@
 		</p:column>
 	</p:dataTable>
 	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"
-		ajax="true" update=":formCorpo" />
+		ajax="true" update=":formCorpo"
+		title="Mostra todos os item que estão no limite, abaixo do limite e em falta" />
 	<p:commandButton value="Completa" actionListener="#{tabelaMB.listar}"
-		ajax="true" update=":formCorpo" />
+		ajax="true" update=":formCorpo"
+		title="Mostra todos os itens da lista" />
 	<p:commandButton value="Locais"
 		actionListener="#{itensMB.mostrarLocais}" ajax="true" update=":formLi"
-		oncomplete="PF('dlg14').show();" disabled="#{itensMB.selc == null}" />
+		oncomplete="PF('dlg14').show();" disabled="#{itensMB.selc == null}"
+		title="Mostra todos os locais onde o item pode ser encontrado" />
 	<p:commandButton value="Editar" actionListener="#{itensMB.editar}"
 		ajax="true" update=":formEI" oncomplete="PF('dlg10').show();"
-		disabled="#{itensMB.selc == null || loginMB.f.funcao == 1}" />
+		disabled="#{itensMB.selc == null || loginMB.f.funcao == 1}" 
+		title="Pode editar algum item"/>
 	<style>
 .baixo {
 	background-color: red !important;

@@ -20,7 +20,7 @@
 				<p:inputText id="minimo" value="#{itensMB.i.minimo}" />
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
-				actionListener="#{tabelaMB.listar}"
+				actionListener="#{tabelaMB.listar}" action="#{itensMB.zerar}"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 				oncomplete="PF('dlg10').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
