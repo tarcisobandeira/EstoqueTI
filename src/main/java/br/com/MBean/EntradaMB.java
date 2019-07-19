@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.entradaDAO;
 import br.com.DAO.itensDAO;
@@ -37,8 +39,10 @@ public class EntradaMB {
 
 	Integer codigo;
 	Entrada selc;
+	FacesContext context;
 
 	public void fazerEntrada() {
+		context = FacesContext.getCurrentInstance();
 		if (testarCampos()) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 			Calendar data = new GregorianCalendar();
@@ -58,16 +62,24 @@ public class EntradaMB {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + i.getDescricao() + ".");
 				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
+					context.addMessage(null,
+							new FacesMessage("Sucesso", "Feita a entrada de " + i.getDescricao() + "."));
 					zerar();
 					codigo = null;
 				} else {
 					System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao fazer a entrar do item.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em entrada single.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -84,11 +96,17 @@ public class EntradaMB {
 				System.out.println("EstoqueTI:Foi feita a entrada de " + entrada.getItens().getDescricao() + ".");
 				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
+					context.addMessage(null,
+							new FacesMessage("Sucesso", "Feita a entrada de " + i.getDescricao() + "."));
 				} else {
 					System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao fazer a entrar do item.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		}
 		System.out.println("EstoqueTI:Nenhum item na lista.");
@@ -98,6 +116,7 @@ public class EntradaMB {
 	}
 
 	public void addListE() {
+		context = FacesContext.getCurrentInstance();
 		if (testarCampos()) {
 			Entrada entrada = new Entrada();
 			i = iDAO.buscarItem(en.getId_itens());
@@ -124,7 +143,9 @@ public class EntradaMB {
 			entrada = new Entrada();
 			zerar();
 		} else {
-
+			System.out.println("EstoqueTI:Campo vazio em entrada multiple.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 

@@ -7,6 +7,9 @@
 
 	<h:body>
 		<h:form id="formE">
+			<p:growl id="gwEntrada" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="itens" filter="true" filterMatchMode="contains"
@@ -17,7 +20,8 @@
 					<p:ajax listener="#{entradaMB.listarLocal}" event="change"
 						update="sLocal" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();" />
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg2').show();"
+					title="Permite adicionar um novo item" />
 
 				<p:outputLabel value="Local: " />
 				<p:selectOneMenu id="sLocal" filter="true"
