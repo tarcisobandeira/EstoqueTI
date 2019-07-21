@@ -7,8 +7,10 @@
 
 	<h:body>
 		<h:form id="formEM">
+			<p:growl id="gwEmprestimo" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="2">
-
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="itens" filter="true" filterMatchMode="contains"
 					value="#{emprestimoMB.em.id_itens}">

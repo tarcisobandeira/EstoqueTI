@@ -7,6 +7,9 @@
 
 	<h:body>
 		<h:form id="formEI">
+			<p:growl id="gwEItens" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Descrição: " />
 				<p:inputText id="descricao" value="#{itensMB.i.descricao}" />

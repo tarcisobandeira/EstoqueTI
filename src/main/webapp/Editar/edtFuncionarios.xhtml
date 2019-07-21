@@ -7,6 +7,9 @@
 
 	<h:body>
 		<h:form id="formEF">
+			<p:growl id="gwEFuncionarios" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Nome: " />
 				<p:inputText id="nome_fun" value="#{funcionariosMB.f.nome}" />

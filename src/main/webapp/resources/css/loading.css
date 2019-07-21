@@ -1,0 +1,10 @@
+.loading{
+	bottom: 10;
+	right: 10;
+	top: auto !important;
+	left: auto !important; 
+}
+
+.loading .ui-dialog-content{
+	padding: 0px !important;
+}

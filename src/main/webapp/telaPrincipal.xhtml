@@ -11,13 +11,16 @@
 	</ui:define>
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/impressaoEmprestimo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="resources/css/loading.css" />
 
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
 
-	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
-		closable="false" resizable="false" showHeader="false">
-		<p:graphicImage name="/resources/gif/tenor.gif" />
+	<p:dialog styleClass="loading" widgetVar="statusDialog" modal="false"
+		draggable="false" closable="false" resizable="false"
+		showHeader="false">
+		<p:graphicImage value="/resources/gif/blocks.gif" />
 	</p:dialog>
 
 	<h:form styleClass="formPrimario" id="formPrimario">

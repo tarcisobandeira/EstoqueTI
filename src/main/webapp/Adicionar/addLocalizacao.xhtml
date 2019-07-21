@@ -7,9 +7,9 @@
 
 	<h:body>
 		<h:form id="formL">
-		<p:growl id="gwLocalizacao" showDetail="true" >
-			<p:autoUpdate/>
-		</p:growl>
+			<p:growl id="gwLocalizacao" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="2">
 				<p:outputLabel value="Nome do local: " />
 				<p:inputText id="nome_local" value="#{localizacaoMB.l.local_nome}" />
@@ -24,8 +24,8 @@
 				actionListener="#{tabelaMB.listar}"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
 				oncomplete="PF('dlg3').hide();" process="@this">
-				<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}"
-					event="click" update=":formT:localN :formT:qtd" />
+				<p:ajax listener="#{trocaEstoqueMB.listarDisponivel}" event="click"
+					update=":formT:localN :formT:qtd" />
 			</p:commandButton>
 			<p:commandButton value="Salvar" ajax="true"
 				actionListener="#{localizacaoMB.criarLocal}" update=":formL" />

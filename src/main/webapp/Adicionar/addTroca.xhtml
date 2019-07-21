@@ -7,6 +7,9 @@
 
 	<h:body>
 		<h:form id="formT">
+			<p:growl id="gwTroca" showDetail="true">
+				<p:autoUpdate />
+			</p:growl>
 			<p:panelGrid columns="3">
 				<p:outputLabel value="Item: " />
 				<p:selectOneMenu id="item" value="#{trocaEstoqueMB.t.id_itens}"
