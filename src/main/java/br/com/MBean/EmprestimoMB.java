@@ -7,8 +7,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.emprestimoDAO;
 import br.com.DAO.itensDAO;
@@ -37,11 +39,14 @@ public class EmprestimoMB {
 
 	Emprestimo selc;
 
+	FacesContext context;
+
 	public EmprestimoMB() {
 
 	}
 
 	public void fazerEmprestimo() {
+		context = FacesContext.getCurrentInstance();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 		em.setLimite(0);
 		em.setDia_saida(sdf.format(saida));
@@ -54,18 +59,27 @@ public class EmprestimoMB {
 				if (liDAO.updateEstoque(descontar(em))) {
 					if (iDAO.updateEstoque(i.getEstoque_at(), em.getId_itens())) {
 						System.out.println("EstoqueTI:Empréstimo feito.");
+						context.addMessage(null, new FacesMessage("Sucesso", "Novo emprestimo criado."));
 						zerar();
 					} else {
 						System.out.println("EstoqueTI:Erro ao descontar no item.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
 					System.out.println("EstoqueTI:Erro ao descontar no estoque.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao fazer empréstimo.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em empréstimo.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -80,15 +94,22 @@ public class EmprestimoMB {
 			if (liDAO.updateEstoque(acrescentar(selc))) {
 				if (iDAO.updateEstoque(i.getEstoque_at(), selc.getId_itens())) {
 					System.out.println("EstoqueTI:Empréstimo finalizado.");
+					context.addMessage(null, new FacesMessage("Sucesso", "Emprestimo finalizado."));
 					zerar();
 				} else {
 					System.out.println("EstoqueTI:Erro ao acrescentar no itens.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao acrescentar no estoque.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Erro ao finalizar empréstimo.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal", "Erro ao se conectar com o servidor."));
 		}
 	}
 

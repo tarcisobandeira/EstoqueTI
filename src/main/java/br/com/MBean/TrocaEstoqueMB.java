@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
@@ -30,7 +32,10 @@ public class TrocaEstoqueMB {
 	List<LI> listLi = new ArrayList<LI>();
 	List<Localizacao> listL = new ArrayList<Localizacao>();
 
+	FacesContext context;
+
 	public void fazerMovimento() {
+		context = FacesContext.getCurrentInstance();
 		if (testarCampos()) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 			Calendar data = new GregorianCalendar();
@@ -41,30 +46,46 @@ public class TrocaEstoqueMB {
 					if (liDAO.inserirTroca(t)) {
 						if (liDAO.updateEstoque(descontar(t))) {
 							System.out.println("EstoqueTI:Troca de estoque realizada.");
+							context.addMessage(null, new FacesMessage("Sucesso",
+									"Troca de " + t.getItens().getDescricao() + " foi feita."));
 							zerar();
 						} else {
 							System.out.println("EstoqueTI:Erro ao descontar no estoque.");
+							context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+									"Erro ao se conectar com o servidor."));
 						}
 					} else {
-						System.out.println("EstoqueTI:Erro ao fazer ligaÁ„o.");
+						System.out.println("EstoqueTI:Erro ao fazer liga√ß√£o.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
 					if (liDAO.updateEstoque(acrescentar(t))) {
 						if (liDAO.updateEstoque(descontar(t))) {
 							System.out.println("EstoqueTI:Troca de estoque realizada.");
+							context.addMessage(null, new FacesMessage("Sucesso",
+									"Troca de " + t.getItens().getDescricao() + " foi feita."));
 							zerar();
 						} else {
 							System.out.println("EstoqueTI:Erro ao descontar no estoque.");
+							context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+									"Erro ao se conectar com o servidor."));
 						}
 					} else {
 						System.out.println("EstoqueTI:Erro ao acrescentar no estoque.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				}
 			} else {
 				System.out.println("EstoqueTI:Erro ao trocar de local.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em troca de estoque.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo n√£o foi preenchido."));
 		}
 	}
 

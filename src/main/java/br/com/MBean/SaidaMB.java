@@ -6,8 +6,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.DAO.entradaDAO;
 import br.com.DAO.funcionariosDAO;
@@ -46,7 +48,10 @@ public class SaidaMB {
 	Integer codigo;
 	Saida selc;
 
+	FacesContext context;
+
 	public void fazerSaida() {
+		context = FacesContext.getCurrentInstance();
 		if (testarCampos()) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 			Calendar data = new GregorianCalendar();
@@ -63,20 +68,27 @@ public class SaidaMB {
 			li.setEstoque(li.getEstoque() - s.getSaida());
 
 			if (sDAO.inserir(s)) {
-				System.out.println("EstoqueTI:Foi feita a sa�da de " + i.getDescricao() + ".");
+				System.out.println("EstoqueTI:Foi feita a saída de " + i.getDescricao() + ".");
 				if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 					System.out.println("EstoqueTI:Estoque atualizado.");
+					context.addMessage(null, new FacesMessage("Sucesso", "Feita a saída de " + i.getDescricao() + "."));
 					zerar();
 					zerarList();
 					codigo = null;
 				} else {
 					System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			} else {
-				System.out.println("EstoqueTI:Erro ao fazer a sa�da do item.");
+				System.out.println("EstoqueTI:Erro ao fazer a saída do item.");
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+						"Erro ao se conectar com o servidor."));
 			}
 		} else {
-			System.out.println("EstoqueTI:Campo vazio em saida single.");
+			System.out.println("EstoqueTI:Campo vazio em saída single.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 
 	}
@@ -90,21 +102,27 @@ public class SaidaMB {
 				descontarEstoque(saida);
 
 				if (sDAO.inserir(saida)) {
-					System.out.println("EstoqueTI:Foi feita a sa�da de " + saida.getItens().getDescricao() + ".");
+					System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
 					if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
 						System.out.println("EstoqueTI:Estoque atualizado.");
+						context.addMessage(null,
+								new FacesMessage("Sucesso", "Feita a saída de " + i.getDescricao() + "."));
 					} else {
 						System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+								"Erro ao se conectar com o servidor."));
 					}
 				} else {
-					System.out.println("EstoqueTI:Erro ao fazer a sa�da do item.");
+					System.out.println("EstoqueTI:Erro ao fazer a saída do item.");
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+							"Erro ao se conectar com o servidor."));
 				}
 			}
 			zerar();
 			zerarList();
 			codigo = null;
 		} else {
-			System.out.println("EstoqueTI:Algum item(ns) com informa��es vazias.");
+			System.out.println("EstoqueTI:Algum item(ns) com informações vazias.");
 		}
 	}
 
@@ -147,6 +165,8 @@ public class SaidaMB {
 			zerar();
 		} else {
 			System.out.println("EstoqueTI:Campo vazio em saida multipla.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Campo Vazio.", "Algum campo não foi preenchido."));
 		}
 	}
 
@@ -218,7 +238,7 @@ public class SaidaMB {
 			saida.setItens(item);
 
 			deletListS(saida);
-			
+
 			listS.add(saida);
 		}
 	}
