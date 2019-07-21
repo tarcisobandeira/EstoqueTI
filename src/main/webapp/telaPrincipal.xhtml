@@ -11,6 +11,15 @@
 	</ui:define>
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/impressaoEmprestimo.css" />
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="/resources/gif/tenor.gif" />
+	</p:dialog>
+
 	<h:form styleClass="formPrimario" id="formPrimario">
 		<h:panelGroup rendered="#{loginMB.logado}">
 			<div>
