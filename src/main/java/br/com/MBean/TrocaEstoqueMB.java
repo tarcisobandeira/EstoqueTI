@@ -11,6 +11,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.DAO.itensDAO;
 import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
 import br.com.DAO.trocaDAO;
@@ -28,6 +29,7 @@ public class TrocaEstoqueMB {
 	liDAO liDAO = new liDAO();
 	trocaDAO tDAO = new trocaDAO();
 	localizacaoDAO lDAO = new localizacaoDAO();
+	itensDAO iDAO = new itensDAO();
 
 	List<LI> listLi = new ArrayList<LI>();
 	List<Localizacao> listL = new ArrayList<Localizacao>();
@@ -40,6 +42,8 @@ public class TrocaEstoqueMB {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");
 			Calendar data = new GregorianCalendar();
 			t.setDia(sdf.format(data.getTime()));
+			
+			t.setItens(iDAO.buscarItem(t.getId_itens()));
 
 			if (tDAO.inserir(t)) {
 				if (!liDAO.confirmarLigacao(t)) {
@@ -47,7 +51,7 @@ public class TrocaEstoqueMB {
 						if (liDAO.updateEstoque(descontar(t))) {
 							System.out.println("EstoqueTI:Troca de estoque realizada.");
 							context.addMessage(null, new FacesMessage("Sucesso",
-									"Troca de " + t.getItens().getDescricao() + " foi feita."));
+									"Troca de local feita com " + t.getItens().getDescricao() + "."));
 							zerar();
 						} else {
 							System.out.println("EstoqueTI:Erro ao descontar no estoque.");

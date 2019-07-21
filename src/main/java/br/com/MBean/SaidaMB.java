@@ -94,35 +94,42 @@ public class SaidaMB {
 	}
 
 	public void fazerMultSaida() {
-		if (tCampos()) {
-			for (Saida saida : listS) {
-				i = iDAO.buscarItem(saida.getId_itens());
-				i.setEstoque_at(i.getEstoque_at() - saida.getSaida());
+		context = FacesContext.getCurrentInstance();
+		if (!listS.isEmpty()) {
+			if (tCampos()) {
+				for (Saida saida : listS) {
+					i = iDAO.buscarItem(saida.getId_itens());
+					i.setEstoque_at(i.getEstoque_at() - saida.getSaida());
 
-				descontarEstoque(saida);
+					descontarEstoque(saida);
 
-				if (sDAO.inserir(saida)) {
-					System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
-					if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
-						System.out.println("EstoqueTI:Estoque atualizado.");
-						context.addMessage(null,
-								new FacesMessage("Sucesso", "Feita a saída de " + i.getDescricao() + "."));
+					if (sDAO.inserir(saida)) {
+						System.out.println("EstoqueTI:Foi feita a saída de " + saida.getItens().getDescricao() + ".");
+						if ((iDAO.updateEstoque(i.getEstoque_at(), i.getId())) && (liDAO.updateEstoque(li))) {
+							System.out.println("EstoqueTI:Estoque atualizado.");
+							context.addMessage(null,
+									new FacesMessage("Sucesso", "Feita a saída de " + i.getDescricao() + "."));
+						} else {
+							System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+							context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
+									"Erro ao se conectar com o servidor."));
+						}
 					} else {
-						System.out.println("EstoqueTI:Erro ao atualizar estoque.");
+						System.out.println("EstoqueTI:Erro ao fazer a saída do item.");
 						context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
 								"Erro ao se conectar com o servidor."));
 					}
-				} else {
-					System.out.println("EstoqueTI:Erro ao fazer a saída do item.");
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Erro Fatal",
-							"Erro ao se conectar com o servidor."));
 				}
+				zerar();
+				zerarList();
+				codigo = null;
+			} else {
+				System.out.println("EstoqueTI:Algum item(ns) com informações vazias.");
 			}
-			zerar();
-			zerarList();
-			codigo = null;
 		} else {
-			System.out.println("EstoqueTI:Algum item(ns) com informações vazias.");
+			System.out.println("EstoqueTI:Lista vazia em saída multipla.");
+			context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN, "Lista Vazia.", "Nenhum item na lista."));
 		}
 	}
 
@@ -132,6 +139,7 @@ public class SaidaMB {
 	}
 
 	public void addListS() {
+		context = FacesContext.getCurrentInstance();
 		Saida saida = new Saida();
 		if (testarCampos()) {
 			i = iDAO.buscarItem(s.getId_itens());

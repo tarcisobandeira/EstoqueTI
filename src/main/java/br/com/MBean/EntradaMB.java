@@ -84,6 +84,7 @@ public class EntradaMB {
 	}
 
 	public void fazerMultEntrada() {
+		context = FacesContext.getCurrentInstance();
 		for (Entrada entrada : listE) {
 
 			i = iDAO.buscarItem(entrada.getId_itens());
