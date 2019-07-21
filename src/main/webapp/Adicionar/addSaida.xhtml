@@ -39,7 +39,8 @@
 						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus"
-					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg3').show();" />
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg3').show();"
+					title="Permite adicionar um novo local" />
 
 				<p:outputLabel value="Funcionário: " />
 				<p:selectOneMenu id="fun" filter="true" filterMatchMode="contains"
@@ -49,7 +50,8 @@
 						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus"
-					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg1').show();" />
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg1').show();"
+					title="Permite criar um novo funcionário" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="qtdS" value="#{saidaMB.s.saida}"

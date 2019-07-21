@@ -38,7 +38,8 @@
 					<f:selectItems value="#{trocaEstoqueMB.listL}" var="listL"
 						itemLabel="#{listL.local_nome}" itemValue="#{listL.id}" />
 				</p:selectOneMenu>
-				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();" />
+				<p:commandButton icon="ui-icon-plus" onclick="PF('dlg3').show();"
+					title="Permite adicionar um novo local" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="qtd" value="#{trocaEstoqueMB.t.quantidade}"

@@ -39,7 +39,8 @@
 						itemLabel="#{lf.local_nome}" itemValue="#{lf.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus"
-					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg3').show();" />
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg3').show();"
+					title="Permite adicionar um novo local" />
 
 				<p:outputLabel value="Funcionário: " />
 				<p:selectOneMenu id="fun" filter="true" filterMatchMode="contains"
@@ -49,7 +50,8 @@
 						itemLabel="#{fs.nome}" itemValue="#{fs.id}" />
 				</p:selectOneMenu>
 				<p:commandButton icon="ui-icon-plus"
-					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg1').show();" />
+					disabled="#{loginMB.f.funcao == 1}" onclick="PF('dlg1').show();"
+					title="Permite criar um novo funcionário" />
 
 				<p:outputLabel value="Quantidade: " />
 				<p:spinner id="qtdS" value="#{saidaMB.s.saida}"
@@ -64,7 +66,8 @@
 
 				<p:outputLabel />
 				<p:commandButton value="ADD" actionListener="#{saidaMB.addListS}"
-					ajax="true" update=":formMS" />
+					ajax="true" update=":formMS"
+					title="Adiciona os dados na lista abaixo para ser salvo depois" />
 				<p:outputLabel />
 			</p:panelGrid>
 
@@ -72,7 +75,8 @@
 				<p:inputNumber id="codigo" decimalPlaces="0"
 					value="#{saidaMB.codigo}" />
 				<p:commandButton value="por código"
-					actionListener="#{saidaMB.buscar}" ajax="true" update=":formMS" />
+					actionListener="#{saidaMB.buscar}" ajax="true" update=":formMS"
+					title="Permite buscar itens com o mesmo código para serem editados" />
 			</p:panelGrid>
 
 			<p:dataTable id="multSaida" value="#{saidaMB.listS}" var="listS"
@@ -97,10 +101,12 @@
 				update=":formCorpo :formMS" oncomplete="PF('dlg9').hide();"
 				process="@this" />
 			<p:commandButton value="Editar" actionListener="#{saidaMB.editar}"
-				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}" />
+				ajax="true" update=":formMS" disabled="#{saidaMB.selc == null}"
+				title="Permite editar uma das saída de itens" />
 			<p:commandButton value="Deletar"
 				actionListener="#{saidaMB.deletList}" ajax="true" update=":formMS"
-				disabled="#{saidaMB.selc == null}" />
+				disabled="#{saidaMB.selc == null}"
+				title="Exclui uma das saída de itens" />
 			<p:commandButton value="Salvar" ajax="true"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
 				actionListener="#{saidaMB.fazerMultSaida}" />

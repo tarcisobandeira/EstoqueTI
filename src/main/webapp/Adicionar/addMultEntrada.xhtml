@@ -45,7 +45,8 @@
 
 				<p:outputLabel />
 				<p:commandButton value="ADD" actionListener="#{entradaMB.addListE}"
-					ajax="true" update=":formME" title="Adiciona os dados na lista abaixo para ser salvo depois"/>
+					ajax="true" update=":formME"
+					title="Adiciona os dados na lista abaixo para ser salvo depois" />
 				<p:outputLabel />
 			</p:panelGrid>
 
@@ -68,10 +69,12 @@
 				update=":formCorpo :formME" oncomplete="PF('dlg6').hide();"
 				process="@this" />
 			<p:commandButton value="Editar" actionListener="#{entradaMB.editar}"
-				ajax="true" update=":formME" disabled="#{entradaMB.selc == null}" />
+				ajax="true" update=":formME" disabled="#{entradaMB.selc == null}"
+				title="Permite editar uma das entradas de itens" />
 			<p:commandButton value="Deletar"
 				actionListener="#{entradaMB.deletList}" ajax="true" update=":formME"
-				disabled="#{entradaMB.selc == null}" />
+				disabled="#{entradaMB.selc == null}"
+				title="Exclui uma das entradas de itens" />
 			<p:commandButton value="Salvar" ajax="true"
 				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS :formU :formT :formEM"
 				actionListener="#{entradaMB.fazerMultEntrada}" />

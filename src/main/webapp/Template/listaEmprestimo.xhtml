@@ -41,14 +41,17 @@
 	<p:commandButton value="Informações" ajax="true" update=":formOBS"
 		disabled="#{emprestimoMB.selc == null}"
 		actionListener="#{emprestimoMB.detalhes}"
-		oncomplete="PF('dlg16').show();" />
+		oncomplete="PF('dlg16').show();"
+		title="Mostra todas as informções do empréstimo" />
 
 	<p:commandButton value="Finalizar"
 		disabled="#{emprestimoMB.selc == null || emprestimoMB.selc.limite == 3 }"
-		type="button" onclick="PF('confirm').show();" />
+		type="button" onclick="PF('confirm').show();"
+		title="Finaliza o empréstimo" />
 
 	<p:commandButton value="Impressão" onclick="PF('dlg17').show();"
-		disabled="#{emprestimoMB.selc == null}">
+		disabled="#{emprestimoMB.selc == null}"
+		title="Permite imprimir o termo de responsabilidade">
 		<p:printer target="formMImpre" />
 	</p:commandButton>
 
