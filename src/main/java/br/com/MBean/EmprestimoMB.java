@@ -37,6 +37,8 @@ public class EmprestimoMB {
 	emprestimoDAO emDAO = new emprestimoDAO();
 	itensDAO iDAO = new itensDAO();
 
+	String status;
+
 	Emprestimo selc;
 
 	FacesContext context;
@@ -136,6 +138,16 @@ public class EmprestimoMB {
 
 	public void detalhes() {
 		em = selc;
+		if (em.getLimite() == 0) {
+			status = "Emprestado";
+		} else if (em.getLimite() == 1) {
+			status = "Devolve Hoje";
+		} else if (em.getLimite() == 2) {
+			status = "Atraso na devolução";
+		} else {
+			status = "Fechado";
+		}
+
 	}
 
 	public void listarLocal() {
@@ -254,6 +266,22 @@ public class EmprestimoMB {
 
 	public void setMin(Date min) {
 		this.min = min;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public FacesContext getContext() {
+		return context;
+	}
+
+	public void setContext(FacesContext context) {
+		this.context = context;
 	}
 
 }

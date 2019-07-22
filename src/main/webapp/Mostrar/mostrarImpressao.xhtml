@@ -7,26 +7,21 @@
 	<h:body>
 		<h:form styleClass="formMImpre" id="formMImpre">
 			<div class="texto">
-				<p:panelGrid styleClass="grid" columns="2">
-					<f:facet name="header">
-						<p:graphicImage styleClass="img" id="unifaj"
-							value="/resources/Imagens/unifaj.png" />
-					</f:facet>
-					<p:outputLabel value="Colaborador: " />
-					<p:outputLabel value="#{emprestimoMB.selc.colaborador}" />
-					<p:outputLabel value="Item: " />
-					<p:outputLabel value="#{emprestimoMB.selc.itens.descricao}" />
-					<p:outputLabel value="Quantidade: " />
-					<p:outputLabel value="#{emprestimoMB.selc.quantidade}" />
-					<p:outputLabel value="Saída: " />
-					<p:outputLabel value="#{emprestimoMB.selc.dia_saida}" />
-					<p:outputLabel value="Devolução: " />
-					<p:outputLabel value="#{emprestimoMB.selc.dia_devol}" />
-				</p:panelGrid>
-				<p:panelGrid styleClass="grid" columns="2" layout="grid">
-					<p:outputLabel value="OBS.: " />
-					<p:outputLabel value="#{emprestimoMB.selc.OBS}" />
-				</p:panelGrid>
+				<div class="divIMG">
+					<p:graphicImage styleClass="img" id="unifaj"
+						value="/resources/Imagens/unifaj.png" />
+				</div>
+				<div class="titulo">
+					<p:outputLabel value="TERMO DE RESPONSABILIDADE DE EQUIPAMENTOS" />
+				</div>
+				<div class="divTermo">
+					<p:outputLabel styleClass="termo"
+						value="Eu: #{emprestimoMB.selc.colaborador}, mediante este documento DECLARO para os devidos fins e a quem possa interessar, que recebi #{emprestimoMB.selc .quantidade} #{emprestimoMB.selc .itens.descricao} em perfeitas condições de uso, comprometendo-me pela conservação do equipamento descrito." />
+				</div>
+				<div class="divData">
+					<p:outputLabel styleClass="diaData"
+						value="Jaguariúna/SP, #{emprestimoMB.selc.dia_saida}" />
+				</div>
 				<div class="ui">
 					<div class="ui-g-2">
 						<p:outputLabel value="Assinatura do responsável" />
