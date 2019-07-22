@@ -31,7 +31,8 @@
 
 				<p:outputLabel value="Local: " />
 				<p:selectOneMenu id="local" filter="true" filterMatchMode="contains"
-					value="#{itensMB.li.id_localizacao}">
+					value="#{itensMB.li.id_localizacao}" required="true"
+					requiredMessage="Não foi feita a seleção do local">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItems value="#{tabelaMB.localnL}" var="localL"
 						itemLabel="#{localL.local_nome}" itemValue="#{localL.id}" />
