@@ -8,6 +8,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.PrimeFaces;
+
 import br.com.DAO.itensDAO;
 import br.com.DAO.liDAO;
 import br.com.DAO.localizacaoDAO;
@@ -27,9 +29,16 @@ public class ItensMB {
 	LI li = new LI();
 
 	List<LI> listLi = new ArrayList<LI>();
+	List<Itens> listI = new ArrayList<Itens>();
+	List<Itens> busca = new ArrayList<Itens>();
 
 	FacesContext context;
 	Itens selc;
+
+	public ItensMB() {
+		listI = iDAO.listarTodos();
+		busca = iDAO.listarTodos();
+	}
 
 	public void salvar() {
 		context = FacesContext.getCurrentInstance();
@@ -125,6 +134,22 @@ public class ItensMB {
 		listLi = liDAO.listarLocalSemFalta(selc.getId());
 	}
 
+	public void completo() {
+		busca = null;
+		busca = iDAO.listarTodos();
+		listI = null;
+		listI = iDAO.listarTodos();
+		PrimeFaces.current().ajax().update(":formCorpo");
+	}
+	
+	public void orderBy() {
+		busca = null;
+		busca = iDAO.listarItensFalta();
+		listI = null;
+		listI = iDAO.listarItensFalta();
+		PrimeFaces.current().ajax().update(":formCorpo");
+	}
+
 	public itensDAO getiDAO() {
 		return iDAO;
 	}
@@ -187,6 +212,30 @@ public class ItensMB {
 
 	public void setListLi(List<LI> listLi) {
 		this.listLi = listLi;
+	}
+
+	public FacesContext getContext() {
+		return context;
+	}
+
+	public void setContext(FacesContext context) {
+		this.context = context;
+	}
+
+	public List<Itens> getListI() {
+		return listI;
+	}
+
+	public void setListI(List<Itens> listI) {
+		this.listI = listI;
+	}
+
+	public List<Itens> getBusca() {
+		return busca;
+	}
+
+	public void setBusca(List<Itens> busca) {
+		this.busca = busca;
 	}
 
 }

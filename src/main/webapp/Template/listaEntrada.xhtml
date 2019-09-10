@@ -7,7 +7,7 @@
 
 	<p:outputLabel value="Lista de entrada de itens" />
 	<p:dataTable id="tabela5" value="#{tabelaMB.entradaL}"
-		scrollable="true" scrollHeight="500" var="ee"
+		scrollable="true" scrollHeight="500" var="ee" disabledSelection="true"
 		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{ee.dia}" headerText="Dia"

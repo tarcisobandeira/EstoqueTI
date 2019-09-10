@@ -6,8 +6,9 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<h:form id="formLi">
-		<p:dataTable id="tabela4" value="#{itensMB.listLi}" scrollable="true"
-			scrollHeight="250" var="li" emptyMessage="Nenhum item encontrado">
+		<p:dataTable id="tabela10" value="#{itensMB.listLi}" scrollable="true"
+			scrollHeight="250" var="li" emptyMessage="Nenhum item encontrado"
+			disabledSelection="true">
 
 			<p:column filterBy="#{li.localizacao.local_nome}" headerText="Local"
 				filterMatchMode="contains">

@@ -6,7 +6,7 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Lista itens" />
-	<p:dataTable id="tabela1" value="#{tabelaMB.itensL}" scrollable="true"
+	<p:dataTable id="tabela1" value="#{itensMB.listI}" scrollable="true"
 		scrollHeight="500" var="itensL" emptyMessage="Nenhum item encontrado"
 		selection="#{itensMB.selc}" selectionMode="single"
 		rowKey="#{itensL.id}"
@@ -18,39 +18,39 @@
 		</p:column>
 
 		<p:column filterBy="#{itensL.descricao}" headerText="Descrição"
-			filterMatchMode="contains">
+			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
 			<p:outputLabel value="#{itensL.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{itensL.unidade.unidade}" headerText="Unidade"
-			filterMatchMode="contains">
+			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
 			<p:outputLabel value="#{itensL.unidade.unidade}" />
 		</p:column>
 
 		<p:column id="minimo" filterBy="#{itensL.minimo}" headerText="Minimo"
-			filterMatchMode="contains">
+			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
 			<p:outputLabel value="#{itensL.minimo}" />
 		</p:column>
 
 		<p:column id="atual" filterBy="#{itensL.estoque_at}"
-			headerText="Atual" filterMatchMode="contains">
+			headerText="Atual" filterMatchMode="contains"
+			filteredValue="#{itensMB.busca}">
 			<p:outputLabel value="#{itensL.estoque_at}" />
 		</p:column>
 	</p:dataTable>
-	<p:commandButton value="Falta" actionListener="#{tabelaMB.orderBy}"
-		ajax="true" update=":formCorpo"
+	<p:commandButton value="Falta" actionListener="#{itensMB.orderBy}"
+		ajax="true"
 		title="Mostra todos os item que estão no limite, abaixo do limite e em falta" />
-	<p:commandButton value="Completa" actionListener="#{tabelaMB.listar}"
-		ajax="true" update=":formCorpo"
-		title="Mostra todos os itens da lista" />
+	<p:commandButton value="Completa" actionListener="#{itensMB.completo}"
+		ajax="true" title="Mostra todos os itens da lista" />
 	<p:commandButton value="Locais"
 		actionListener="#{itensMB.mostrarLocais}" ajax="true" update=":formLi"
 		oncomplete="PF('dlg14').show();" disabled="#{itensMB.selc == null}"
 		title="Mostra todos os locais onde o item pode ser encontrado" />
 	<p:commandButton value="Editar" actionListener="#{itensMB.editar}"
 		ajax="true" update=":formEI" oncomplete="PF('dlg10').show();"
-		disabled="#{itensMB.selc == null || loginMB.f.funcao == 1}" 
-		title="Pode editar algum item"/>
+		disabled="#{itensMB.selc == null || loginMB.f.funcao == 1}"
+		title="Pode editar algum item" />
 	<style>
 .baixo {
 	background-color: red !important;

@@ -6,9 +6,9 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Lista das Unidades" />
-	<p:dataTable id="tabela4" value="#{tabelaMB.unidadeL}" scrollable="true"
-		selection="#{unidadeMB.selc}" selectionMode="single" 
-		rowKey="#{ul.id}" scrollHeight="500" var="ul"
+	<p:dataTable id="tabela11" value="#{tabelaMB.unidadeL}"
+		scrollable="true" selection="#{unidadeMB.selc}" selectionMode="single"
+		rowKey="#{ul.id}" scrollHeight="500" var="ul" disabledSelection="true"
 		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{ul.id}" headerText="Código"

@@ -6,7 +6,7 @@
 	xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
 	<p:outputLabel value="Lista de saída de itens" />
-	<p:dataTable id="tabela6" value="#{tabelaMB.saidaL}" scrollable="true"
+	<p:dataTable id="tabela6" value="#{tabelaMB.saidaL}" scrollable="true" disabledSelection="true"
 		scrollHeight="500" var="sl" emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{sl.dia}" headerText="Dia"

@@ -85,11 +85,6 @@ public class TabelaMB {
 
 	}
 
-	public void orderBy() {
-		itensL = null;
-		itensL = iDAO.listarItensFalta();
-	}
-
 	public itensDAO getiDAO() {
 		return iDAO;
 	}

@@ -8,7 +8,8 @@
 	<p:outputLabel value="Troca de Local" />
 
 	<p:dataTable id="tbTroca" scrollable="true" value="#{tabelaMB.trocaL}"
-		var="tl" scrollHeight="500" emptyMessage="Nenhum item encontrado">
+		disabledSelection="true" var="tl" scrollHeight="500"
+		emptyMessage="Nenhum item encontrado">
 
 		<p:column filterBy="#{tl.itens.descricao}" headerText="Item"
 			filterMatchMode="contains">

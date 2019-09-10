@@ -122,6 +122,7 @@ public class itensDAO {
 				Itens i = new Itens();
 				i.setId(rs.getInt("id"));
 				i.setDescricao(rs.getString("descricao"));
+				i.setId_unidade(rs.getInt("id_unidade"));
 				i.setUnidade(new Unidade(i.getId_unidade(), rs.getString("nomeUnidade")));
 				i.setMinimo(rs.getInt("minimo"));
 				i.setEstoque_at(rs.getInt("estoque_at"));
