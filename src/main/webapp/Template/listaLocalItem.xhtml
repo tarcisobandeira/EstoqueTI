@@ -12,18 +12,17 @@
 
 			<p:column filterBy="#{li.localizacao.local_nome}" headerText="Local"
 				filterMatchMode="contains">
-				<p:outputLabel value="#{li.localizacao.local_nome}" />
+				<h:outputText value="#{li.localizacao.local_nome}" />
 			</p:column>
 
 			<p:column filterBy="#{li.estoque}" headerText="Quantidade"
 				filterMatchMode="contains">
-				<p:outputLabel value="#{li.estoque}" />
+				<h:outputText value="#{li.estoque}" />
 			</p:column>
 
 		</p:dataTable>
 		<p:commandButton value="Voltar" ajax="true"
 			actionListener="#{itensMB.zerar}"
-			update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
 			oncomplete="PF('dlg14').hide();" process="@this" />
 	</h:form>
 </ui:composition>

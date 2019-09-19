@@ -9,28 +9,29 @@
 	<p:dataTable id="tabela20" value="#{tabelaMB.funciL}" scrollable="true"
 		selection="#{funcionariosMB.selc}" selectionMode="single"
 		scrollHeight="500" rowKey="#{ff.id}" var="ff"
+		filteredValue="#{funcionariosMB.fun}"
 		emptyMessage="Nenhum item encontrado">
 		<p:ajax event="rowSelect" update=":formCorpo" />
 
 		<p:column filterBy="#{ff.nome}" headerText="Nome"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ff.nome}" />
+			<h:outputText value="#{ff.nome}" />
 		</p:column>
 
 		<p:column filterBy="#{ff.funcao}" headerText="Função"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ff.funcao}" />
+			<h:outputText value="#{ff.funcao}" />
 		</p:column>
 
 		<p:column filterBy="#{ff.login}" headerText="Login"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ff.login}" />
+			<h:outputText value="#{ff.login}" />
 		</p:column>
 	</p:dataTable>
 
 	<p:commandButton value="Editar"
 		disabled="#{funcionariosMB.selc == null || loginMB.f.funcao == 1}"
 		ajax="true" update=":formEF" actionListener="#{funcionariosMB.editar}"
-		oncomplete="PF('dlg11').show();" title="Permite editar um funcionário"/>
+		oncomplete="PF('dlg11').show();" title="Permite editar um funcionário" />
 
 </ui:composition>

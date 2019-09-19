@@ -16,22 +16,22 @@
 
 		<p:column filterBy="#{em.colaborador}" headerText="Colaborador"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{em.colaborador}" />
+			<h:outputText value="#{em.colaborador}" />
 		</p:column>
 
 		<p:column filterBy="#{em.dia_devol}" headerText="Devoloução"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{em.dia_devol}" />
+			<h:outputText value="#{em.dia_devol}" />
 		</p:column>
 
 		<p:column filterBy="#{em.itens.descricao}" headerText="Item"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{em.itens.descricao}" />
+			<h:outputText value="#{em.itens.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{em.quantidade}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{em.quantidade}" />
+			<h:outputText value="#{em.quantidade}" />
 		</p:column>
 
 	</p:dataTable>

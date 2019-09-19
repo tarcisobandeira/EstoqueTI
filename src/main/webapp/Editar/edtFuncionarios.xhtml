@@ -26,9 +26,7 @@
 			</p:panelGrid>
 			<p:commandButton value="Voltar" ajax="true"
 				actionListener="#{tabelaMB.listar}" action="#{funcionariosMB.zerar}"
-				oncomplete="PF('dlg11').hide();"
-				update=":formCorpo :formF :formI :formL :formE :formS :formME :formMS"
-				process="@this" />
+				oncomplete="PF('dlg11').hide();" process="@this" />
 			<p:commandButton value="Salvar" ajax="true"
 				actionListener="#{funcionariosMB.salvar}"
 				update=":formCorpo :formEF" />

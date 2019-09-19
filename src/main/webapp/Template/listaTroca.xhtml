@@ -13,27 +13,27 @@
 
 		<p:column filterBy="#{tl.itens.descricao}" headerText="Item"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{tl.itens.descricao}" />
+			<h:outputText value="#{tl.itens.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{tl.LAN.local_nome}" headerText="Local anterior"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{tl.LAN.local_nome}" />
+			<h:outputText value="#{tl.LAN.local_nome}" />
 		</p:column>
 
 		<p:column filterBy="#{tl.LAT.local_nome}" headerText="Local atual"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{tl.LAT.local_nome}" />
+			<h:outputText value="#{tl.LAT.local_nome}" />
 		</p:column>
 
 		<p:column filterBy="#{tl.quantidade}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{tl.quantidade}" />
+			<h:outputText value="#{tl.quantidade}" />
 		</p:column>
 
 		<p:column filterBy="#{tl.dia}" headerText="Data"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{tl.dia}" />
+			<h:outputText value="#{tl.dia}" />
 		</p:column>
 
 	</p:dataTable>

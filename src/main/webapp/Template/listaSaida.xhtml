@@ -11,32 +11,32 @@
 
 		<p:column filterBy="#{sl.dia}" headerText="Dia"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.dia}" />
+			<h:outputText value="#{sl.dia}" />
 		</p:column>
 
 		<p:column filterBy="#{sl.itens.descricao}" headerText="Item"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.itens.descricao}" />
+			<h:outputText value="#{sl.itens.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{sl.localizacao.local_nome}" headerText="Local"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.localizacao.local_nome}" />
+			<h:outputText value="#{sl.localizacao.local_nome}" />
 		</p:column>
 
 		<p:column filterBy="#{sl.funcionarios.nome}" headerText="Funcionario"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.funcionarios.nome}" />
+			<h:outputText value="#{sl.funcionarios.nome}" />
 		</p:column>
 
 		<p:column filterBy="#{sl.saida}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.saida}" />
+			<h:outputText value="#{sl.saida}" />
 		</p:column>
 
 		<p:column filterBy="#{sl.OS}" headerText="O.S."
 			filterMatchMode="contains">
-			<p:outputLabel value="#{sl.OS}"/>
+			<h:outputText value="#{sl.OS}"/>
 		</p:column>
 
 	</p:dataTable>

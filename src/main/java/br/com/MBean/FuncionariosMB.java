@@ -1,5 +1,7 @@
 package br.com.MBean;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -15,6 +17,8 @@ public class FuncionariosMB {
 	funcionariosDAO fDAO = new funcionariosDAO();
 	Funcionarios f = new Funcionarios();
 	Funcionarios selc;
+
+	List<Funcionarios> fun;
 
 	FacesContext context;
 
@@ -128,6 +132,22 @@ public class FuncionariosMB {
 
 	public void setSelc(Funcionarios selc) {
 		this.selc = selc;
+	}
+
+	public List<Funcionarios> getFun() {
+		return fun;
+	}
+
+	public void setFun(List<Funcionarios> fun) {
+		this.fun = fun;
+	}
+
+	public FacesContext getContext() {
+		return context;
+	}
+
+	public void setContext(FacesContext context) {
+		this.context = context;
 	}
 
 }

@@ -12,27 +12,27 @@
 
 		<p:column filterBy="#{ee.dia}" headerText="Dia"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ee.dia}" />
+			<h:outputText value="#{ee.dia}" />
 		</p:column>
 
 		<p:column filterBy="#{ee.codigo}" headerText="Código"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ee.codigo}" />
+			<h:outputText value="#{ee.codigo}" />
 		</p:column>
 
 		<p:column filterBy="#{ee.itens.descricao}" headerText="Item"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ee.itens.descricao}" />
+			<h:outputText value="#{ee.itens.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{ee.localizacao.local_nome}" headerText="Local"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ee.localizacao.local_nome}" />
+			<h:outputText value="#{ee.localizacao.local_nome}" />
 		</p:column>
 
 		<p:column filterBy="#{ee.entrada}" headerText="Quantidade"
 			filterMatchMode="contains">
-			<p:outputLabel value="#{ee.entrada}" />
+			<h:outputText value="#{ee.entrada}" />
 		</p:column>
 
 	</p:dataTable>

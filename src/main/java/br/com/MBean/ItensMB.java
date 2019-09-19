@@ -32,6 +32,8 @@ public class ItensMB {
 	List<Itens> listI = new ArrayList<Itens>();
 	List<Itens> busca = new ArrayList<Itens>();
 
+	List<Itens> teste;
+
 	FacesContext context;
 	Itens selc;
 
@@ -135,19 +137,23 @@ public class ItensMB {
 	}
 
 	public void completo() {
+		teste = null;
+		PrimeFaces.current().ajax().update("formCorpo:tabela1");
 		busca = null;
 		busca = iDAO.listarTodos();
 		listI = null;
 		listI = iDAO.listarTodos();
-		PrimeFaces.current().ajax().update(":formCorpo");
+		PrimeFaces.current().ajax().update("formCorpo:tabela1");
 	}
-	
+
 	public void orderBy() {
+		teste = null;
+		PrimeFaces.current().ajax().update("formCorpo:tabela1");
 		busca = null;
 		busca = iDAO.listarItensFalta();
 		listI = null;
 		listI = iDAO.listarItensFalta();
-		PrimeFaces.current().ajax().update(":formCorpo");
+		PrimeFaces.current().ajax().update("formCorpo:tabela1");
 	}
 
 	public itensDAO getiDAO() {
@@ -236,6 +242,14 @@ public class ItensMB {
 
 	public void setBusca(List<Itens> busca) {
 		this.busca = busca;
+	}
+
+	public List<Itens> getTeste() {
+		return teste;
+	}
+
+	public void setTeste(List<Itens> teste) {
+		this.teste = teste;
 	}
 
 }
