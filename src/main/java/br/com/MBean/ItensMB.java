@@ -30,16 +30,14 @@ public class ItensMB {
 
 	List<LI> listLi = new ArrayList<LI>();
 	List<Itens> listI = new ArrayList<Itens>();
-	List<Itens> busca = new ArrayList<Itens>();
 
-	List<Itens> teste;
+	List<Itens> gardarBusca;
 
 	FacesContext context;
 	Itens selc;
 
 	public ItensMB() {
 		listI = iDAO.listarTodos();
-		busca = iDAO.listarTodos();
 	}
 
 	public void salvar() {
@@ -129,7 +127,7 @@ public class ItensMB {
 		i = new Itens();
 		is = new Itens();
 		li = new LI();
-		selc = null;
+		gardarBusca = new ArrayList<Itens>();
 	}
 
 	public void mostrarLocais() {
@@ -137,20 +135,18 @@ public class ItensMB {
 	}
 
 	public void completo() {
-		teste = null;
+		gardarBusca = null;
+		gardarBusca = new ArrayList<Itens>();
 		PrimeFaces.current().ajax().update("formCorpo:tabela1");
-		busca = null;
-		busca = iDAO.listarTodos();
 		listI = null;
 		listI = iDAO.listarTodos();
 		PrimeFaces.current().ajax().update("formCorpo:tabela1");
 	}
 
 	public void orderBy() {
-		teste = null;
+		gardarBusca = null;
+		gardarBusca = new ArrayList<Itens>();
 		PrimeFaces.current().ajax().update("formCorpo:tabela1");
-		busca = null;
-		busca = iDAO.listarItensFalta();
 		listI = null;
 		listI = iDAO.listarItensFalta();
 		PrimeFaces.current().ajax().update("formCorpo:tabela1");
@@ -236,20 +232,12 @@ public class ItensMB {
 		this.listI = listI;
 	}
 
-	public List<Itens> getBusca() {
-		return busca;
+	public List<Itens> getGardarBusca() {
+		return gardarBusca;
 	}
 
-	public void setBusca(List<Itens> busca) {
-		this.busca = busca;
-	}
-
-	public List<Itens> getTeste() {
-		return teste;
-	}
-
-	public void setTeste(List<Itens> teste) {
-		this.teste = teste;
+	public void setGardarBusca(List<Itens> gardarBusca) {
+		this.gardarBusca = gardarBusca;
 	}
 
 }

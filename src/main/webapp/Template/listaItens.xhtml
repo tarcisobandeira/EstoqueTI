@@ -9,7 +9,7 @@
 	<p:dataTable id="tabela1" value="#{itensMB.listI}" scrollable="true"
 		scrollHeight="500" var="itensL" emptyMessage="Nenhum item encontrado"
 		selection="#{itensMB.selc}" selectionMode="single"
-		rowKey="#{itensL.id}" filteredValue="#{itensMB.teste}"
+		rowKey="#{itensL.id}" filteredValue="#{itensMB.gardarBusca}"
 		rowStyleClass="#{itensL.estoque_at lt itensL.minimo ? 'baixo' : (itensL.estoque_at eq itensL.minimo ? 'limite' : null)}">
 		<p:ajax event="rowSelect" update=":formCorpo" />
 		<p:column filterBy="#{itensL.id}" headerText="Código"
@@ -18,23 +18,22 @@
 		</p:column>
 
 		<p:column filterBy="#{itensL.descricao}" headerText="Descrição"
-			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
+			filterMatchMode="contains">
 			<h:outputText value="#{itensL.descricao}" />
 		</p:column>
 
 		<p:column filterBy="#{itensL.unidade.unidade}" headerText="Unidade"
-			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
+			filterMatchMode="contains">
 			<h:outputText value="#{itensL.unidade.unidade}" />
 		</p:column>
 
 		<p:column id="minimo" filterBy="#{itensL.minimo}" headerText="Minimo"
-			filterMatchMode="contains" filteredValue="#{itensMB.busca}">
+			filterMatchMode="contains">
 			<h:outputText value="#{itensL.minimo}" />
 		</p:column>
 
 		<p:column id="atual" filterBy="#{itensL.estoque_at}"
-			headerText="Atual" filterMatchMode="contains"
-			filteredValue="#{itensMB.busca}">
+			headerText="Atual" filterMatchMode="contains">
 			<h:outputText value="#{itensL.estoque_at}" />
 		</p:column>
 	</p:dataTable>
