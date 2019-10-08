@@ -11,8 +11,7 @@
 	</ui:define>
 	<link rel="stylesheet" type="text/css"
 		href="resources/css/impressaoEmprestimo.css" />
-	<link rel="stylesheet" type="text/css"
-		href="resources/css/loading.css" />
+	<link rel="stylesheet" type="text/css" href="resources/css/loading.css" />
 
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
@@ -66,6 +65,8 @@
 					<p:menuitem value="Empréstimos" disabled="#{loginMB.f.funcao == 1}"
 						actionListener="#{tabelaMB.listar}"
 						action="#{templateMB.setOpt(8)}" ajax="true" update=":formCorpo" />
+					<p:menuitem value="Gráfico" action="#{templateMB.setOpt(10)}"
+						ajax="true" update=":formCorpo" />
 					<p:menuitem value="Sair" action="#{loginMB.deslogar}" />
 				</p:menubar>
 			</div>

@@ -24,10 +24,12 @@ public class TemplateMB {
 			return "/Template/listaSaida.xhtml";
 		} else if (opt == 7) {
 			return "/Template/listaTroca.xhtml";
-		} else if (opt == 8){
+		} else if (opt == 8) {
 			return "/Template/listaEmprestimo.xhtml";
-		} else {
+		} else if (opt == 9) {
 			return "/Template/listaUnidade.xhtml";
+		} else {
+			return "/Template/listaGrafico.xhtml";
 		}
 	}
 
