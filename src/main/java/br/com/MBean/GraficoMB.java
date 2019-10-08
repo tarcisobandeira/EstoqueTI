@@ -46,11 +46,8 @@ public class GraficoMB {
 		int hsl = 0;
 		for (Itens i : itensL) {
 			bgColors.add("hsl(" + hsl + ", 100%, 50%)");
-
-			if (hsl == 360) {
-				hsl = 10;
-			}
-			hsl = hsl + 20;
+			
+			hsl = hsl + 10;
 		}
 
 		dataSet.setBackgroundColor(bgColors);
