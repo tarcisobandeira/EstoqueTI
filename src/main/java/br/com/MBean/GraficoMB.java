@@ -6,9 +6,9 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.model.chart.PieChartModel;
 import org.primefaces.model.charts.ChartData;
 import org.primefaces.model.charts.pie.PieChartDataSet;
-import org.primefaces.model.charts.pie.PieChartModel;
 
 import br.com.DAO.itensDAO;
 import br.com.entities.Itens;
@@ -31,35 +31,15 @@ public class GraficoMB {
 		itensL = iDAO.listarTodos();
 
 		pieModel = new PieChartModel();
-		ChartData data = new ChartData();
 
-		PieChartDataSet dataSet = new PieChartDataSet();
-
-		List<Number> values = new ArrayList<>();
 		for (Itens i : itensL) {
-			values.add(i.getEstoque_at());
+			pieModel.set(i.getDescricao(), i.getEstoque_at());
 		}
-
-		dataSet.setData(values);
-
-		List<String> bgColors = new ArrayList<>();
-		int hsl = 0;
-		for (Itens i : itensL) {
-			bgColors.add("hsl(" + hsl + ", 100%, 50%)");
-			
-			hsl = hsl + 10;
-		}
-
-		dataSet.setBackgroundColor(bgColors);
-
-		data.addChartDataSet(dataSet);
-		List<String> labels = new ArrayList<>();
-		for (Itens i : itensL) {
-			labels.add(i.getDescricao());
-		}
-		data.setLabels(labels);
-
-		pieModel.setData(data);
+		
+		pieModel.setLegendPosition("w");
+		pieModel.setShadow(false);
+		pieModel.setDiameter(500);
+		pieModel.setShowDataLabels(true);
 	}
 
 	public PieChartModel getPieModel() {
