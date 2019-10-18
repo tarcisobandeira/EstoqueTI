@@ -79,7 +79,7 @@ public class entradaDAO {
 	public Entrada buscarEntrada(int id) {
 		String sql = 	" SELECT e.*, " + 
 						" i.descricao AS nomeItem, " + 
-						" l.local_nome AS nomeLocal " + 
+						" l.local_nome AS nomeLocal "  + 
 						" FROM entrada e " + 
 						" INNER JOIN itens i " + 
 						" ON e.id_itens = i.id " + 
@@ -107,7 +107,7 @@ public class entradaDAO {
 	
 	public List<Entrada> buscarCodigo(int codigo) {
 		List<Entrada> list = new ArrayList<Entrada>();
-		String sql = 	" SELECT id_itens FROM entrada WHERE codigo = ? ";
+		String sql = " SELECT id_itens FROM entrada WHERE codigo = ? ";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -126,4 +126,29 @@ public class entradaDAO {
 		return list;
 	}
 	
+	public List<Entrada> listarEntrada(int id) {
+		List<Entrada> list = new ArrayList<Entrada>();
+		String sql = 	" SELECT * FROM Entrada WHERE id_itens = ? ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Entrada en = new Entrada();
+				en.setId(rs.getInt("id"));
+				en.setCodigo(rs.getInt("codigo"));
+				en.setId_itens(rs.getInt("id_itens"));
+				en.setId_localizacao(rs.getInt("id_localizacao"));
+				en.setEntrada(rs.getInt("entrada"));
+				en.setDia(rs.getString("dia"));
+				
+				list.add(en);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
 }

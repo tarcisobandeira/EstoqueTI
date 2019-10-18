@@ -184,5 +184,29 @@ public class itensDAO {
 		}
 		return false;
 	}
+	
+	public List<Itens> listarTodosOrderDesc() {
+		List<Itens> list = new ArrayList<Itens>();
+		String sql = " SELECT * FROM itens ORDER BY estoque_at DESC ";
+
+		try {
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Itens i = new Itens();
+				i.setId(rs.getInt("id"));
+				i.setDescricao(rs.getString("descricao"));
+				i.setEstoque_at(rs.getInt("estoque_at"));
+				list.add(i);
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return list;
+	}
 
 }
